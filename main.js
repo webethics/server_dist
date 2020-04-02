@@ -1780,6 +1780,27 @@ var ExportXlxsService = /** @class */ (function () {
         //const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
         this.saveAsExcelFile(excelBuffer, excelFileName);
     };
+    ExportXlxsService.prototype.exportAsExcelFileAsWorkbook = function (json, json1, json2, json3, json4, json5, json6, json7, excelFileName) {
+        var ws = xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].aoa_to_sheet(json);
+        var ws1 = xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].aoa_to_sheet(json1);
+        var ws2 = xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].aoa_to_sheet(json2);
+        var ws3 = xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].aoa_to_sheet(json3);
+        var ws4 = xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].aoa_to_sheet(json4);
+        var ws5 = xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].aoa_to_sheet(json5);
+        var ws6 = xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].aoa_to_sheet(json6);
+        var ws7 = xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].aoa_to_sheet(json7);
+        var wb = xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].book_new();
+        xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].book_append_sheet(wb, ws, "Matching Reports");
+        xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].book_append_sheet(wb, ws1, "Actual Date Users");
+        xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].book_append_sheet(wb, ws2, "Sorted Questionnier User");
+        xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].book_append_sheet(wb, ws3, "Sorted Nomatchpass Users");
+        xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].book_append_sheet(wb, ws4, "Sorted Lists Users");
+        xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].book_append_sheet(wb, ws5, "No Matchpass Users");
+        xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].book_append_sheet(wb, ws6, "Call Drop Users");
+        xlsx__WEBPACK_IMPORTED_MODULE_2__["utils"].book_append_sheet(wb, ws7, "Accept Reject Statuses");
+        var excelBuffer = xlsx__WEBPACK_IMPORTED_MODULE_2__["write"](wb, { bookType: 'xlsx', type: 'array' });
+        this.saveAsExcelFile(excelBuffer, excelFileName);
+    };
     ExportXlxsService.prototype.saveAsExcelFile = function (buffer, fileName) {
         var data = new Blob([buffer], {
             type: EXCEL_TYPE
