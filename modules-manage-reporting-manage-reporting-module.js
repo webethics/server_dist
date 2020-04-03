@@ -3740,7 +3740,7 @@ __export(__webpack_require__(/*! ./components/table/table */ "./node_modules/pri
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".export_button{    margin: 0 10px;}"
+module.exports = ".export_button{    margin: 0 10px;}\r\n.admin-box-item{width:100%}"
 
 /***/ }),
 
@@ -3751,7 +3751,7 @@ module.exports = ".export_button{    margin: 0 10px;}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<input type=\"date\" [(ngModel)]=\"createDate\">\n<button type=\"submit\" (click)=\"displayReport(createDate)\">Search</button>\n\n<button class=\"export_button\" (click)=\"exportAsXLSXReports()\">Export As XLSX Reports</button>\n<div class=\"admin-main-content\">\n    <div *ngIf=\"reports?.length\">\n        <h3> MATCHING </h3>\n        <!-- <button (click)=\"exportAsXLSXReports()\">export As XLSX Reports</button> -->\n        <div class=\"admin-box\">\n            <div class=\"admin-box-item box-video\">\n                <div class=\"box-video__item\">\n                    <div class=\"box-video__content\">\n                        <div class=\"table-responsive\">\n                            <table class=\"table NoTopBorder custom-table\">\n                                <tr>\n                                    <th>Sr no</th>\n                                    <th>User1</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>User2</th>\n                                    <th>Age</th>\n                                    <th>Email</th>\n                                    <th>Gender</th>\n                                    <th>matchedBasedon</th>\n                                    <th>answersMatched</th>\n                                    <th>Date</th>\n                                </tr>\n                                <tr *ngFor=\"let report of reportsChunk;let i = index\">\n                                    <td>{{i+1}}</td>\n                                    <td>\n                                        {{report?.userInfo1.firstName}}\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo1.email}}\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo1.age}}\n\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo1.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo2.firstName}}\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo2.email}}\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo2.age}}\n\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo2.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{report?.matchedBasedon}}\n                                    </td>\n                                    <td>\n                                        {{report?.answersMatched}}\n                                    </td>\n                                    <td>\n                                        {{report?.dateWithTimeZone | dateWithTimezone:'America/New_York':'LLLL'}}\n                                    </td>\n\n                                </tr>\n                            </table>\n\n                            <p-paginator [rows]=\"5\" [totalRecords]=reportsCount\n                                (onPageChange)=\"paginateMatching($event)\"></p-paginator>\n                        </div>\n                        <div class=\"box-video__meta\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n\n    <div *ngIf=\"actualDateUsers?.length\">\n        <h3> ACTUAL DATE </h3>\n        <!-- <button (click)=\"exportAsXLSXReports()\">export As XLSX Reports</button> -->\n        <div class=\"admin-box\">\n            <div class=\"admin-box-item box-video\">\n                <div class=\"box-video__item\">\n                    <div class=\"box-video__content\">\n                        <div class=\"table-responsive\">\n                            <table class=\"table NoTopBorder custom-table\">\n                                <tr>\n                                    <th>Sr no</th>\n                                    <th>User1</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>User2</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>Date</th>\n                                </tr>\n                                <tr *ngFor=\"let actualDateUser of actualDateUsersChunk;let i = index\">\n                                    <td>{{i+1}}</td>\n                                    <td [routerLink]=\"['/admin/user/video-log/',actualDateUser?.userInfo1?._id]\">\n                                        {{actualDateUser?.userInfo1.firstName}}\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.userInfo1.email}}\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.userInfo1.age}}\n\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.userInfo1.gender | gender}}\n\n                                    </td>\n                                    <td [routerLink]=\"['/admin/user/video-log/',actualDateUser?.userInfo2?._id]\">\n                                        {{actualDateUser?.userInfo2.firstName}}\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.userInfo2.email}}\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.userInfo2.age}}\n\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.userInfo2.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.createdWithTZ | dateWithTimezone:'America/New_York':'LLLL'}}\n                                    </td>\n\n                                </tr>\n                            </table>\n\t\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=actualDateCount\n                                (onPageChange)=\"paginateActualDateUsers($event)\"></p-paginator>\n                        </div>\n                        <div class=\"box-video__meta\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div *ngIf=\"sortedLists?.length\">\n        <h3> SORTEDLIST </h3>\n        \n        <div class=\"admin-box\">\n            <div class=\"admin-box-item box-video\">\n                <div class=\"box-video__item\">\n                    <div class=\"box-video__content\">\n                        <div class=\"table-responsive doc-tablewrapper\">\n                            <table class=\"table NoTopBorder custom-table doc-table\">\n                                <tr>\n                                    <th>Sr No</th>\n                                    <th>User Name</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>App Version</th>\n                                    <th> K </th>\n                                    <th>S</th>\n                                    <th>T</th>\n                                    <th>C</th>\n                                    <th>Number of questions answered</th>\n                                    <th>Date</th>\n                                </tr>\n                                <tr *ngFor=\"let sortedList of sortedListsChunk;let i = index\">\n                                    <td>{{i+1}}</td>\n                                    <td [routerLink]=\"['/admin/user/video-log/',sortedList?.userInfo?._id]\">\n                                        {{sortedList?.userInfo.firstName}}\n                                    </td>\n                                    <td>\n                                        {{sortedList?.userInfo.email}}\n                                    </td>\n                                    <td>\n                                        {{sortedList?.userInfo.age}}\n                                    </td>\n                                    <td>\n                                        {{sortedList?.userInfo.gender | gender}}\n                                    </td>\n                                    <td>\n                                        {{sortedList?.userInfo.appVersion}}\n                                    </td>\n\n                                    <td>\n                                        <div *ngFor=\"let supImpAns of sortedList.sup_imp_ans;let i = index \">\n                                            <div\n                                                *ngIf=\"(supImpAns?.answer_text=='Keeping Kosher')||(supImpAns?.answer_text=='Not Keeping Kosher')\">\n                                                <div *ngIf=\"(supImpAns?.answer_text=='Keeping Kosher');else abbrivated\">\n                                                    Y\n                                                </div>\n                                            </div>\n                                        </div>\n\n                                    </td>\n                                    <td>\n                                        <div *ngFor=\"let supImpAns of sortedList.sup_imp_ans;let i = index \">\n                                            <div\n                                                *ngIf=\"(supImpAns?.answer_text=='Keeping Shabbos')||(supImpAns?.answer_text=='Not Keeping Shabbos')\">\n                                                <div\n                                                    *ngIf=\"(supImpAns?.answer_text=='Keeping Shabbos');else abbrivated\">\n                                                    Y\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </td>\n                                    <td>\n                                        <div *ngFor=\"let supImpAns of  sortedList.sup_imp_ans;let i = index \">\n                                            <div\n                                                *ngIf=\"(supImpAns?.answer_text=='Wearing Tefillin')||(supImpAns?.answer_text=='Not Wearing Tefillin')\">\n                                                <div\n                                                    *ngIf=\"(supImpAns?.answer_text=='Wearing Tefillin');else abbrivated\">\n                                                    Y\n                                                </div>\n                                            </div>\n                                        </div>\n\n                                    </td>\n                                    <td *ngIf=\"!sortedList.gender\">\n                                        <div *ngIf=\"sortedList.isCohen;else cohen\">\n                                            Y\n                                        </div>\n                                    </td>\n                                    <td *ngIf=\"sortedList.gender\">\n                                        <div *ngIf=\"sortedList.isAbleToMarryCohen;else AbleToMarryCohen\">\n                                            Y\n                                        </div>\n                                    </td>\n                                    <td>\n                                        {{sortedList?.questionAnswered}}\n                                    </td>\n                                    <td>\n                                        {{sortedList?.dateWithTimeZone | dateWithTimezone:'America/New_York':'LLLL'}}\n                                    </td>\n                                </tr>\n                            </table>\n\t\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=sortedTotalCount (onPageChange)=\"paginateMatchingSortedList($event)\"></p-paginator>\n                        </div>\n                        <div class=\"box-video__meta\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n\n\n<div *ngIf=\"sortedNomatchpassUsers?.length\">\n    <h3> SORTEDLIST OF NOMATCHPASSUSERS</h3>\n    <!-- <button (click)=\"exportAsXLSXReportssortedLists()\">export As XLSX Reports</button> -->\n    <div class=\"admin-box\">\n        <div class=\"admin-box-item box-video\">\n            <div class=\"box-video__item\">\n                <div class=\"box-video__content\">\n                    <div class=\"table-responsive\">\n                        <table class=\"table NoTopBorder custom-table\">\n                            <tr>\n                                <th>Sr no</th>\n                                <th>User</th>\n                                <th>Email</th>\n                                <th>Age</th>\n                                <th>Gender</th>\n                                <th>Number of questions answered</th>\n                                <th>Date</th>\n                            </tr>\n                            <tr *ngFor=\"let sortedNomatchpassUser of sortedNomatchpassUsersCountChunk;let i = index\">\n                                <td>{{i+1}}</td>\n                                <td [routerLink]=\"['/admin/user/video-log/',sortedNomatchpassUser?.userInfo._id]\">\n                                    {{sortedNomatchpassUser?.userInfo.firstName}}\n                                </td>\n                                <td>\n                                    {{sortedNomatchpassUser?.userInfo.email}}\n                                </td>\n                                <td>\n                                    {{sortedNomatchpassUser?.userInfo.age}}\n                                </td>\n                                <td>\n                                    {{sortedNomatchpassUser?.userInfo.gender | gender}}\n                                </td>\n                                <td>\n                                    {{sortedNomatchpassUser?.questionAnswered}}\n                                </td>\n                                <td>\n                                    {{sortedNomatchpassUser?.dateWithTimeZone | dateWithTimezone:'America/New_York':'LLLL'}}\n                                </td>\n                            </tr>\n                        </table>\n\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=sortedNomatchpassUsersCount (onPageChange)=\"paginateSortedNomatchpassUsersList($event)\"></p-paginator>\n                    </div>\n                    <div class=\"box-video__meta\">\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>\n\n\n<div *ngIf=\"sortedQuestionnierUser?.length\">\n    <h3> SORTEDLIST OF QUESTIONNIER USERS</h3>\n    <!-- <button (click)=\"exportAsXLSXReportssortedLists()\">export As XLSX Reports</button> -->\n    <div class=\"admin-box\">\n        <div class=\"admin-box-item box-video\">\n            <div class=\"box-video__item\">\n                <div class=\"box-video__content\">\n                    <div class=\"table-responsive\">\n\n                        <table class=\"table NoTopBorder custom-table\">\n                            <tr>\n                                <th>Sr no</th>\n                                <th>User</th>\n                                <th>Email</th>\n                                <th>Age</th>\n                                <th>Gender</th>\n                                <th>Number of questions answered</th>\n                                <th>Date</th>\n                            </tr>\n                            <tr *ngFor=\"let sortedQuestionnierUsr of sortedQuestionnierUserChunk;let i = index\">\n                                <td>{{i+1}}</td>\n                                <td [routerLink]=\"['/admin/user/video-log/',sortedQuestionnierUsr?.userInfo?._id]\">\n                                    {{sortedQuestionnierUsr?.userInfo.firstName}}\n                                </td>\n                                <td>\n                                    {{sortedQuestionnierUsr?.userInfo.email}}\n                                </td>\n                                <td>\n                                    {{sortedQuestionnierUsr?.userInfo.age}}\n                                </td>\n                                <td>\n                                    {{sortedQuestionnierUsr?.userInfo.gender | gender}}\n                                </td>\n                                <td>\n                                    {{sortedQuestionnierUsr?.questionAnswered}}\n                                </td>\n                                <td>\n                                    {{sortedQuestionnierUsr?.dateWithTimeZone | dateWithTimezone:'America/New_York':'LLLL'}}\n                                </td>\n                            </tr>\n                        </table>\n\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=sortedQuestionnierUserCount\n                                (onPageChange)=\"paginateSortedQuestionnierUser($event)\"></p-paginator>\n                    </div>\n                    <div class=\"box-video__meta\">\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>\n\n\n<div *ngIf=\"nomatchpassUsers?.length\">\n    <h3>NO MATCH PASS USERS FOR NEXT CALL (NO DATES FOR TODAY)</h3>\n    \n    <div class=\"admin-box\">\n        <div class=\"admin-box-item box-video\">\n            <div class=\"box-video__item\">\n                <div class=\"box-video__content\">\n                    <div class=\"table-responsive\">\n\n                        <table class=\"table NoTopBorder custom-table\">\n                            <tr>\n                                <th>Sr no</th>\n                                <th>User</th>\n                                <th>Email</th>\n                                <th>Age</th>\n                                <th>Gender</th>\n                                <th>Date</th>\n                            </tr>\n                            <tr *ngFor=\"let nomatchpassUser of nomatchpassUsersChunk;let i = index\">\n                                <td>\n                                    {{i+1}}\n                                </td>\n                                <td [routerLink]=\"['/admin/user/video-log/',nomatchpassUser.userInfo?._id]\">\n                                    {{nomatchpassUser.userInfo.firstName}}\n                                </td>\n                                <td>\n                                    {{nomatchpassUser.userInfo.email}}\n                                </td>\n                                <td>\n                                    {{nomatchpassUser.userInfo.age}}\n                                </td>\n                                <td>\n                                    {{nomatchpassUser.userInfo.gender | gender }}\n                                </td>\n                                <td>\n                                    {{nomatchpassUser.dateWithTimeZone | dateWithTimezone:'America/New_York':'LLLL'}}\n                                </td>\n                            </tr>\n                        </table>\n\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=nomatchpassUsersCount\n                                (onPageChange)=\"paginateNomatchpassUsers($event)\"></p-paginator>\n                    </div>\n                    <div class=\"box-video__meta\">\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>\n\n        <div *ngIf=\"acceptrejectstatuses?.length\">\n            <h3> ACCEPT REJECT STATUS </h3>\n          \n            <div class=\"admin-box\">\n                <div class=\"admin-box-item box-video\">\n\n                    <div class=\"box-video__item\">\n                        <div class=\"box-video__content\">\n                            <div class=\"table-responsive\">\n\n                            <table class=\"table NoTopBorder custom-table\">\n                                <tr>\n                                    <th>Sr no</th>\n                                    <th>User1</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>User2</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>Status</th>\n                                    <th>Date</th>\n                                </tr>\n                                <tr *ngFor=\"let acceptrejectstatus of acceptrejectstatusesChunk;let i = index\">\n                                    <td>{{i+1}}</td>\n                                    <td [routerLink]=\"['/admin/user/video-log/',acceptrejectstatus?.userInfo1?._id]\">\n                                        {{acceptrejectstatus?.userInfo1.firstName}}\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo1.email}}\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo1.age}}\n\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo1.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo2.firstName}}\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo2.email}}\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo2.age}}\n\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo2.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.status}}\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.dateWithTimeZone | dateWithTimezone:'America/New_York':'LLLL'}}\n                                    </td>\n                                </tr>\n                            </table>\n\t\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=acceptrejectstatusesCount\n                                (onPageChange)=\"paginateAcceptrejectstatuses($event)\"></p-paginator>\n                        </div>\n                        <div class=\"box-video__meta\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n        <div *ngIf=\"callDropUsers?.length\">\n            <h3> CALLDROPS </h3>\n            \n            <div class=\"admin-box\">\n                <div class=\"admin-box-item box-video\">\n\n                    <div class=\"box-video__item\">\n                        <div class=\"box-video__content\">\n                            <div class=\"table-responsive\">\n\n                            <table class=\"table NoTopBorder custom-table\">\n                                <tr>\n                                    <th>Sr no</th>\n                                    <th>User1</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>User2</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>Date</th>\n                                </tr>\n                                <tr *ngFor=\"let callDropUser of callDropUsersChunk;let i = index\">\n                                    <td>{{i+1}}</td>\n                                    <td [routerLink]=\"['/admin/user/video-log/',callDropUser?.userInfo1?._id]\">\n                                        {{callDropUser?.userInfo1.firstName}}\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo1.email}}\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo1.age}}\n\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo1.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo2.firstName}}\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo2.email}}\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo2.age}}\n\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo2.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.dateWithoutOffset | dateWithTimezone:'America/New_York':'LLLL'}}\n                                    </td>\n                                </tr>\n                            </table>\n\t\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=callDropUsersCount\n                                (onPageChange)=\"paginateCallDropUsers($event)\"></p-paginator>\n                        </div>\n                        <div class=\"box-video__meta\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n</div>\n\n\n\n<ngx-spinner bdOpacity=0.1 size=\"medium\" color=\"#50008e\" type=\"line-scale\" [fullScreen]=\"true\">\n    <p style=\"color: white\"> Loading... </p>\n</ngx-spinner>\n<!-- for -->\n<!-- <ul>\n    <li>\n\n    </li>\n</ul> -->\n<ng-template #abbrivated>\n    <td>N</td>\n</ng-template>\n\n<ng-template #AbleToMarryCohen>\n    <td>N</td>\n</ng-template>\n<ng-template #cohen>\n    <td>N</td>\n</ng-template>"
+module.exports = "<input type=\"date\" [(ngModel)]=\"createDate\" value=\"{{this.mySimpleFormat}}\">\n<button type=\"submit\" (click)=\"displayReport(createDate)\">Search</button>\n\n<button class=\"export_button\" (click)=\"exportAsXLSXReports()\">Export As XLSX Reports</button>\n<div class=\"admin-main-content\">\n\t<h3> Records Display For {{this.mySimpleFormat}} </h3>\n    <div *ngIf=\"reports?.length\">\n        <h3> MATCHING </h3>\n        <!-- <button (click)=\"exportAsXLSXReports()\">export As XLSX Reports</button> -->\n        <div class=\"admin-box\">\n            <div class=\"admin-box-item box-video\">\n                <div class=\"box-video__item\">\n                    <div class=\"box-video__content\">\n                        <div class=\"table-responsive\">\n                            <table class=\"table NoTopBorder custom-table\">\n                                <tr>\n                                    <th>Sr no</th>\n                                    <th>User1</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>User2</th>\n                                    <th>Age</th>\n                                    <th>Email</th>\n                                    <th>Gender</th>\n                                    <th>matchedBasedon</th>\n                                    <th>answersMatched</th>\n                                    <th>Date</th>\n                                </tr>\n                                <tr *ngFor=\"let report of reportsChunk;let i = index\">\n                                    <td>{{(this.page*5)+i+1}}</td>\n                                    <td>\n                                        {{report?.userInfo1.firstName}}\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo1.email}}\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo1.age}}\n\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo1.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo2.firstName}}\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo2.email}}\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo2.age}}\n\n                                    </td>\n                                    <td>\n                                        {{report?.userInfo2.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{report?.matchedBasedon}}\n                                    </td>\n                                    <td>\n                                        {{report?.answersMatched}}\n                                    </td>\n                                    <td>\n                                        {{report?.dateWithTimeZone | dateWithTimezone:'America/New_York':'LLLL'}}\n                                    </td>\n\n                                </tr>\n                            </table>\n\n                            <p-paginator [rows]=\"5\" [totalRecords]=reportsCount\n                                (onPageChange)=\"paginateMatching($event)\"></p-paginator>\n                        </div>\n                        <div class=\"box-video__meta\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n\n    <div *ngIf=\"actualDateUsers?.length\">\n        <h3> ACTUAL DATE </h3>\n        <!-- <button (click)=\"exportAsXLSXReports()\">export As XLSX Reports</button> -->\n        <div class=\"admin-box\">\n            <div class=\"admin-box-item box-video\">\n                <div class=\"box-video__item\">\n                    <div class=\"box-video__content\">\n                        <div class=\"table-responsive\">\n                            <table class=\"table NoTopBorder custom-table\">\n                                <tr>\n                                    <th>Sr no</th>\n                                    <th>User1</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>User2</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>Date</th>\n                                </tr>\n                                <tr *ngFor=\"let actualDateUser of actualDateUsersChunk;let i = index\">\n                                     <td>{{(this.page1*5)+i+1}}</td>\n                                    <td [routerLink]=\"['/admin/user/video-log/',actualDateUser?.userInfo1?._id]\">\n                                        {{actualDateUser?.userInfo1.firstName}}\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.userInfo1.email}}\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.userInfo1.age}}\n\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.userInfo1.gender | gender}}\n\n                                    </td>\n                                    <td [routerLink]=\"['/admin/user/video-log/',actualDateUser?.userInfo2?._id]\">\n                                        {{actualDateUser?.userInfo2.firstName}}\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.userInfo2.email}}\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.userInfo2.age}}\n\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.userInfo2.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{actualDateUser?.createdWithTZ | dateWithTimezone:'America/New_York':'LLLL'}}\n                                    </td>\n\n                                </tr>\n                            </table>\n\t\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=actualDateCount\n                                (onPageChange)=\"paginateActualDateUsers($event)\"></p-paginator>\n                        </div>\n                        <div class=\"box-video__meta\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div *ngIf=\"sortedLists?.length\">\n        <h3> SORTEDLIST </h3>\n        \n        <div class=\"admin-box\">\n            <div class=\"admin-box-item box-video\">\n                <div class=\"box-video__item\">\n                    <div class=\"box-video__content\">\n                        <div class=\"table-responsive doc-tablewrapper\">\n                            <table class=\"table NoTopBorder custom-table doc-table\">\n                                <tr>\n                                    <th>Sr No</th>\n                                    <th>User Name</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>App Version</th>\n                                    <th> K </th>\n                                    <th>S</th>\n                                    <th>T</th>\n                                    <th>C</th>\n                                    <th>Number of questions answered</th>\n                                    <th>Date</th>\n                                </tr>\n                                <tr *ngFor=\"let sortedList of sortedListsChunk;let i = index\">\n                                     <td>{{(this.page4*5)+i+1}}</td>\n                                    <td [routerLink]=\"['/admin/user/video-log/',sortedList?.userInfo?._id]\">\n                                        {{sortedList?.userInfo.firstName}}\n                                    </td>\n                                    <td>\n                                        {{sortedList?.userInfo.email}}\n                                    </td>\n                                    <td>\n                                        {{sortedList?.userInfo.age}}\n                                    </td>\n                                    <td>\n                                        {{sortedList?.userInfo.gender | gender}}\n                                    </td>\n                                    <td>\n                                        {{sortedList?.userInfo.appVersion}}\n                                    </td>\n\n                                    <td>\n                                        <div *ngFor=\"let supImpAns of sortedList.sup_imp_ans;let i = index \">\n                                            <div\n                                                *ngIf=\"(supImpAns?.answer_text=='Keeping Kosher')||(supImpAns?.answer_text=='Not Keeping Kosher')\">\n                                                <div *ngIf=\"(supImpAns?.answer_text=='Keeping Kosher');else abbrivated\">\n                                                    Y\n                                                </div>\n                                            </div>\n                                        </div>\n\n                                    </td>\n                                    <td>\n                                        <div *ngFor=\"let supImpAns of sortedList.sup_imp_ans;let i = index \">\n                                            <div\n                                                *ngIf=\"(supImpAns?.answer_text=='Keeping Shabbos')||(supImpAns?.answer_text=='Not Keeping Shabbos')\">\n                                                <div\n                                                    *ngIf=\"(supImpAns?.answer_text=='Keeping Shabbos');else abbrivated\">\n                                                    Y\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </td>\n                                    <td>\n                                        <div *ngFor=\"let supImpAns of  sortedList.sup_imp_ans;let i = index \">\n                                            <div\n                                                *ngIf=\"(supImpAns?.answer_text=='Wearing Tefillin')||(supImpAns?.answer_text=='Not Wearing Tefillin')\">\n                                                <div\n                                                    *ngIf=\"(supImpAns?.answer_text=='Wearing Tefillin');else abbrivated\">\n                                                    Y\n                                                </div>\n                                            </div>\n                                        </div>\n\n                                    </td>\n                                    <td *ngIf=\"!sortedList.gender\">\n                                        <div *ngIf=\"sortedList.isCohen;else cohen\">\n                                            Y\n                                        </div>\n                                    </td>\n                                    <td *ngIf=\"sortedList.gender\">\n                                        <div *ngIf=\"sortedList.isAbleToMarryCohen;else AbleToMarryCohen\">\n                                            Y\n                                        </div>\n                                    </td>\n                                    <td>\n                                        {{sortedList?.questionAnswered}}\n                                    </td>\n                                    <td>\n                                        {{sortedList?.dateWithTimeZone | dateWithTimezone:'America/New_York':'LLLL'}}\n                                    </td>\n                                </tr>\n                            </table>\n\t\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=sortedTotalCount (onPageChange)=\"paginateMatchingSortedList($event)\"></p-paginator>\n                        </div>\n                        <div class=\"box-video__meta\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n\n\n<div *ngIf=\"sortedNomatchpassUsers?.length\">\n    <h3> SORTEDLIST OF NOMATCHPASSUSERS</h3>\n    <!-- <button (click)=\"exportAsXLSXReportssortedLists()\">export As XLSX Reports</button> -->\n    <div class=\"admin-box\">\n        <div class=\"admin-box-item box-video\">\n            <div class=\"box-video__item\">\n                <div class=\"box-video__content\">\n                    <div class=\"table-responsive\">\n                        <table class=\"table NoTopBorder custom-table\">\n                            <tr>\n                                <th>Sr no</th>\n                                <th>User</th>\n                                <th>Email</th>\n                                <th>Age</th>\n                                <th>Gender</th>\n                                <th>Number of questions answered</th>\n                                <th>Date</th>\n                            </tr>\n                            <tr *ngFor=\"let sortedNomatchpassUser of sortedNomatchpassUsersCountChunk;let i = index\">\n                                 <td>{{(this.page3*5)+i+1}}</td>\n                                <td [routerLink]=\"['/admin/user/video-log/',sortedNomatchpassUser?.userInfo._id]\">\n                                    {{sortedNomatchpassUser?.userInfo.firstName}}\n                                </td>\n                                <td>\n                                    {{sortedNomatchpassUser?.userInfo.email}}\n                                </td>\n                                <td>\n                                    {{sortedNomatchpassUser?.userInfo.age}}\n                                </td>\n                                <td>\n                                    {{sortedNomatchpassUser?.userInfo.gender | gender}}\n                                </td>\n                                <td>\n                                    {{sortedNomatchpassUser?.questionAnswered}}\n                                </td>\n                                <td>\n                                    {{sortedNomatchpassUser?.dateWithTimeZone | dateWithTimezone:'America/New_York':'LLLL'}}\n                                </td>\n                            </tr>\n                        </table>\n\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=sortedNomatchpassUsersCount (onPageChange)=\"paginateSortedNomatchpassUsersList($event)\"></p-paginator>\n                    </div>\n                    <div class=\"box-video__meta\">\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>\n\n\n<div *ngIf=\"sortedQuestionnierUser?.length\">\n    <h3> SORTEDLIST OF QUESTIONNIER USERS</h3>\n    <!-- <button (click)=\"exportAsXLSXReportssortedLists()\">export As XLSX Reports</button> -->\n    <div class=\"admin-box\">\n        <div class=\"admin-box-item box-video\">\n            <div class=\"box-video__item\">\n                <div class=\"box-video__content\">\n                    <div class=\"table-responsive\">\n\n                        <table class=\"table NoTopBorder custom-table\">\n                            <tr>\n                                <th>Sr no</th>\n                                <th>User</th>\n                                <th>Email</th>\n                                <th>Age</th>\n                                <th>Gender</th>\n                                <th>Number of questions answered</th>\n                                <th>Date</th>\n                            </tr>\n                            <tr *ngFor=\"let sortedQuestionnierUsr of sortedQuestionnierUserChunk;let i = index\">\n                                <td>{{(this.page2*5)+i+1}}</td>\n                                <td [routerLink]=\"['/admin/user/video-log/',sortedQuestionnierUsr?.userInfo?._id]\">\n                                    {{sortedQuestionnierUsr?.userInfo.firstName}}\n                                </td>\n                                <td>\n                                    {{sortedQuestionnierUsr?.userInfo.email}}\n                                </td>\n                                <td>\n                                    {{sortedQuestionnierUsr?.userInfo.age}}\n                                </td>\n                                <td>\n                                    {{sortedQuestionnierUsr?.userInfo.gender | gender}}\n                                </td>\n                                <td>\n                                    {{sortedQuestionnierUsr?.questionAnswered}}\n                                </td>\n                                <td>\n                                    {{sortedQuestionnierUsr?.dateWithTimeZone | dateWithTimezone:'America/New_York':'LLLL'}}\n                                </td>\n                            </tr>\n                        </table>\n\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=sortedQuestionnierUserCount\n                                (onPageChange)=\"paginateSortedQuestionnierUser($event)\"></p-paginator>\n                    </div>\n                    <div class=\"box-video__meta\">\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>\n\n\n<div *ngIf=\"nomatchpassUsers?.length\">\n    <h3>NO MATCH PASS USERS FOR NEXT CALL (NO DATES FOR TODAY)</h3>\n    \n    <div class=\"admin-box\">\n        <div class=\"admin-box-item box-video\">\n            <div class=\"box-video__item\">\n                <div class=\"box-video__content\">\n                    <div class=\"table-responsive\">\n\n                        <table class=\"table NoTopBorder custom-table\">\n                            <tr>\n                                <th>Sr no</th>\n                                <th>User</th>\n                                <th>Email</th>\n                                <th>Age</th>\n                                <th>Gender</th>\n                                <th>Date</th>\n                            </tr>\n                            <tr *ngFor=\"let nomatchpassUser of nomatchpassUsersChunk;let i = index\">\n                               <td>{{(this.page5*5)+i+1}}</td>\n                                <td [routerLink]=\"['/admin/user/video-log/',nomatchpassUser.userInfo?._id]\">\n                                    {{nomatchpassUser.userInfo.firstName}}\n                                </td>\n                                <td>\n                                    {{nomatchpassUser.userInfo.email}}\n                                </td>\n                                <td>\n                                    {{nomatchpassUser.userInfo.age}}\n                                </td>\n                                <td>\n                                    {{nomatchpassUser.userInfo.gender | gender }}\n                                </td>\n                                <td>\n                                    {{nomatchpassUser.dateWithTimeZone | dateWithTimezone:'America/New_York':'LLLL'}}\n                                </td>\n                            </tr>\n                        </table>\n\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=nomatchpassUsersCount\n                                (onPageChange)=\"paginateNomatchpassUsers($event)\"></p-paginator>\n                    </div>\n                    <div class=\"box-video__meta\">\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>\n\n        <div *ngIf=\"acceptrejectstatuses?.length\">\n            <h3> ACCEPT REJECT STATUS </h3>\n          \n            <div class=\"admin-box\">\n                <div class=\"admin-box-item box-video\">\n\n                    <div class=\"box-video__item\">\n                        <div class=\"box-video__content\">\n                            <div class=\"table-responsive\">\n\n                            <table class=\"table NoTopBorder custom-table\">\n                                <tr>\n                                    <th>Sr no</th>\n                                    <th>User1</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>User2</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>Status</th>\n                                    <th>Date</th>\n                                </tr>\n                                <tr *ngFor=\"let acceptrejectstatus of acceptrejectstatusesChunk;let i = index\">\n                                    <td>{{(this.page7*5)+i}}</td>\n                                    <td [routerLink]=\"['/admin/user/video-log/',acceptrejectstatus?.userInfo1?._id]\">\n                                        {{acceptrejectstatus?.userInfo1.firstName}}\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo1.email}}\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo1.age}}\n\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo1.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo2.firstName}}\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo2.email}}\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo2.age}}\n\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.userInfo2.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.status}}\n                                    </td>\n                                    <td>\n                                        {{acceptrejectstatus?.dateWithTimeZone | dateWithTimezone:'America/New_York':'LLLL'}}\n                                    </td>\n                                </tr>\n                            </table>\n\t\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=acceptrejectstatusesCount\n                                (onPageChange)=\"paginateAcceptrejectstatuses($event)\"></p-paginator>\n                        </div>\n                        <div class=\"box-video__meta\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n        <div *ngIf=\"callDropUsers?.length\">\n            <h3> CALLDROPS </h3>\n            \n            <div class=\"admin-box\">\n                <div class=\"admin-box-item box-video\">\n\n                    <div class=\"box-video__item\">\n                        <div class=\"box-video__content\">\n                            <div class=\"table-responsive\">\n\n                            <table class=\"table NoTopBorder custom-table\">\n                                <tr>\n                                    <th>Sr no</th>\n                                    <th>User1</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>User2</th>\n                                    <th>Email</th>\n                                    <th>Age</th>\n                                    <th>Gender</th>\n                                    <th>Date</th>\n                                </tr>\n                                <tr *ngFor=\"let callDropUser of callDropUsersChunk;let i = index\">\n                                     <td>{{(this.page6*5)+i}}</td>\n                                    <td [routerLink]=\"['/admin/user/video-log/',callDropUser?.userInfo1?._id]\">\n                                        {{callDropUser?.userInfo1.firstName}}\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo1.email}}\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo1.age}}\n\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo1.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo2.firstName}}\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo2.email}}\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo2.age}}\n\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.userInfo2.gender | gender}}\n\n                                    </td>\n                                    <td>\n                                        {{callDropUser?.dateWithoutOffset | dateWithTimezone:'America/New_York':'LLLL'}}\n                                    </td>\n                                </tr>\n                            </table>\n\t\t\t\t\t\t\t<p-paginator [rows]=\"5\" [totalRecords]=callDropUsersCount\n                                (onPageChange)=\"paginateCallDropUsers($event)\"></p-paginator>\n                        </div>\n                        <div class=\"box-video__meta\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n</div>\n\n\n\n<ngx-spinner bdOpacity=0.1 size=\"medium\" color=\"#50008e\" type=\"line-scale\" [fullScreen]=\"true\">\n    <p style=\"color: white\"> Loading... </p>\n</ngx-spinner>\n<!-- for -->\n<!-- <ul>\n    <li>\n\n    </li>\n</ul> -->\n<ng-template #abbrivated>\n    <td>N</td>\n</ng-template>\n\n<ng-template #AbleToMarryCohen>\n    <td>N</td>\n</ng-template>\n<ng-template #cohen>\n    <td>N</td>\n</ng-template>"
 
 /***/ }),
 
@@ -3771,6 +3771,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_service_notifiation_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../shared/service/notifiation.service */ "./src/app/shared/service/notifiation.service.ts");
 /* harmony import */ var ngx_spinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-spinner */ "./node_modules/ngx-spinner/fesm5/ngx-spinner.js");
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3786,6 +3787,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var DisplayReportingComponent = /** @class */ (function () {
     function DisplayReportingComponent(admin, excelService, notification, spinner, toastr) {
         this.admin = admin;
@@ -3793,6 +3795,7 @@ var DisplayReportingComponent = /** @class */ (function () {
         this.notification = notification;
         this.spinner = spinner;
         this.toastr = toastr;
+        this.pipe = new _angular_common__WEBPACK_IMPORTED_MODULE_6__["DatePipe"]('en-US');
     }
     DisplayReportingComponent.prototype.ngOnInit = function () {
         //  console.log('it is the one which is called');
@@ -3800,12 +3803,16 @@ var DisplayReportingComponent = /** @class */ (function () {
         // setTimeout(() => {
         //   this.spinner.hide()
         // }, 1000)
-        this.displayReport('2020-03-31');
+        var d = new Date();
+        this.now = new Date();
+        this.now.setDate(d.getDate() - 1);
+        this.mySimpleFormat = this.pipe.transform(this.now, 'yyyy-MM-dd');
+        console.log(this.mySimpleFormat);
+        this.displayReport(this.mySimpleFormat);
     };
     DisplayReportingComponent.prototype.displayReport = function (createDate) {
-        var _this = this;
         // console.log(createDate);
-        this.page = 0;
+        var _this = this;
         var date = {
             date: createDate,
             page: this.page
@@ -3818,10 +3825,10 @@ var DisplayReportingComponent = /** @class */ (function () {
                 _this.reports = res.data;
                 _this.reportsCount = res.data.length;
                 _this.reportsChunk = _this.reports.slice(0, 5);
+                _this.page = 0;
             }
             else {
                 _this.toastr.success('No data available for ' + createDate + ' fetched');
-                // this.notification.infoToast("Unable to fetch inforamation")
             }
         });
         this.admin.actualDateReport(date).subscribe(function (res) {
@@ -3831,6 +3838,7 @@ var DisplayReportingComponent = /** @class */ (function () {
                 _this.actualDateCount = res.data.length;
                 console.log('actualDateCount=' + _this.actualDateCount);
                 _this.actualDateUsersChunk = _this.actualDateUsers.slice(0, 5);
+                _this.page1 = 0;
             }
         });
         this.admin.questionnierSortedList(date).subscribe(function (res) {
@@ -3839,6 +3847,7 @@ var DisplayReportingComponent = /** @class */ (function () {
                 _this.sortedQuestionnierUser = res.data;
                 _this.sortedQuestionnierUserCount = res.data.length;
                 _this.sortedQuestionnierUserChunk = _this.sortedQuestionnierUser.slice(0, 5);
+                _this.page2 = 0;
             }
         });
         this.admin.nomatchpassusersSortedList(date).subscribe(function (res) {
@@ -3847,6 +3856,7 @@ var DisplayReportingComponent = /** @class */ (function () {
                 _this.sortedNomatchpassUsers = res.data;
                 _this.sortedNomatchpassUsersCount = res.data.length;
                 _this.sortedNomatchpassUsersCountChunk = _this.sortedNomatchpassUsers.slice(0, 5);
+                _this.page3 = 0;
             }
         });
         this.admin.entireSortedListOfUser(date).subscribe(function (res) {
@@ -3855,6 +3865,7 @@ var DisplayReportingComponent = /** @class */ (function () {
                 _this.sortedLists = res.data;
                 _this.sortedTotalCount = res.data.length;
                 _this.sortedListsChunk = _this.sortedLists.slice(0, 5);
+                _this.page4 = 0;
             }
         });
         this.admin.nomatchpassusers(date).subscribe(function (res) {
@@ -3863,6 +3874,7 @@ var DisplayReportingComponent = /** @class */ (function () {
                 _this.nomatchpassUsers = res.data;
                 _this.nomatchpassUsersCount = res.data.length;
                 _this.nomatchpassUsersChunk = _this.nomatchpassUsers.slice(0, 5);
+                _this.page5 = 0;
             }
         });
         this.admin.callDropInfo(date).subscribe(function (res) {
@@ -3870,6 +3882,7 @@ var DisplayReportingComponent = /** @class */ (function () {
                 _this.callDropUsers = res.data;
                 _this.callDropUsersCount = res.data.length;
                 _this.callDropUsersChunk = _this.callDropUsers.slice(0, 5);
+                _this.page6 = 0;
             }
         });
         this.admin.acceptRejectInfo(date).subscribe(function (res) {
@@ -3877,77 +3890,84 @@ var DisplayReportingComponent = /** @class */ (function () {
                 _this.acceptrejectstatuses = res.data;
                 _this.acceptrejectstatusesCount = res.data.length;
                 _this.acceptrejectstatusesChunk = _this.acceptrejectstatuses.slice(0, 5);
+                _this.page7 = 0;
             }
         });
-        // this.admin.getSortedListbasedonQuestions(date).subscribe(res => {
-        //   console.log(res, 'res===============')
-        //   this.spinner.show()
-        //   if (res.code == 200 && res.data.length) {
-        //     this.spinner.hide()
-        //     this.toastr.success('Data for '+createDate+' fetched')
-        //     this.sortedLists = res.data.soertedUsers,
-        //       this.nomatchpassUsers = res.data.nomatchpassUsers,
-        //       this.acceptrejectstatuses = res.data.acceptrejectUsers,
-        //       this.sortedNomatchpassUsers = res.data.sortedNomatchpassUsers,
-        //       this.sortedQuestionnierUser = res.data.sortedQuestionnierUser,
-        //       this.callDropUsers = res.data.callDropUsers
-        //   } else {
-        //     this.toastr.success('No data available for '+createDate+' fetched')
-        //     this.spinner.hide()
-        //     // this.notification.infoToast("Unable to fetch inforamation")
-        //   }
-        // })
+        this.mySimpleFormat = this.pipe.transform(createDate, 'yyyy-MM-dd');
     };
     DisplayReportingComponent.prototype.exportAsXLSXReports = function () {
-        var reportArr = [];
-        var reportArr1 = [];
-        var reportArr2 = [];
-        var reportArr3 = [];
-        var reportArr4 = [];
-        var reportArr5 = [];
-        var reportArr6 = [];
-        var reportArr7 = [];
-        if (this.reports.length) {
+        var reportArr = [
+            ["S.No.", "First Name", "Age", "Gender", "First Name", "Age", "Gender", "Matched Based On", "Date"]
+        ];
+        var reportArr1 = [
+            ["S.No.", "First Name", "Age", "Gender", "First Name", "Age", "Gender", "Date"]
+        ];
+        var reportArr2 = [
+            ["S.No.", "First Name", "Age", "Gender", "Date"]
+        ];
+        var reportArr3 = [
+            ["S.No.", "First Name", "Age", "Gender", "Date"]
+        ];
+        var reportArr4 = [
+            ["S.No.", "First Name", "Age", "Gender", "Date"]
+        ];
+        var reportArr5 = [
+            ["S.No.", "First Name", "Age", "Gender", "Date"]
+        ];
+        var reportArr6 = [
+            ["S.No.", "First Name", "Age", "Gender", "First Name", "Age", "Gender", "Date"]
+        ];
+        var reportArr7 = [
+            ["S.No.", "First Name", "Age", "Gender", "First Name", "Age", "Gender", "Date"]
+        ];
+        if (this.reports && this.reports.length) {
+            var i_1 = 1;
             this.reports.forEach(function (element) {
                 reportArr.push([
+                    i_1++,
                     element.userInfo1.firstName,
                     element.userInfo1.age,
                     element.userInfo1.gender ? 'Female' : 'Male',
                     element.userInfo2.firstName,
                     element.userInfo2.age,
                     element.userInfo2.gender ? 'Female' : 'Male',
-                    element.dateWithTimeZone,
                     element.matchedBasedon,
+                    element.dateWithTimeZone
                 ]);
             });
         }
-        if (this.actualDateUsers.length) {
+        if (this.actualDateUsers && this.actualDateUsers.length) {
+            var i_2 = 1;
             this.actualDateUsers.forEach(function (element) {
                 reportArr1.push([
+                    i_2++,
                     element.userInfo1.firstName,
                     element.userInfo1.age,
                     element.userInfo1.gender ? 'Female' : 'Male',
                     element.userInfo2.firstName,
                     element.userInfo2.age,
                     element.userInfo2.gender ? 'Female' : 'Male',
-                    element.dateWithTimeZone
+                    element.createdWithTZ
                 ]);
             });
         }
-        if (this.sortedQuestionnierUser.length) {
+        if (this.sortedQuestionnierUser && this.sortedQuestionnierUser.length) {
+            var i_3 = 1;
             this.sortedQuestionnierUser.forEach(function (element) {
                 reportArr2.push([
+                    i_3++,
                     element.userInfo.firstName,
                     element.userInfo.age,
                     element.userInfo.gender ? 'Female' : 'Male',
-                    element.userInfo.firstName,
                     element.dateWithTimeZone
                 ]);
             });
         }
-        if (this.sortedNomatchpassUsers.length) {
+        if (this.sortedNomatchpassUsers && this.sortedNomatchpassUsers.length) {
+            var i_4 = 1;
             this.sortedNomatchpassUsers.forEach(function (element) {
                 reportArr3.push([
+                    i_4++,
                     element.userInfo.firstName,
                     element.userInfo.age,
                     element.userInfo.gender ? 'Female' : 'Male',
@@ -3955,9 +3975,11 @@ var DisplayReportingComponent = /** @class */ (function () {
                 ]);
             });
         }
-        if (this.sortedLists.length) {
+        if (this.sortedLists && this.sortedLists.length) {
+            var i_5 = 1;
             this.sortedLists.forEach(function (element) {
                 reportArr4.push([
+                    i_5++,
                     element.userInfo.firstName,
                     element.userInfo.age,
                     element.userInfo.gender ? 'Female' : 'Male',
@@ -3965,9 +3987,11 @@ var DisplayReportingComponent = /** @class */ (function () {
                 ]);
             });
         }
-        if (this.nomatchpassUsers.length) {
+        if (this.nomatchpassUsers && this.nomatchpassUsers.length) {
+            var i_6 = 1;
             this.nomatchpassUsers.forEach(function (element) {
                 reportArr5.push([
+                    i_6++,
                     element.userInfo.firstName,
                     element.userInfo.age,
                     element.userInfo.gender ? 'Female' : 'Male',
@@ -3975,22 +3999,26 @@ var DisplayReportingComponent = /** @class */ (function () {
                 ]);
             });
         }
-        if (this.callDropUsers.length) {
+        if (this.callDropUsers && this.callDropUsers.length) {
+            var i_7 = 1;
             this.callDropUsers.forEach(function (element) {
                 reportArr6.push([
+                    i_7++,
                     element.userInfo1.firstName,
                     element.userInfo1.age,
                     element.userInfo1.gender ? 'Female' : 'Male',
                     element.userInfo2.firstName,
                     element.userInfo2.age,
                     element.userInfo2.gender ? 'Female' : 'Male',
-                    element.dateWithTimeZone
+                    element.dateWithoutOffset
                 ]);
             });
         }
-        if (this.acceptrejectstatuses.length) {
+        if (this.acceptrejectstatuses && this.acceptrejectstatuses.length) {
+            var i_8 = 1;
             this.acceptrejectstatuses.forEach(function (element) {
                 reportArr7.push([
+                    i_8++,
                     element.userInfo1.firstName,
                     element.userInfo1.age,
                     element.userInfo1.gender ? 'Female' : 'Male',
@@ -4008,53 +4036,61 @@ var DisplayReportingComponent = /** @class */ (function () {
             this.toastr.info('No data available to export');
         }
     };
-    DisplayReportingComponent.prototype.paginateMatchingSortedList = function (event) {
-        var obj = {
-            page: event.page
-        };
-        this.sortedListsChunk = this.sortedLists.slice(event.first, event.first + event.rows);
-    };
-    DisplayReportingComponent.prototype.paginateSortedNomatchpassUsersList = function (event) {
-        var obj = {
-            page: event.page
-        };
-        this.sortedNomatchpassUsersCountChunk = this.sortedNomatchpassUsers.slice(event.first, event.first + event.rows);
-    };
     DisplayReportingComponent.prototype.paginateMatching = function (event) {
         var obj = {
             page: event.page
         };
         this.reportsChunk = this.reports.slice(event.first, event.first + event.rows);
+        this.page = event.page;
     };
     DisplayReportingComponent.prototype.paginateActualDateUsers = function (event) {
         var obj = {
             page: event.page
         };
         this.actualDateUsersChunk = this.actualDateUsers.slice(event.first, event.first + event.rows);
+        this.page1 = event.page;
     };
     DisplayReportingComponent.prototype.paginateSortedQuestionnierUser = function (event) {
         var obj = {
             page: event.page
         };
         this.sortedQuestionnierUserChunk = this.sortedQuestionnierUser.slice(event.first, event.first + event.rows);
+        this.page2 = event.page;
+    };
+    DisplayReportingComponent.prototype.paginateSortedNomatchpassUsersList = function (event) {
+        var obj = {
+            page: event.page
+        };
+        this.sortedNomatchpassUsersCountChunk = this.sortedNomatchpassUsers.slice(event.first, event.first + event.rows);
+        this.page3 = event.page;
+    };
+    DisplayReportingComponent.prototype.paginateMatchingSortedList = function (event) {
+        var obj = {
+            page: event.page
+        };
+        this.sortedListsChunk = this.sortedLists.slice(event.first, event.first + event.rows);
+        this.page4 = event.page;
     };
     DisplayReportingComponent.prototype.paginateNomatchpassUsers = function (event) {
         var obj = {
             page: event.page
         };
         this.nomatchpassUsersChunk = this.nomatchpassUsers.slice(event.first, event.first + event.rows);
-    };
-    DisplayReportingComponent.prototype.paginateAcceptrejectstatuses = function (event) {
-        var obj = {
-            page: event.page
-        };
-        this.acceptrejectstatusesChunk = this.acceptrejectstatuses.slice(event.first, event.first + event.rows);
+        this.page5 = event.page;
     };
     DisplayReportingComponent.prototype.paginateCallDropUsers = function (event) {
         var obj = {
             page: event.page
         };
         this.callDropUsersChunk = this.callDropUsers.slice(event.first, event.first + event.rows);
+        this.page6 = event.page;
+    };
+    DisplayReportingComponent.prototype.paginateAcceptrejectstatuses = function (event) {
+        var obj = {
+            page: event.page
+        };
+        this.acceptrejectstatusesChunk = this.acceptrejectstatuses.slice(event.first, event.first + event.rows);
+        this.page7 = event.page;
     };
     DisplayReportingComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
