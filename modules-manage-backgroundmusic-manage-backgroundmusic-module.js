@@ -176,8 +176,17 @@ var AdminService = /** @class */ (function () {
     AdminService.prototype.listRankedMatch = function (id) {
         return this.http.get(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].LIST_RANKED_MATCH + id);
     };
-    AdminService.prototype.videoCallDone = function (id) {
-        return this.http.get(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].VIDEO_CALL_DONE + id);
+    /* videoCallDone(id): Observable<any> {
+      return this.http.get(ElesAppConst.VIDEO_CALL_DONE + id);
+    } */
+    AdminService.prototype.videoCallDone = function (data) {
+        //return this.http.get(ElesAppConst.VIDEO_CALL_DONE + id);
+        if (data) {
+            return this.http.post(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].VIDEO_CALL_DONE, data);
+        }
+        else {
+            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].create(function (observer) { return observer.error(_shared_utils_string_constants__WEBPACK_IMPORTED_MODULE_4__["StringConst"].INVALID_INFORMATION); });
+        }
     };
     AdminService.prototype.superImportantOfUser2 = function (id) {
         return this.http.get(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].SUPERIMP_OF_USER2 + id);

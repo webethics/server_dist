@@ -1,161 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["modules-manage-reporting-manage-reporting-module"],{
 
-/***/ "./node_modules/primeng/components/rating/rating.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/primeng/components/rating/rating.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var common_1 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-exports.RATING_VALUE_ACCESSOR = {
-    provide: forms_1.NG_VALUE_ACCESSOR,
-    useExisting: core_1.forwardRef(function () { return Rating; }),
-    multi: true
-};
-var Rating = /** @class */ (function () {
-    function Rating(cd) {
-        this.cd = cd;
-        this.stars = 5;
-        this.cancel = true;
-        this.iconOnClass = 'pi pi-star';
-        this.iconOffClass = 'pi pi-star-o';
-        this.iconCancelClass = 'pi pi-ban';
-        this.onRate = new core_1.EventEmitter();
-        this.onCancel = new core_1.EventEmitter();
-        this.onModelChange = function () { };
-        this.onModelTouched = function () { };
-    }
-    Rating.prototype.ngOnInit = function () {
-        this.starsArray = [];
-        for (var i = 0; i < this.stars; i++) {
-            this.starsArray[i] = i;
-        }
-    };
-    Rating.prototype.rate = function (event, i) {
-        if (!this.readonly && !this.disabled) {
-            this.value = (i + 1);
-            this.onModelChange(this.value);
-            this.onModelTouched();
-            this.onRate.emit({
-                originalEvent: event,
-                value: (i + 1)
-            });
-        }
-        event.preventDefault();
-    };
-    Rating.prototype.clear = function (event) {
-        if (!this.readonly && !this.disabled) {
-            this.value = null;
-            this.onModelChange(this.value);
-            this.onModelTouched();
-            this.onCancel.emit(event);
-        }
-        event.preventDefault();
-    };
-    Rating.prototype.writeValue = function (value) {
-        this.value = value;
-        this.cd.detectChanges();
-    };
-    Rating.prototype.registerOnChange = function (fn) {
-        this.onModelChange = fn;
-    };
-    Rating.prototype.registerOnTouched = function (fn) {
-        this.onModelTouched = fn;
-    };
-    Rating.prototype.setDisabledState = function (val) {
-        this.disabled = val;
-    };
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Boolean)
-    ], Rating.prototype, "disabled", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Boolean)
-    ], Rating.prototype, "readonly", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Number)
-    ], Rating.prototype, "stars", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Boolean)
-    ], Rating.prototype, "cancel", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", String)
-    ], Rating.prototype, "iconOnClass", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], Rating.prototype, "iconOnStyle", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", String)
-    ], Rating.prototype, "iconOffClass", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], Rating.prototype, "iconOffStyle", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", String)
-    ], Rating.prototype, "iconCancelClass", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], Rating.prototype, "iconCancelStyle", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", core_1.EventEmitter)
-    ], Rating.prototype, "onRate", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", core_1.EventEmitter)
-    ], Rating.prototype, "onCancel", void 0);
-    Rating = __decorate([
-        core_1.Component({
-            selector: 'p-rating',
-            template: "\n        <div class=\"ui-rating\" [ngClass]=\"{'ui-state-disabled': disabled}\">\n            <a [attr.tabindex]=\"disabled ? null : '0'\" *ngIf=\"cancel\" (click)=\"clear($event)\" (keydown.enter)=\"clear($event)\"  class=\"ui-rating-cancel\">\n                <span class=\"ui-rating-icon\" [ngClass]=\"iconCancelClass\" [ngStyle]=\"iconCancelStyle\"></span>\n            </a>\n            <a [attr.tabindex]=\"disabled ? null : '0'\" *ngFor=\"let star of starsArray;let i=index\" (click)=\"rate($event,i)\" (keydown.enter)=\"rate($event,i)\">\n                <span class=\"ui-rating-icon\" \n                    [ngClass]=\"(!value || i >= value) ? iconOffClass : iconOnClass\"\n                    [ngStyle]=\"(!value || i >= value) ? iconOffStyle : iconOnStyle\"\n                ></span>\n            </a>\n        </div>\n    ",
-            providers: [exports.RATING_VALUE_ACCESSOR]
-        }),
-        __metadata("design:paramtypes", [core_1.ChangeDetectorRef])
-    ], Rating);
-    return Rating;
-}());
-exports.Rating = Rating;
-var RatingModule = /** @class */ (function () {
-    function RatingModule() {
-    }
-    RatingModule = __decorate([
-        core_1.NgModule({
-            imports: [common_1.CommonModule],
-            exports: [Rating],
-            declarations: [Rating]
-        })
-    ], RatingModule);
-    return RatingModule;
-}());
-exports.RatingModule = RatingModule;
-//# sourceMappingURL=rating.js.map
-
-/***/ }),
-
 /***/ "./node_modules/primeng/components/table/table.js":
 /*!********************************************************!*\
   !*** ./node_modules/primeng/components/table/table.js ***!
@@ -3697,24 +3541,6 @@ exports.TableModule = TableModule;
 
 /***/ }),
 
-/***/ "./node_modules/primeng/rating.js":
-/*!****************************************!*\
-  !*** ./node_modules/primeng/rating.js ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* Shorthand */
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(/*! ./components/rating/rating */ "./node_modules/primeng/components/rating/rating.js"));
-
-/***/ }),
-
 /***/ "./node_modules/primeng/table.js":
 /*!***************************************!*\
   !*** ./node_modules/primeng/table.js ***!
@@ -4370,7 +4196,7 @@ module.exports = "/* .userDetailsOverlay {\n    position: fixed; \n    display: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"viewallvideoDates?.length\">\n    <div class=\"admin-main-content\">\n        <h3> View All Video Dates </h3>\n        <div class=\"admin-box-controls\">\n            <div class=\"admin-box\">\n                <div class=\"admin-box-item box-video\">\n                    <div class=\"box-video__item\">\n                        <div class=\"box-video__content\">\n                            <div class=\"table-responsive\">\n                                <table class=\"table NoTopBorder custom-table\">\n                                    <tr>\n                                        <th>Sr no</th>\n                                        <th>User1</th>\n                                        <th>Age</th>\n                                        <th>Gender</th>\n                                        <th>Interested</th>\n                                        <th>User2</th>\n                                        <th>Age</th>\n                                        <th>Gender</th>\n                                        <th>Interested</th>\n                                        <th>Video</th>\n                                        <th>Review</th>\n                                        <th>Date Count</th>\n                                        <th>Date</th>\n    \n                                    </tr>\n                                    <tr *ngFor=\"let viewallvideoDate of viewallvideoDates;let i = index\">\n                                        <td>{{i+1}}</td>\n                                        <td [routerLink]=\"['/admin/user/video-log/',viewallvideoDate?.user1info[0]?._id]\">\n                                            {{viewallvideoDate?.user1info[0]?.firstName}}\n                                        </td>\n    \n                                        <td>\n                                            {{viewallvideoDate?.user1info[0]?.age}}\n    \n                                        </td>\n                                        <td>\n                                            {{viewallvideoDate?.user1info[0]?.gender | gender}}\n    \n                                        </td>\n                                        <div\n                                            *ngIf=\"viewallvideoDate?.user1info[0]?._id==viewallvideoDate?.reviewLog[0]?.review_from\">\n                                            <td *ngIf=\"viewallvideoDate?.reviewLog[0]?.isInterested;else interested\">\n                                                Yes\n                                            </td>\n    \n                                        </div>\n                                        <div\n                                            *ngIf=\"viewallvideoDate?.user1info[0]?._id==viewallvideoDate?.reviewLog[1]?.review_from\">\n                                            <td *ngIf=\"viewallvideoDate?.reviewLog[1]?.isInterested;else interested\">\n                                                Yes\n                                            </td>\n                                        </div>\n                                        <td [routerLink]=\"['/admin/user/video-log/',viewallvideoDate?.user2info[0]?._id]\">\n                                            {{viewallvideoDate?.user2info[0]?.firstName}}\n                                        </td>\n    \n                                        <td>\n                                            {{viewallvideoDate?.user2info[0]?.age}}\n    \n                                        </td>\n                                        <td>\n                                            {{viewallvideoDate?.user2info[0]?.gender | gender}}\n    \n                                        </td>\n                                        <td>\n                                            <div *ngIf=\"viewallvideoDate?.reviewLog.length >=2;else no \">\n                                                <div *ngIf=\"viewallvideoDate?.user2info[0]?._id==[0]?.review_from\">\n                                                    <div\n                                                        *ngIf=\"viewallvideoDate?.reviewLog[0]?.isInterested;else interested\">\n                                                        Yes\n                                                    </div>\n                                                </div>\n                                                <div\n                                                    *ngIf=\"viewallvideoDate?.user2info[0]?._id==viewallvideoDate?.reviewLog[1]?.review_from\">\n                                                    <div\n                                                        *ngIf=\"viewallvideoDate?.reviewLog[1]?.isInterested;else interested\">\n                                                        Yes\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </td>\n    \n                                        <td>\n                                            <a title=\"View Video Date\"\n                                                (click)=\"downloadVideo(viewallvideoDate?.archive_s3_url)\">\n                                                <i class=\"fa fa-eye\" aria-hidden=\"true\"></i>\n                                            </a>\n    \n                                        </td>\n                                        <td>\n    \n                                            <button type=\"button\" (click)=\"showDialog(viewallvideoDate)\" pButton\n                                                icon=\"pi pi-info-circle\" label=\"Review\"></button>\n                                        </td>\n                                        <td>\n                                            {{viewallvideoDate?._id?.dateCount}}\n                                        </td>\n                                        <td>\n                                            {{viewallvideoDate?.reviewLog[0]?.createdAt | dateWithTimezone:'America/New_York':'LLLL' }}\n                                        </td>\n                                    </tr>\n                                </table>\n                            </div>\n                            <!-- <p-paginator [rows]=\"20\" [totalRecords]=totalCount (onPageChange)=\"paginateMatching($event)\"></p-paginator> -->\n                        </div>\n                        <div class=\"box-video__meta\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n</div>\n<p-dialog header=\"View Reviews\" [(visible)]=\"displayReviews\" [modal]=\"true\" [responsive]=\"true\"\n    [style]=\"{width: '600px', minWidth: '600px'}\" [minY]=\"700\" closable='true' dismissableMask='true' baseZIndex='0'\n    closeOnEscape='true' responsive='true' baseZIndex='0'>\n    <div *ngIf=\"viewReview?.user1info[0]?._id==viewReview?.reviewLog[0].review_from;else viewReviewofElse\">\n        <table class=\"table NoTopBorder custom-table\">\n\n            <tr>\n                <th>Name</th>\n                <th>Pleasant</th>\n                <th>Attractive</th>\n                <th>MarriageFocused</th>\n\n                <th>Note</th>\n                <th>Interested</th>\n            </tr>\n\n\n            <tr>\n                <td>{{viewReview?.user1info[0]?.firstName}}</td>\n                <td>\n                    <p-rating [ngModel]=viewReview?.reviewLog[0]?.pleasant readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                    </p-rating>\n                </td>\n\n                <td>\n                    <p-rating [ngModel]=viewReview?.reviewLog[0]?.attractive readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                    </p-rating>\n                </td>\n                <td>\n                    <p-rating [ngModel]=viewReview?.reviewLog[0]?.marriageFocused readonly=\"true\" stars=\"5\"\n                        [cancel]=\"false\"></p-rating>\n                </td>\n                <td>{{viewReview?.reviewLog[0]?.notes}} </td>\n                <!-- <td>\n                    {{viewReview?.reviewLog[0].isInterested}}\n                </td> -->\n                <td *ngIf=\"viewReview?.reviewLog[0]?.isInterested;else no\">\n                    Yes\n                </td>\n            </tr>\n            <tr>\n                <td>{{viewReview?.user2info[0]?.firstName}}</td>\n                <td>\n                    <p-rating [ngModel]=viewReview?.reviewLog[1]?.pleasant readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                    </p-rating>\n                </td>\n\n                <td>\n                    <p-rating [ngModel]=viewReview?.reviewLog[1]?.attractive readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                    </p-rating>\n                </td>\n                <td>\n                    <p-rating [ngModel]=viewReview?.reviewLog[1]?.marriageFocused readonly=\"true\" stars=\"5\"\n                        [cancel]=\"false\"></p-rating>\n                </td>\n                <td>{{viewReview?.reviewLog[1]?.notes}} </td>\n                <!-- <td>\n                    {{viewReview?.reviewLog[1].isInterested}}\n\n                </td> -->\n                <td *ngIf=\"viewReview?.reviewLog[1]?.isInterested;else no\">\n                    Yes\n                </td>\n            </tr>\n\n        </table>\n    </div>\n\n\n</p-dialog>\n\n<p-dialog header=\"View Video\" [(visible)]=\"displayVideo\" [modal]=\"true\" [responsive]=\"true\"\n    [style]=\"{width: '600px', minWidth: '600px'}\" [minY]=\"700\" closable='true' dismissableMask='true' baseZIndex='0'\n    closeOnEscape='true' responsive='true' baseZIndex='0'>\n    <video autoplay=\"autoplay\" preload=\"auto\" ng-click=\"pauseOrPlay()\" #videoPlayer controls>\n        <source [src]=\"videourl\" type=\"video/mp4\" />\n    </video>\n\n\n</p-dialog>\n<!-- <div class=\"userDetailsOverlay\" *ngIf=\"displayReviews\">\n    <div class=\"main-section-area\">\n       \n    </div>\n</div> -->\n\n<ng-template #viewReviewofElse>\n    <table class=\"table NoTopBorder custom-table\">\n        <tr>\n            <th>Name</th>\n            <th>Pleasant</th>\n            <th>Attractive</th>\n            <th>MarriageFocused</th>\n\n            <th>Note</th>\n            <th>Interested</th>\n        </tr>\n        <tr>\n            <td>{{viewReview?.user2info[0]?.firstName}}</td>\n            <td>\n                <p-rating [ngModel]=viewReview?.reviewLog[1]?.pleasant readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                </p-rating>\n            </td>\n\n            <td>\n                <p-rating [ngModel]=viewReview?.reviewLog[1]?.attractive readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                </p-rating>\n            </td>\n            <td>\n                <p-rating [ngModel]=viewReview?.reviewLog[1]?.marriageFocused readonly=\"true\" stars=\"5\"\n                    [cancel]=\"false\"></p-rating>\n            </td>\n            <td>{{viewReview?.reviewLog[1]?.notes}} </td>\n            <td *ngIf=\"viewReview?.reviewLog[0]?.isInterested;else no\">\n                Yes\n            </td>\n        </tr>\n        <tr>\n            <td>{{viewReview?.user1info[0]?.firstName}}</td>\n            <td>\n                <p-rating [ngModel]=viewReview?.reviewLog[0]?.pleasant readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                </p-rating>\n            </td>\n\n            <td>\n                <p-rating [ngModel]=viewReview?.reviewLog[0]?.attractive readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                </p-rating>\n            </td>\n            <td>\n                <p-rating [ngModel]=viewReview?.reviewLog[0]?.marriageFocused readonly=\"true\" stars=\"5\"\n                    [cancel]=\"false\"></p-rating>\n            </td>\n            <td>{{viewReview?.reviewLog[0]?.notes}} </td>\n            <td *ngIf=\"viewReview?.reviewLog[0]?.isInterested;else no\">\n                Yes\n            </td>\n        </tr>\n    </table>\n</ng-template>\n\n\n<ng-template #no>\n    <td>No</td>\n</ng-template>\n<ng-template #interested>\n    <td>\n        No\n    </td>\n</ng-template>\n\n<ngx-spinner bdOpacity=0.1 size=\"medium\" color=\"#50008e\" type=\"line-scale\" [fullScreen]=\"true\">\n    <p style=\"color: white\"> Loading... </p>\n</ngx-spinner>"
+module.exports = "<div *ngIf=\"viewallvideoDates?.length\">\n    <div class=\"admin-main-content\">\n        <h3> View All Video Dates </h3>\n        <div class=\"admin-box-controls  user-control\">\n         \n                            <div class=\"table-responsive\">\n                                <table class=\"table NoTopBorder custom-table user-control-tablea\">\n                                    <tr>\n                                        <th>Sr no</th>\n                                        <th>User1</th>\n                                        <th>Age</th>\n                                        <th>Gender</th>\n\t\t\t\t\t\t\t\t\t\t<th>Device Type(App Version)</th>\n\t\t\t\t\t\t\t\t\t\t<th>Interested</th>\n                                        <th>User2</th>\n                                        <th>Age</th>\n                                        <th>Gender</th>\n\t\t\t\t\t\t\t\t\t\t<th>Device Type(App Version)</th>\n\t\t\t\t\t\t\t\t\t\t<th>Interested</th>\n                                        <th>Video</th>\n                                        <th>Review</th>\n                                        <th>Date Count</th>\n                                        <th>Date</th>\n    \n                                    </tr>\n                                    <tr *ngFor=\"let viewallvideoDate of viewallvideoDates;let i = index\">\n                                        <td>{{i+1}}</td>\n                                        <td [routerLink]=\"['/admin/user/video-log/',viewallvideoDate?.user1info[0]?._id]\">\n                                            {{viewallvideoDate?.user1info[0]?.firstName}}\n                                        </td>\n    \n                                        <td>\n                                            {{viewallvideoDate?.user1info[0]?.age}}\n    \n                                        </td>\n                                        <td>\n                                            {{viewallvideoDate?.user1info[0]?.gender | gender}}\n    \n                                        </td>\n\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t{{viewallvideoDate?.user1info[0]?.device_type}}\n\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t   <td>\n\t\t\t\t\t\t\t\t\t\t\t{{viewallvideoDate?.user1info[0]?.appVersion}}\n\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t<td>\n                                        <div\n                                            *ngIf=\"viewallvideoDate?.user1info[0]?._id==viewallvideoDate?.reviewLog[0]?.review_from\">\n                                            <div *ngIf=\"viewallvideoDate?.reviewLog[0]?.isInterested;else interested\">\n                                                Yes\n                                            </div>\n    \n                                        </div>\n                                        <div\n                                            *ngIf=\"viewallvideoDate?.user1info[0]?._id==viewallvideoDate?.reviewLog[1]?.review_from\">\n                                            <div *ngIf=\"viewallvideoDate?.reviewLog[1]?.isInterested;else interested\">\n                                                Yes\n                                            </div>\n                                        </div>\n\t\t\t\t\t\t\t\t\t\t</td>\n                                        <td [routerLink]=\"['/admin/user/video-log/',viewallvideoDate?.user2info[0]?._id]\">\n                                            {{viewallvideoDate?.user2info[0]?.firstName}}\n                                        </td>\n    \n                                        <td>\n                                            {{viewallvideoDate?.user2info[0]?.age}}\n    \n                                        </td>\n                                        <td>\n                                            {{viewallvideoDate?.user2info[0]?.gender | gender}}\n    \n                                        </td>\n\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t{{viewallvideoDate?.user2info[0]?.device_type}}\n\t\t\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t\t\t\t{{viewallvideoDate?.user2info[0]?.appVersion}}\n\t\t\t\t\t\t\t\t\t\t</td>\n                                        <td>\n                                            <div *ngIf=\"viewallvideoDate?.reviewLog.length >=2;else no \">\n                                                <div *ngIf=\"viewallvideoDate?.user2info[0]?._id==viewallvideoDate?.reviewLog[0]?.review_from\">\n                                                    <div\n                                                        *ngIf=\"viewallvideoDate?.reviewLog[0]?.isInterested;else interested\">\n                                                        Yes\n                                                    </div>\n                                                </div>\n                                                <div\n                                                    *ngIf=\"viewallvideoDate?.user2info[0]?._id==viewallvideoDate?.reviewLog[1]?.review_from\">\n                                                    <div\n                                                        *ngIf=\"viewallvideoDate?.reviewLog[1]?.isInterested;else interested\">\n                                                        Yes\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </td>\n    \n                                        <td>\n                                            <a title=\"View Video Date\"\n                                                (click)=\"downloadVideo(viewallvideoDate?.archive_s3_url)\">\n                                                <i class=\"fa fa-eye\" aria-hidden=\"true\"></i>\n                                            </a>\n    \n                                        </td>\n                                        <td>\n    \n                                            <button type=\"button\" (click)=\"showDialog(viewallvideoDate)\" pButton\n                                                icon=\"pi pi-info-circle\" label=\"Review\"></button>\n                                        </td>\n                                        <td>\n                                            {{viewallvideoDate?._id?.dateCount}}\n                                        </td>\n                                        <td>\n                                            {{viewallvideoDate?.reviewLog[0]?.createdAt | dateWithTimezone:'America/New_York':'LLLL' }}\n                                        </td>\n                                    </tr>\n                                </table>\n                            </div>\n                            <!-- <p-paginator [rows]=\"20\" [totalRecords]=totalCount (onPageChange)=\"paginateMatching($event)\"></p-paginator> -->\n                        </div>\n                        <div class=\"box-video__meta\">\n                        </div>\n                    \n\n    </div>\n</div>\n<p-dialog header=\"View Reviews\" [(visible)]=\"displayReviews\" [modal]=\"true\" [responsive]=\"true\"\n    [style]=\"{width: '600px', minWidth: '600px'}\" [minY]=\"700\" closable='true' dismissableMask='true' baseZIndex='0'\n    closeOnEscape='true' responsive='true' baseZIndex='0'>\n    <div *ngIf=\"viewReview?.user1info[0]?._id==viewReview?.reviewLog[0].review_from;else viewReviewofElse\">\n        <table class=\"table NoTopBorder custom-table\">\n\n            <tr>\n                <th>Name</th>\n                <th>Pleasant</th>\n                <th>Attractive</th>\n                <th>MarriageFocused</th>\n\n                <th>Note</th>\n                <th>Interested</th>\n            </tr>\n\n\n            <tr>\n                <td>{{viewReview?.user1info[0]?.firstName}}</td>\n                <td>\n                    <p-rating [ngModel]=viewReview?.reviewLog[0]?.pleasant readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                    </p-rating>\n                </td>\n\n                <td>\n                    <p-rating [ngModel]=viewReview?.reviewLog[0]?.attractive readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                    </p-rating>\n                </td>\n                <td>\n                    <p-rating [ngModel]=viewReview?.reviewLog[0]?.marriageFocused readonly=\"true\" stars=\"5\"\n                        [cancel]=\"false\"></p-rating>\n                </td>\n                <td>{{viewReview?.reviewLog[0]?.notes}} </td>\n                <!-- <td>\n                    {{viewReview?.reviewLog[0].isInterested}}\n                </td> -->\n                <td *ngIf=\"viewReview?.reviewLog[0]?.isInterested;else no\">\n                    Yes\n                </td>\n            </tr>\n            <tr>\n                <td>{{viewReview?.user2info[0]?.firstName}}</td>\n                <td>\n                    <p-rating [ngModel]=viewReview?.reviewLog[1]?.pleasant readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                    </p-rating>\n                </td>\n\n                <td>\n                    <p-rating [ngModel]=viewReview?.reviewLog[1]?.attractive readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                    </p-rating>\n                </td>\n                <td>\n                    <p-rating [ngModel]=viewReview?.reviewLog[1]?.marriageFocused readonly=\"true\" stars=\"5\"\n                        [cancel]=\"false\"></p-rating>\n                </td>\n                <td>{{viewReview?.reviewLog[1]?.notes}} </td>\n                <!-- <td>\n                    {{viewReview?.reviewLog[1].isInterested}}\n\n                </td> -->\n                <td *ngIf=\"viewReview?.reviewLog[1]?.isInterested;else no\">\n                    Yes\n                </td>\n            </tr>\n\n        </table>\n    </div>\n\n\n</p-dialog>\n\n<p-dialog header=\"View Video\" [(visible)]=\"displayVideo\" [modal]=\"true\" [responsive]=\"true\"\n    [style]=\"{width: '600px', minWidth: '600px'}\" [minY]=\"700\" closable='true' dismissableMask='true' baseZIndex='0'\n    closeOnEscape='true' responsive='true' baseZIndex='0'>\n    <video autoplay=\"autoplay\" preload=\"auto\" ng-click=\"pauseOrPlay()\" #videoPlayer controls>\n        <source [src]=\"videourl\" type=\"video/mp4\" />\n    </video>\n\n\n</p-dialog>\n<!-- <div class=\"userDetailsOverlay\" *ngIf=\"displayReviews\">\n    <div class=\"main-section-area\">\n       \n    </div>\n</div> -->\n\n<ng-template #viewReviewofElse>\n    <table class=\"table NoTopBorder custom-table\">\n        <tr>\n            <th>Name</th>\n            <th>Pleasant</th>\n            <th>Attractive</th>\n            <th>MarriageFocused</th>\n\n            <th>Note</th>\n            <th>Interested</th>\n        </tr>\n        <tr>\n            <td>{{viewReview?.user2info[0]?.firstName}}</td>\n            <td>\n                <p-rating [ngModel]=viewReview?.reviewLog[1]?.pleasant readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                </p-rating>\n            </td>\n\n            <td>\n                <p-rating [ngModel]=viewReview?.reviewLog[1]?.attractive readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                </p-rating>\n            </td>\n            <td>\n                <p-rating [ngModel]=viewReview?.reviewLog[1]?.marriageFocused readonly=\"true\" stars=\"5\"\n                    [cancel]=\"false\"></p-rating>\n            </td>\n            <td>{{viewReview?.reviewLog[1]?.notes}} </td>\n            <td *ngIf=\"viewReview?.reviewLog[0]?.isInterested;else no\">\n                Yes\n            </td>\n        </tr>\n        <tr>\n            <td>{{viewReview?.user1info[0]?.firstName}}</td>\n            <td>\n                <p-rating [ngModel]=viewReview?.reviewLog[0]?.pleasant readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                </p-rating>\n            </td>\n\n            <td>\n                <p-rating [ngModel]=viewReview?.reviewLog[0]?.attractive readonly=\"true\" stars=\"5\" [cancel]=\"false\">\n                </p-rating>\n            </td>\n            <td>\n                <p-rating [ngModel]=viewReview?.reviewLog[0]?.marriageFocused readonly=\"true\" stars=\"5\"\n                    [cancel]=\"false\"></p-rating>\n            </td>\n            <td>{{viewReview?.reviewLog[0]?.notes}} </td>\n            <td *ngIf=\"viewReview?.reviewLog[0]?.isInterested;else no\">\n                Yes\n            </td>\n        </tr>\n    </table>\n</ng-template>\n\n\n<ng-template #no>\n    <div>No</div>\n</ng-template>\n<ng-template #interested>\n    <div>\n        No\n    </div>\n</ng-template>\n\n<ngx-spinner bdOpacity=0.1 size=\"medium\" color=\"#50008e\" type=\"line-scale\" [fullScreen]=\"true\">\n    <p style=\"color: white\"> Loading... </p>\n</ngx-spinner>"
 
 /***/ }),
 
@@ -4420,6 +4246,7 @@ var VideodateLogsComponent = /** @class */ (function () {
             if (res.code === 200) {
                 _this.spinner.hide();
                 _this.viewallvideoDates = res.data;
+                console.log(_this.viewallvideoDates);
             }
             else {
             }

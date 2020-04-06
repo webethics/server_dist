@@ -2732,7 +2732,9 @@ var ElesAppConst = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(ElesAppConst, "VIDEO_CALL_DONE", {
-        get: function () { return this.appurl + 'admin/videoCallWithUser/'; },
+        //http://23.251.151.250:5952/apis/admin/listLastDatesOfUser
+        //  public static get VIDEO_CALL_DONE(): string { return this.appurl + 'admin/listLastDatesOfUser/'; }
+        get: function () { return this.appurl + 'admin/listLastDatesOfUser/'; },
         enumerable: true,
         configurable: true
     });
@@ -3234,7 +3236,7 @@ __webpack_require__.r(__webpack_exports__);
 var environment = {
     production: true,
     // url: 'https://meanstack.stagingsdei.com:5952/apis/'
-    url: 'http://23.251.151.250:5952/apis/'
+    url: 'https://theaishadchan.com/apis/'
 };
 /*
  * In development mode, for easier debugging, you can ignore zone related error
