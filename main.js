@@ -2738,6 +2738,11 @@ var ElesAppConst = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ElesAppConst, "CHANGE_REVIEW_INTEREST", {
+        get: function () { return this.appurl + 'admin/changeReviewInterest/'; },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ElesAppConst, "SUPERIMP_OF_USER2", {
         get: function () { return this.appurl + 'admin/superImporantQandAofUser2?id='; },
         enumerable: true,

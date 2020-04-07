@@ -797,6 +797,14 @@ var AdminService = /** @class */ (function () {
             return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].create(function (observer) { return observer.error(_shared_utils_string_constants__WEBPACK_IMPORTED_MODULE_4__["StringConst"].INVALID_INFORMATION); });
         }
     };
+    AdminService.prototype.changeReviewInterest = function (data) {
+        if (data) {
+            return this.http.post(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].CHANGE_REVIEW_INTEREST, data);
+        }
+        else {
+            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].create(function (observer) { return observer.error(_shared_utils_string_constants__WEBPACK_IMPORTED_MODULE_4__["StringConst"].INVALID_INFORMATION); });
+        }
+    };
     AdminService.prototype.editAGE_DOB = function (data) {
         if (data) {
             // console.log('csassa',data)
