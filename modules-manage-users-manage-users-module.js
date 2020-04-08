@@ -3724,6 +3724,9 @@ var ListOnlineUsersComponent = /** @class */ (function () {
         this.listOnlineUsers(this.page);
         this.ageList();
         this.genderSelected = '';
+        /* setInterval(() => {
+                  this.listOnlineUsers(this.page);
+                }, 1000); */
     };
     ListOnlineUsersComponent.prototype.enableDisableGenderBasedAlarm = function (flag) {
         var _this = this;
