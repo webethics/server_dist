@@ -3611,6 +3611,575 @@ var EditUsersComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/admin/modules/manage-users/list-online-users/list-online-users.component.css":
+/*!**********************************************************************************************!*\
+  !*** ./src/app/admin/modules/manage-users/list-online-users/list-online-users.component.css ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".listItem{\n    list-style-type: none;\n    margin: 0; padding: 0;\n}\n.listItem li{ display: inline-block; margin-right: 8px; }\n.dotRed{\n    height: 15px;\n    width: 15px;\n    border-radius: 50%;\n    background: red;\n    position: absolute;\n    top: 10px;\n    left: 5px;\n}\n.dotGreen{\n    height: 15px;\n    width: 15px;\n    border-radius: 50%;\n    background: green;\n    position: absolute;\n    top: 10px;\n    left: 5px; \n}\n.posRelative{\n    position: relative;\n    padding-left: 30px;\n}\n.listItem {\n    list-style-type: none;\n    margin: 0;\n    padding: 0\n}\n.listItem li {\n    display: inline-block;\n    margin-right: 8px\n}\n.table-responsive img {\n    max-width: 24%;\n}\n.example-viewport {\n    height: 450px;\n    width: 100%;\n    /* border: 1px solid black; */\n  }\n.example-item {\n    height: 50px;\n  }\nform {\n    overflow: hidden;\n  }\n.admin-box-controls{\n      display: flex;\n      flex-wrap: wrap;\n      align-items:center;\n      width: 100%;\n      padding-bottom: 15px;\n  }\n.searchForm{\n      display: flex;\n      padding: 0;\n      align-items: flex-start;\n  \n  }\n.searchInp{\n    padding: 20px;\n    padding-left:10px;\n    outline: none;\n    border:1px solid lightgray;\n    margin: 5px;\n    border-radius: 5px;\n  }\n.searchBtn{\n  padding: 10px;  \n}\n.btn-search{\n    color:white;\n    background: linear-gradient(180deg, #feba36 0, #f92387 163.64%);\n    padding: 5px;\n    padding-left:10px ;\n    padding-right:10px ;\n    outline: none;\n    border-radius: 10px;\n    border:1px solid #feba36;\n    margin-left: 5px;\n    margin-right: 5px;\n}\n.dropdown{\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    margin: 0 !important;\n    padding: 0;\n}\n.search-area{\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.enableGenderArea{\n    display: flex;\n    padding: 0;\n}\n.enabled{\n    display: flex;\n    align-items: center;\n\n}\n.statusG{\n    padding: 5px;\n    margin-left: 5px;\n    color:white;\n    font-size: 12px;\n    border-radius: 5px;\n    width: 5.2em;\n    background-color: green;\n    border:1px solid green;\n}\n.statusR{\n    padding: 5px;\n    margin-left: 5px;\n    color:white;\n    font-size: 12px;\n    border-radius: 5px;\n    width: 5.2em;\n    background-color: red;\n    border:1px solid red;\n}\n.fields{\n\n}\n.label{\n    margin: 0;\n    font-weight: 500;\n    margin-left: 5px;\n}\n.checkBx{\n    margin-left: 5px;\n}\nselect {\n    width: 100%;\n    max-width: 100%;\n    height: auto;\n    padding: 0px 5px;\n    border-radius: 13px;\n    border: 1px solid #fc6763;\n    background: #fff;\n    font-size: 15px;\n    color: #3e4148;\n    line-height: 1;\n    -webkit-appearance: none;\n}"
+
+/***/ }),
+
+/***/ "./src/app/admin/modules/manage-users/list-online-users/list-online-users.component.html":
+/*!***********************************************************************************************!*\
+  !*** ./src/app/admin/modules/manage-users/list-online-users/list-online-users.component.html ***!
+  \***********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<!-- <div class=\"admin-bar\">\n    <div class=\"wrapper dashboard\">\n        <div class=\"admin-main-container\"> -->\n<!-- <div class=\"admin-main-content\"> -->\n<div class=\"admin-main-content\">\n    <h3>List of Online Users</h3>\n    <div class=\"admin-box-controls\">\n        <div class=\"enableGenderArea col-lg-4 col-md-4 col-sm-12\">\n\n            <div class=\"enabled\">\n                <span class=\"fields\" *ngIf=\"femaleAlarm;else disablealarm\">Alarm Enabled:</span>\n                <div class=\"fields\" [ngClass]=\"femaleAlarm ? 'statusG' : 'statusR'\">FEMALE</div>\n            </div>\n            <label for=\"gender\" class=\"label\" *ngIf=\"femaleAlarm;else lableChange\">Disable:</label>\n            <p-checkbox name=\"groupname\" value=\"1\" [(ngModel)]=\"isDisabledFemale\"\n                (click)=\"enableDisableGenderBasedAlarm(femaleAlarm)\"></p-checkbox>\n            <!-- <input class=\"checkBx\" type=\"checkbox\" name=\"gender\" [(ngModel)]=\"isDisabledFemale\" > -->\n        </div>\n\n        <div class=\"enableGenderArea col-lg-4 col-md-4 col-sm-12\">\n            <div class=\"enabled\">\n                <span class=\"fields\" *ngIf=\"maleAlarm;else disablealarm\">Alarm Enabled:</span>\n                <div class=\"fields status\" [ngClass]=\"maleAlarm ? 'statusG' : 'statusR'\">MALE</div>\n            </div>\n            <label for=\"gender\" class=\"label\" *ngIf=\"maleAlarm;else lableChange\">Disable:</label>\n            <p-checkbox name=\"groupname\" value=\"0\" [(ngModel)]=\"isDisabledFemale\"\n                (click)=\"enableDisableGenderBasedAlarm(maleAlarm)\"></p-checkbox>\n            <!-- <input class=\"checkBx\" type=\"checkbox\" name=\"gender\" [(ngModel)]=\"isDisabledMale\" (click)=\"enableDisableGenderBasedAlarm()\"> -->\n        </div>\n        <!-- <div class=\"dropdown col-lg-3 col-md-3 col-sm-12\">\n            <p-dropdown [options]=\"genderValues\" [(ngModel)]=\"genderalarm\"></p-dropdown>\n            <button type=\"submit\" class=\"btn-search\" (click)=\"enableDisableGenderBasedAlarm()\">Submit</button>\n        </div> -->\n\n        <form [formGroup]=\"searchForm\" class=\"searchForm col-lg-3 col-md-3 col-sm-12\" novalidate\n            (ngSubmit)=\"submitListUser()\">\n            <div class=\"search-area\">\n                <input type=\"text\" class=\"form-control\" formControlName=\"searchText\" id=\"inputUrl\"\n                    placeholder=\"Search Here\">\n                <div *ngIf=\"searchForm.controls['searchText'].touched\">\n                    <span *ngIf=\"searchForm.controls['searchText'].hasError('required')\" class=\"error\">\n                        Required\n                    </span>\n                </div>\n                <span *ngIf=\"searchForm.controls['searchText'].hasError('maxlength')\" class=\"error\">\n                    Length exceded\n                </span>\n            </div>\n            <button type=\"submit\" class=\"btn-search\">Search</button>\n        </form>\n    </div>\n       <!--  <cdk-virtual-scroll-viewport itemSize=\"60\" class='example-viewport'> -->\n            <div class=\"table-responsive example-itema\">\n                <table class=\"table NoTopBorder custom-table user-control-tablea \">\n                    <tbody>\n                        <tr>\n\t\t\t\t\t\t\t<th class=\"label\">Sr no</th>\n                            <th class=\"label\">Name</th>\n                            <th class=\"label\">App Version</th>\n                            <th class=\"label\">Email</th>\n                            <th class=\"label\">Gender\n                                <div class=\"dropdown\">\n                                    <select (change)=\"onGenderChangeEvent($event.target.value)\">\n                                        <option style=\"display:none\">select</option>\n                                        <option value=\"male\">Male</option>\n                                        <option value=\"female\">female</option>\n                                    </select>\n                                </div>\n                            </th>\n                            <th class=\"label\">K\n                                <div class=\"dropdown\">\n                                    <!-- <select [(ngModel)]=\"supImp\" (change)=\"onSUPIMPCHANGE($event.target.value)\">\n                                        <option style=\"display:none\">select</option>\n                                        <option value=\"Keeping Kosher\">K</option>\n                                        <option value=\"Not Keeping Kosher\">NK</option>\n                                    </select> -->\n                                </div>\n                            </th>\n                            <th class=\"label\">S\n                                <div class=\"dropdown\">\n                                    <!-- <select [(ngModel)]=\"supImp1\" (change)=\"onSUPIMPCHANGE($event.target.value)\">\n                                        <option style=\"display:none\">select</option>\n                                        <option value=\"Keeping Shabbos\">S</option>\n                                        <option value=\"Not Keeping Shabbos\">NS</option>\n                                    </select> -->\n                                </div>\n                            </th>\n                            <th class=\"label\">T\n                                <div class=\"dropdown\">\n                                    <!-- <select [(ngModel)]=\"supImp2\" (change)=\"onSUPIMPCHANGE($event.target.value)\">\n                                        <option style=\"display:none\">select</option>\n                                        <option value=\"Wearing Tefillin\">T</option>\n                                        <option value=\"Not Wearing Tefillin\">NT</option>\n                                    </select> -->\n                                </div>\n                            </th>\n                            <th class=\"label\">C\n                                <!-- <div>\n                                                <input type=\"checkbox\" data-md-icheck (change)=\"addprop1($event)\" />\n                                            </div> -->\n                            </th>\n                            <th class=\"label\">DOB</th>\n                            <th class=\"label\">Age\n                                <div class=\"dropdown\">\n                                    <select (change)=\"onAgeChangeEvent($event.target.value)\">\n                                        <option style=\"display:none\">Select</option>\n                                        <option *ngFor=\"let item of ageLists\" value={{item._id.age}}>{{item._id.age}}\n                                        </option>\n                                    </select>\n                                </div>\n                            </th>\n                            <!-- <th>\n                                            Last Online\n                                        </th>\n                                        <th>Last Online Date</th>\n                                        <th>\n                                            Last Offline\n                                        </th>\n                                        <th>Last Offline Date</th> -->\n                            <th class=\"label\">Last seen</th>\n                            <th class=\"label\">Device Type</th>\n                            <th class=\"label\">Location Alarm Enabled</th>\n                            <th class=\"label\"> Gender Alarm Enabled</th>\n                            <th class=\"label\">City</th>\n                            <th class=\"label\">Country</th>\n                            <th class=\"label\"> Subscription Done</th>\n                            <th class=\"label\">Subscription</th>\n                            <th class=\"label\">Action</th>\n                        </tr>\n                        <tr *ngFor=\"let user of onusers;let i = index\">\n\t\t\t\t\t\t\t<td>{{(this.page*40)+i+1}}</td>\n                            <td class=\"posRelative\" [routerLink]=\"['/admin/user/video-log/',user._id]\">\n                                <!-- <td class=\"posRelative\" [routerLink]=\"['/video-log/',user._id]\"> -->\n\n                                <span [ngClass]=\"user.isOnline ? 'dotGreen' : 'dotRed'\"></span>\n                                <a> {{user?.firstName}}</a>\n                            </td>\n                            <td>\n                                {{user?.appVersion}}\n                            </td>\n                            <td>\n                                {{user?.email}}\n                            </td>\n                            <td (click)=\"openGenderModal(user?._id,user.gender)\">\n                                <div *ngIf=\"!user.gender;else other\">\n                                    Male\n                                </div>\n                            </td>\n                            <td>\n                                <div *ngFor=\"let supImpAns of user?.sup_imp_ans;let i = index \">\n                                    <div\n                                        *ngIf=\"(supImpAns?.answer_text=='Keeping Kosher')||(supImpAns?.answer_text=='Not Keeping Kosher')\">\n                                        <div *ngIf=\"(supImpAns?.answer_text=='Keeping Kosher');else abbrivated\">\n                                            Y\n                                        </div>\n                                    </div>\n                                </div>\n                            </td>\n                            <td>\n                                <div *ngFor=\"let supImpAns of user?.sup_imp_ans;let i = index \">\n                                    <div\n                                        *ngIf=\"(supImpAns?.answer_text=='Keeping Shabbos')||(supImpAns?.answer_text=='Not Keeping Shabbos')\">\n                                        <div *ngIf=\"(supImpAns?.answer_text=='Keeping Shabbos');else abbrivated\">\n                                            Y\n                                        </div>\n                                    </div>\n                                </div>\n                            </td>\n                            <td>\n                                <div *ngFor=\"let supImpAns of  user?.sup_imp_ans;let i = index \">\n                                    <div\n                                        *ngIf=\"(supImpAns?.answer_text=='Wearing Tefillin')||(supImpAns?.answer_text=='Not Wearing Tefillin')\">\n                                        <div *ngIf=\"(supImpAns?.answer_text=='Wearing Tefillin');else abbrivated\">\n                                            Y\n                                        </div>\n                                    </div>\n                                </div>\n                            </td>\n                            <td *ngIf=\"!user?.gender\">\n                                <div *ngIf=\"user?.isCohen;else cohen\">\n                                    Y\n                                </div>\n                            </td>\n                            <td *ngIf=\"user?.gender\">\n                                <div *ngIf=\"user?.isAbleToMarryCohen;else AbleToMarryCohen\">\n                                    Y\n                                </div>\n                            </td>\n\n                            <td (click)=\"openAgeModal(user?._id,user?.DOB)\">\n                                {{user?.DOB}}\n                            </td>\n                            <td>\n                                {{user?.age}}\n                            </td>\n                            <td>\n                                {{user?.updatedAt| date: 'dd/MM/yyyy'}}\n                            </td>\n                            <!-- <td>\n                                            {{user.lastOnlineTime}}\n                                        </td>\n                                        <td>\n                                            {{user.lastOnlineDateWithTZ| date: 'dd/MM/yyyy'}}\n                                        </td>\n                                        <td>\n                                            {{user.lastOfflineTime}}\n                                        </td>\n                                        <td>\n                                            {{user.lastOfflineDateWithTZ| date: 'dd/MM/yyyy'}}\n                                        </td> -->\n                            <td>\n                                {{user?.device_type}} </td>\n                            <td>\n                                {{user?.isLocationAlarmEnabled | yesNo:user?.isLocationAlarmEnabled }}\n                            </td>\n                            <td>\n                                {{user?.isGenderAlarmEnabled | yesNo:user?.isGenderAlarmEnabled}}\n                            </td>\n                            <td>\n                                {{user?.city}}\n                            </td>\n                            <td>\n                                {{user?.country}}\n                            </td>\n                            <td *ngIf=\"user?.isSubscriptionDone;else no\">\n                                Yes\n                            </td>\n\n                            <td (click)=\"enableSubscription(user?._id,user?.isSubscriptionFree)\">\n                                <!-- <div class=\"box-video__item\">\n                                                            <form [formGroup]=\"checkBoxForm\">\n                                                              <input type=\"checkbox\" (change)=\"onCheckboxChagen(user._id, $event.target.checked)\">\n                                                            </form>\n                                                          </div> -->\n                                <div *ngIf=\"user.isSubscriptionFree;else subscriptionFree\">\n                                    <!-- <div *ngIf=\"isSubscriptionDone\"> -->\n                                    <!-- <a title=\"Enable Subscription\"> -->\n                                    <button pButton type=\"button\" label=\"Enable\"\n                                        class=\"ui-button-rounded ui-button-success\"></button>\n                                    <!-- <img src=\"../../../../../assets/img/subscription.png\" alt=\"Shidduch View\"> -->\n                                    <!-- </a> -->\n\n                                    <!-- <button >Enable Subscription</button> -->\n                                    <!-- </div> -->\n                                </div>\n                                <!-- <p-checkbox [(ngModel)]=\"checkSubscription\" binary=\"true\"></p-checkbox> -->\n                            </td>\n\n                            <td>\n                                <ul class=\"listItem\">\n                                    <li>\n                                        <a title=\"Edit\">\n                                            <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                                        </a>\n                                    </li>\n                                    <li>\n                                        <a (click)=\"delete(user?._id)\" title=\"Delete\">\n                                            <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n                                        </a>\n                                    </li>\n                                    <li>\n                                        <a (click)=\"sendNotification(user?._id)\" title=\"Send Notification\">\n                                            <i class=\"fa fa-send-o\" aria-hidden=\"true\"></i>\n                                        </a>\n                                    </li>\n                                    <li>\n                                        <a *ngIf=\"user?.isBlocked==true\" (click)=\"Unblock(user?._id)\" title=\"Block\">\n                                            <i class=\"fa fa-bell-slash\" aria-hidden=\"true\"></i>\n                                        </a>\n                                        <a *ngIf=\"user?.isBlocked==false\" (click)=\"Block(user?._id)\" title=\"Unblock\">\n                                            <i class=\"fa fa-bell\" aria-hidden=\"true\"></i>\n                                        </a>\n                                    </li>\n                                </ul>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n\t\t\t\t\n            </div>\n\t\t\t<div id=\"userList\">\n\t\t\t\t<p-paginator  [rows]=\"40\" [totalRecords]=totalCount (onPageChange)=\"paginateUsers($event)\"></p-paginator>\n\t\t\t</div>\n\t\t\t<div id=\"userGenderList\" style=\"display:none\">\n\t\t\t\t<p-paginator [rows]=\"40\" [totalRecords]=totalCount (onPageChange)=\"paginateUsers($event)\"></p-paginator>\n\t\t\t</div>\n        <!-- </cdk-virtual-scroll-viewport> -->\n    </div>\n    <!-- </div>\n\n        </div>\n\n    </div> -->\n    <!-- <p-paginator [rows]=\"20\" [totalRecords]=totalCount (onPageChange)=\"paginate($event)\"></p-paginator> -->\n<ng-template #disablealarm>\n    <span class=\"fields\">Alarm Disabled:</span>\n\n</ng-template>\n<ng-template #lableChange>\n    <label for=\"gender\" class=\"label\">Enable:</label>\n</ng-template>\n\n\n<ng-template #other>\n    <td>Female</td>\n</ng-template>\n\n<ng-template #abbrivated>\n    <td>N</td>\n</ng-template>\n\n<ng-template #no>\n    <td>No</td>\n</ng-template>\n<ng-template #AbleToMarryCohen>\n    <td>N</td>\n</ng-template>\n<ng-template #subscriptionFree>\n    <!-- <a title=\"Disable Subscription\">\n            <img src=\"../../../../../assets/img/unsubscribe.png\" alt=\"Shidduch View\">\n    </a> -->\n    <button pButton type=\"button\" label=\"Disable\" class=\"ui-button-rounded ui-button-danger\"></button>\n</ng-template>\n<ng-template #cohen>\n    <td>N</td>\n</ng-template>\n<div class=\"modal\" id=\"myModalEditAge\">\n    <div class=\"modal-box\">\n        <button title=\"Close (Esc)\" class=\"modal-close\" (click)=\"closeEditAgeModal()\">×</button>\n        <form [formGroup]=\"editAgeForm\" novalidate (ngSubmit)=\"onEditAge()\" class=\"form-default\">\n            <div class=\"modal-header__title\">\n                <span class=\"modal-header__icon\">\n                    <i class=\"fa fa-plus-circle\"></i>\n                </span>\n                Edit D.O.B.\n            </div>\n            <div class=\"modal-form-body\">\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"id\" placeholder=\"\" style=\"display: none;\">\n                </label>\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"DOB\"\n                        placeholder=\"Enter the DOB (dd/mm/yyyy)\">\n                </label>\n\n                <div class=\"btn-group btn-group--c\">\n                    <button type=\"submit\" class=\"btn btn--orange\">submit</button>\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n\n\n\n\n<div class=\"modal\" id=\"myModalEditGender\">\n    <div class=\"modal-box\">\n        <button title=\"Close (Esc)\" class=\"modal-close\" (click)=\"closeEditGenderModal()\">×</button>\n        <form [formGroup]=\"editGenderForm\" novalidate (ngSubmit)=\"onEditGender()\" class=\"form-default\">\n            <div class=\"modal-header__title\">\n                <span class=\"modal-header__icon\">\n                    <i class=\"fa fa-plus-circle\"></i>\n                </span>\n                Edit D.O.B.\n            </div>\n            <div class=\"modal-form-body\">\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"id\" placeholder=\"\" style=\"display: none;\">\n                </label>\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"gender\"\n                        placeholder=\"Enter the DOB (dd/mm/yyyy)\">\n                </label>\n\n                <div class=\"btn-group btn-group--c\">\n                    <button type=\"submit\" class=\"btn btn--orange\">submit</button>\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n\n<div class=\"modal\" id=\"sendNotifcationIndividual\">\n    <div class=\"modal-box\">\n        <button title=\"Close (Esc)\" class=\"modal-close\" (click)=\"closesendNotificationModal()\">×</button>\n        <form [formGroup]=\"sendNotificationForm\" novalidate (ngSubmit)=\"onSendNotifcation()\" class=\"form-default\">\n            <div class=\"modal-header__title\">\n                <span class=\"modal-header__icon\">\n                    <i class=\"fa fa-plus-circle\"></i>\n                </span>\n                Send Notification\n            </div>\n            <div class=\"modal-form-body\">\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"id\" placeholder=\"\" style=\"display: none;\">\n                </label>\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"title\" placeholder=\"Enter title\">\n                </label>\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"message\" placeholder=\"Enter message\">\n                </label>\n\n                <div class=\"btn-group btn-group--c\">\n                    <button type=\"submit\" class=\"btn btn--orange\">Send</button>\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n\n<ngx-spinner bdOpacity=0.1 size=\"medium\" color=\"#50008e\" type=\"line-scale\" [fullScreen]=\"true\">\n    <p style=\"color: white\"> Loading... </p>\n</ngx-spinner>\n\n\n\n\n\n\n\n\n\n\n\n<!-- <ngx-spinner bdOpacity=0 .1 size=\"medium\" color=\"#50008e\" type=\"line-scale\" [fullScreen]=\"true\">\n    <p style=\"color: white\"> Loading... </p>\n</ngx-spinner> -->\n\n<!-- <td>\n    <select [(ngModel)]=\"item.category\">\n         <option style=\"display:none\">select a category</option>\n         <option *ngFor=\"let item of categories\" [ngValue]=\"item.category\" value=\"item.category\">{{item.category}}</option>\n       </select>\n     </td> \n    -->"
+
+/***/ }),
+
+/***/ "./src/app/admin/modules/manage-users/list-online-users/list-online-users.component.ts":
+/*!*********************************************************************************************!*\
+  !*** ./src/app/admin/modules/manage-users/list-online-users/list-online-users.component.ts ***!
+  \*********************************************************************************************/
+/*! exports provided: ListOnlineUsersComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListOnlineUsersComponent", function() { return ListOnlineUsersComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _admin_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../admin.service */ "./src/app/admin/admin.service.ts");
+/* harmony import */ var ngx_spinner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-spinner */ "./node_modules/ngx-spinner/fesm5/ngx-spinner.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+/* harmony import */ var _shared_service_export_xlxs_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../shared/service/export-xlxs.service */ "./src/app/shared/service/export-xlxs.service.ts");
+/* harmony import */ var _shared_service_notifiation_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../shared/service/notifiation.service */ "./src/app/shared/service/notifiation.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/cdk/scrolling */ "./node_modules/@angular/cdk/esm5/scrolling.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var ListOnlineUsersComponent = /** @class */ (function () {
+    function ListOnlineUsersComponent(adminService, spinner, toastr, fb, excelService, notifcation, scrollDispatcher, cd) {
+        this.adminService = adminService;
+        this.spinner = spinner;
+        this.toastr = toastr;
+        this.fb = fb;
+        this.excelService = excelService;
+        this.notifcation = notifcation;
+        this.scrollDispatcher = scrollDispatcher;
+        this.cd = cd;
+        this.onusers = [];
+        this.checkSubscription = false;
+        this.page = 0;
+        this.genderValues = [
+            { label: 'Enable Gender Alarm', value: null },
+            { label: 'Male', value: { id: 0, name: 'Male', code: 'M' } },
+            { label: 'Female', value: { id: 1, name: 'Female', code: 'F' } },
+            { label: 'Both', value: { id: 2, name: 'Both', code: 'MandF' } },
+        ];
+    }
+    ListOnlineUsersComponent.prototype.ngOnInit = function () {
+        // this.exportDataToCSV();
+        this.checkBoxForm = this.fb.group({
+            userid: this.fb.array([])
+        });
+        // this.spinner.show()
+        // setTimeout(() => {
+        //   this.spinner.hide()
+        // }, 1000)
+        this.editAgeForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormGroup"]({
+            id: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"](''),
+            DOB: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', [
+                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required,
+            ])
+        });
+        this.searchForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormGroup"]({
+            searchText: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].maxLength(20)]),
+        });
+        this.sendNotificationForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormGroup"]({
+            id: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"](''),
+            title: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', [
+                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required,
+            ]),
+            message: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', [
+                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required,
+            ])
+        });
+        this.editGenderForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormGroup"]({
+            id: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"](''),
+            gender: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormControl"]('', [
+                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required,
+            ])
+        });
+        this.listOnlineUsers(this.page);
+        this.ageList();
+        this.genderSelected = '';
+    };
+    ListOnlineUsersComponent.prototype.enableDisableGenderBasedAlarm = function (flag) {
+        var _this = this;
+        // console.log('genderalarm', this.isDisabledFemale, flag);
+        this.notifcation.confirm('You want to enable alarm').then(function (data) {
+            // console.log('dataaaaa', data);
+            if (data.value) {
+                var gendervalue = {
+                    // tslint:disable-next-line:radix
+                    gender: parseInt(_this.isDisabledFemale[0]),
+                    enableOrDisableAlarm: !flag
+                };
+                _this.adminService.enableOrDisableGenderAlarm(gendervalue).subscribe(function (res) {
+                    if (res.code === 200) {
+                        _this.isDisabledFemale = '';
+                        _this.listOnlineUsers(0);
+                    }
+                    else {
+                        _this.isDisabledFemale = '';
+                        _this.listOnlineUsers(0);
+                    }
+                });
+            }
+            else {
+                _this.isDisabledFemale = '';
+            }
+        });
+    };
+    ListOnlineUsersComponent.prototype.ageList = function () {
+        var _this = this;
+        this.adminService.ageList().subscribe(function (res) {
+            // console.log(res.data, '************');
+            if (res.code === 200) {
+                _this.ageLists = res.data;
+            }
+            else {
+            }
+        });
+    };
+    /* ngAfterViewInit(): void {
+        this.scrollDispatcher.scrolled()
+            .subscribe(event => {
+                console.log('gdfgggggdfgdfgdfgfg', this.page, 'event', event);
+                const pageNumber = this.page;
+                pageNumber = parseInt(pageNumber) + 1;
+                console.log(pageNumber, 'this.page');
+                this.listOnlineUsers(pageNumber);
+                this.cd.detectChanges();
+            });
+    } */
+    /* ngAfterViewInit(): void {
+      this.scrollDispatcher.scrolled().pipe(
+        filter(event => this.virtualScroll.measureScrollOffset('bottom') === 0)
+      ).subscribe(event => {
+        console.log('gdfgggggdfgdfgdfgfg', this.page, 'event', event);
+        const pageNumber = this.page;
+        pageNumber = parseInt(pageNumber) + 1;
+        console.log(pageNumber, 'this.page');
+        this.listOnlineUsers(pageNumber);
+        this.cd.detectChanges();
+      });
+  
+    } */
+    ListOnlineUsersComponent.prototype.submitListUser = function () {
+        this.listOnlineUsers(this.page);
+    };
+    ListOnlineUsersComponent.prototype.switchPagination = function (switchpagination) {
+        if (switchpagination == 'userList') {
+            document.getElementById('userGenderList').style.display = 'none';
+            document.getElementById('userList').style.display = 'block';
+        }
+        if (switchpagination == 'userGenderList') {
+            document.getElementById('userList').style.display = 'none';
+            document.getElementById('userGenderList').style.display = 'block';
+        }
+    };
+    ListOnlineUsersComponent.prototype.listOnlineUsers = function (page) {
+        var _this = this;
+        console.log('156 page number', page);
+        if (this.searchForm.valid) {
+            // console.log(this.searchForm.value, 'this.searchForm.value');
+            // this.spinner.show()
+            var pageObj = {
+                page: page,
+                isOnline: true,
+                searchText: this.searchForm.value
+            };
+            this.adminService.listOnlineUsers(pageObj).subscribe(function (res) {
+                // console.log('users onlinelistOnlineUsers', res);
+                if (res.code === 200) {
+                    // this.spinner.hide();
+                    _this.onusers = [];
+                    _this.onusers = _this.onusers.concat(res.data.data);
+                    _this.totalCount = res.data.totalCount;
+                    _this.maleAlarm = res.data[0].maleAlarm.isGenderAlarmEnabled;
+                    _this.femaleAlarm = res.data[0].femaleAlarm.isGenderAlarmEnabled;
+                    // console.log('this.onusersthis.onusers', this.femaleAlarm, this.maleAlarm);
+                }
+            });
+        }
+        else {
+            // this.spinner.show();
+            var pageObj = {
+                page: page,
+                isOnline: true,
+            };
+            this.adminService.listOnlineUsers(pageObj).subscribe(function (res) {
+                // console.log('users onlinelistOnlineUsers', res);
+                if (res.code === 200) {
+                    // this.spinner.hide();
+                    _this.onusers = _this.onusers.concat(res.data.data);
+                    // console.log('this.onusersthis.onusers', this.onusers);
+                    _this.totalCount = res.data.totalCount;
+                    _this.maleAlarm = res.data.maleAlarm[0].isGenderAlarmEnabled;
+                    _this.femaleAlarm = res.data.femaleAlarm[0].isGenderAlarmEnabled;
+                    // console.log('this.onusersthis.onusers', this.femaleAlarm, this.maleAlarm);
+                }
+            });
+        }
+        this.switchPagination('userList');
+    };
+    ListOnlineUsersComponent.prototype.paginateUsers = function (event) {
+        var _this = this;
+        if (this.genderSelected == '') {
+            var obj = {
+                page: event.page,
+                isOnline: true,
+            };
+            this.spinner.show();
+            this.adminService.listOnlineUsers(obj).subscribe(function (res) {
+                // console.log('users', res);
+                if (res.code === 200) {
+                    _this.spinner.hide();
+                    _this.onusers = res.data.data;
+                    _this.totalCount = res.data.totalCount;
+                }
+            });
+            this.page = event.page;
+        }
+        else {
+            // console.log(event, '00000000000000000000000000000');
+            if (this.genderSelected === 'male') {
+                this.spinner.show();
+                var gender = {
+                    gender: 0,
+                    isOnline: true,
+                    page: event.page
+                };
+                this.adminService.genderFilter(gender).subscribe(function (res) {
+                    _this.spinner.hide();
+                    _this.onusers = res.data.data;
+                    _this.totalCount = res.data.totalCount;
+                });
+            }
+            else if (this.genderSelected === 'female') {
+                this.spinner.show();
+                var gender1 = {
+                    gender: 1,
+                    isOnline: true,
+                    page: event.page
+                };
+                this.adminService.genderFilter(gender1).subscribe(function (res) {
+                    _this.spinner.hide();
+                    _this.onusers = res.data.data;
+                    _this.totalCount = res.data.totalCount;
+                });
+            }
+            this.page = event.page;
+        }
+    };
+    ListOnlineUsersComponent.prototype.listOnlineUsersWhenActionPerformed = function (page) {
+        var _this = this;
+        this.page = 0;
+        var pageObj = {
+            page: page,
+            isOnline: true,
+        };
+        this.adminService.listOnlineUsers(pageObj).subscribe(function (res) {
+            // console.log('users onlinelistOnlineUsers', res);
+            if (res.code === 200) {
+                // this.spinner.hide();
+                _this.onusers = [];
+                _this.onusers = _this.onusers.concat(res.data.data);
+                // console.log('this.onusersthis.onusers', this.onusers);
+                _this.totalCount = res.data.totalCount;
+            }
+        });
+    };
+    ListOnlineUsersComponent.prototype.sendNotification = function (id) {
+        this.sendNotificationUserid = id;
+        document.getElementById('sendNotifcationIndividual').style.display = 'block';
+    };
+    ListOnlineUsersComponent.prototype.closesendNotificationModal = function () {
+        document.getElementById('sendNotifcationIndividual').style.display = 'none';
+    };
+    ListOnlineUsersComponent.prototype.onSendNotifcation = function () {
+        var _this = this;
+        var userinfo = {
+            id: this.sendNotificationUserid,
+            value: this.sendNotificationForm.value
+        };
+        // console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyy', userinfo);
+        this.adminService.individualNotification(userinfo).subscribe(function (res) {
+            if (res.code === 200) {
+                // this.notifcation.infoToast(res.message)
+                _this.toastr.info(res.message);
+                _this.closesendNotificationModal();
+                _this.sendNotificationForm.reset();
+            }
+            else if (res.code === 403) {
+                // this.notifcation.infoToast(res.message)
+                _this.toastr.info(res.message);
+                _this.closesendNotificationModal();
+                _this.sendNotificationForm.reset();
+            }
+            else if (res.code === 500) {
+                // this.notifcation.infoToast(res.message)
+                _this.toastr.info(res.message);
+                _this.closesendNotificationModal();
+                _this.sendNotificationForm.reset();
+            }
+            else if (res.code === 202) {
+                // this.notifcation.infoToast(res.message)
+                _this.toastr.info(res.message);
+                _this.closesendNotificationModal();
+                _this.sendNotificationForm.reset();
+            }
+        });
+    };
+    ListOnlineUsersComponent.prototype.checkUserSubscription = function () {
+    };
+    ListOnlineUsersComponent.prototype.enableSubscription = function (id, blSbuscription) {
+        var _this = this;
+        // console.log('id', id, blSbuscription);
+        var data = {
+            isSubscriptionFree: !blSbuscription,
+            user_id: id
+        };
+        this.adminService.enable_disable_subscrition(data).subscribe(function (res) {
+            console.log('res', res);
+            if (res.code === 200) {
+                // this.listOnlineUsers(0);
+                _this.listOnlineUsersWhenActionPerformed(0);
+            }
+        });
+        // this.listOnlineUsers(0);
+        this.listOnlineUsersWhenActionPerformed(0);
+    };
+    ListOnlineUsersComponent.prototype.delete = function (id) {
+        var _this = this;
+        this.notifcation.confirm('You want to delete user').then(function (data) {
+            console.log('dataaaaa', data);
+            if (data.value) {
+                _this.adminService.deleteUser(id).subscribe(function (res) {
+                    if (res.code === 200) {
+                        // this.toastr.success(res.message)
+                        // this.listOnlineUsers(0);
+                        _this.listOnlineUsersWhenActionPerformed(0);
+                        _this.notifcation.successToast('Deleted User');
+                    }
+                    else {
+                        // this.toastr.error(res.message)
+                        // this.listOnlineUsers(0);
+                        _this.listOnlineUsersWhenActionPerformed(0);
+                        _this.notifcation.infoToast(res.message);
+                    }
+                });
+            }
+            else {
+                _this.notifcation.infoToast('Cancled');
+            }
+        });
+    };
+    ListOnlineUsersComponent.prototype.Unblock = function (id) {
+        var _this = this;
+        this.adminService.unBlockUser(id).subscribe(function (res) {
+            if (res.code === 200) {
+                // this.listOnlineUsers(0);
+                _this.listOnlineUsersWhenActionPerformed(0);
+            }
+            else {
+                // this.listOnlineUsers(0);
+                _this.listOnlineUsersWhenActionPerformed(0);
+            }
+        });
+    };
+    ListOnlineUsersComponent.prototype.Block = function (id) {
+        var _this = this;
+        this.adminService.blockUser(id).subscribe(function (res) {
+            if (res.code === 200) {
+                // this.listOnlineUsers(0);
+                _this.listOnlineUsersWhenActionPerformed(0);
+            }
+            else {
+                // this.listOnlineUsers(0);
+                _this.listOnlineUsersWhenActionPerformed(0);
+            }
+        });
+    };
+    ListOnlineUsersComponent.prototype.openAgeModal = function (id, DOB) {
+        document.getElementById('myModalEditAge').style.display = 'block';
+        this.editAgeForm.setValue({ 'id': id, 'DOB': DOB });
+    };
+    ListOnlineUsersComponent.prototype.closeEditAgeModal = function () {
+        document.getElementById('myModalEditAge').style.display = 'none';
+    };
+    ListOnlineUsersComponent.prototype.openGenderModal = function (id, gender) {
+        document.getElementById('myModalEditGender').style.display = 'block';
+        if (gender == 0) {
+            this.editGenderForm.setValue({ 'id': id, 'gender': 'Male' });
+        }
+        else {
+            this.editGenderForm.setValue({ 'id': id, 'gender': 'Female' });
+        }
+    };
+    ListOnlineUsersComponent.prototype.closeEditGenderModal = function () {
+        document.getElementById('myModalEditGender').style.display = 'none';
+    };
+    ListOnlineUsersComponent.prototype.onEditAge = function () {
+        var _this = this;
+        // console.log(this.editAgeForm.value);
+        this.adminService.editAGE_DOB(this.editAgeForm.value).subscribe(function (res) {
+            if (res.code === 200) {
+                // this.listOnlineUsers(0);
+                _this.listOnlineUsersWhenActionPerformed(0);
+                document.getElementById('myModalEditGender').style.display = 'none';
+            }
+        });
+    };
+    ListOnlineUsersComponent.prototype.onEditGender = function () {
+        var _this = this;
+        // console.log(this.editGenderForm.value)
+        if (this.editGenderForm.value.gender == 'Male' || this.editGenderForm.value.gender == 'male') {
+            var data = {
+                formValue: this.editGenderForm.value,
+                gender: 0
+            };
+            this.adminService.editGender(data).subscribe(function (res) {
+                // this.listOnlineUsers(0)
+                _this.listOnlineUsersWhenActionPerformed(0);
+                document.getElementById('myModalEditGender').style.display = 'none';
+            });
+        }
+        else if (this.editGenderForm.value.gender == 'Female' || this.editGenderForm.value.gender == 'female') {
+            var data = {
+                formValue: this.editGenderForm.value,
+                gender: 1
+            };
+            this.adminService.editGender(data).subscribe(function (res) {
+                // this.listOnlineUsers(0)
+                _this.listOnlineUsersWhenActionPerformed(0);
+                document.getElementById('myModalEditGender').style.display = 'none';
+            });
+        }
+        else {
+            this.notifcation.infoToast('Invalid Input');
+        }
+    };
+    ListOnlineUsersComponent.prototype.onGenderChangeEvent = function (event) {
+        var _this = this;
+        // console.log(event, '00000000000000000000000000000');
+        if (event === 'male') {
+            this.page = 0;
+            var gender = {
+                gender: 0,
+                isOnline: true,
+                page: this.page
+            };
+            this.adminService.genderFilter(gender).subscribe(function (res) {
+                console.log(res.data.totalCount);
+                _this.onusers = res.data.data;
+                _this.totalCount = res.data.totalCount;
+            });
+        }
+        else if (event === 'female') {
+            this.page = 0;
+            var gender1 = {
+                gender: 1,
+                isOnline: true,
+                page: this.page
+            };
+            this.adminService.genderFilter(gender1).subscribe(function (res) {
+                console.log(res.data.totalCount);
+                _this.onusers = res.data.data;
+                _this.totalCount = res.data.totalCount;
+            });
+        }
+        this.genderSelected = event;
+        this.switchPagination('userGenderList');
+    };
+    ListOnlineUsersComponent.prototype.onAgeChangeEvent = function (event) {
+        var _this = this;
+        this.page = 0;
+        // console.log(event, 'AgeAgeAgeAgeAgeAge');
+        var age = {
+            age: event,
+            isOnline: true,
+            page: this.page
+        };
+        this.adminService.ageFilter(age).subscribe(function (res) {
+            // console.log(res.data);
+            if (res.code === 200) {
+                _this.onusers = res.data;
+            }
+            else {
+            }
+        });
+    };
+    ListOnlineUsersComponent.prototype.onSUPIMPCHANGE = function (event) {
+        console.log('eeeeeeee', this.supImp, this.supImp1, this.supImp2);
+    };
+    ListOnlineUsersComponent.prototype.exportDataToCSV = function () {
+        var _this = this;
+        var userList = [];
+        this.adminService.userInfoToCSV().subscribe(function (res) {
+            if (res.code === 200) {
+                _this.usersList = res.data;
+                _this.usersList.forEach(function (element) {
+                    // console.log(element, 'element');
+                    userList.push({
+                        Question: element.questions,
+                        option1: element.option1,
+                        option2: element.option2,
+                    });
+                });
+            }
+            if (userList.length) {
+                _this.excelService.exportAsExcelFile(userList, 'UserInfomation');
+            }
+            else {
+                // this.notification.infoToast('No data available to export')
+                _this.toastr.info('No data available to export');
+            }
+        });
+    };
+    ListOnlineUsersComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-list-online-users',
+            styles: [__webpack_require__(/*! ./list-online-users.component.css */ "./src/app/admin/modules/manage-users/list-online-users/list-online-users.component.css")],
+            template: __webpack_require__(/*! ./list-online-users.component.html */ "./src/app/admin/modules/manage-users/list-online-users/list-online-users.component.html"),
+        }),
+        __metadata("design:paramtypes", [_admin_service__WEBPACK_IMPORTED_MODULE_1__["AdminService"],
+            ngx_spinner__WEBPACK_IMPORTED_MODULE_2__["NgxSpinnerService"],
+            ngx_toastr__WEBPACK_IMPORTED_MODULE_3__["ToastrService"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormBuilder"],
+            _shared_service_export_xlxs_service__WEBPACK_IMPORTED_MODULE_4__["ExportXlxsService"],
+            _shared_service_notifiation_service__WEBPACK_IMPORTED_MODULE_5__["NotificationService"],
+            _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_7__["ScrollDispatcher"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]])
+    ], ListOnlineUsersComponent);
+    return ListOnlineUsersComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/admin/modules/manage-users/list-users/list-users.component.css":
 /*!********************************************************************************!*\
   !*** ./src/app/admin/modules/manage-users/list-users/list-users.component.css ***!
@@ -3629,7 +4198,7 @@ module.exports = ".listItem{\n    list-style-type: none;\n    margin: 0; padding
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div class=\"admin-bar\">\n    <div class=\"wrapper dashboard\">\n        <div class=\"admin-main-container\"> -->\n<!-- <div class=\"admin-main-content\"> -->\n<div class=\"admin-main-content\">\n    <h3>List of users</h3>\n    <div class=\"admin-box-controls\">\n        <div class=\"enableGenderArea col-lg-4 col-md-4 col-sm-12\">\n\n            <div class=\"enabled\">\n                <span class=\"fields\" *ngIf=\"femaleAlarm;else disablealarm\">Alarm Enabled:</span>\n                <div class=\"fields\" [ngClass]=\"femaleAlarm ? 'statusG' : 'statusR'\">FEMALE</div>\n            </div>\n            <label for=\"gender\" class=\"label\" *ngIf=\"femaleAlarm;else lableChange\">Disable:</label>\n            <p-checkbox name=\"groupname\" value=\"1\" [(ngModel)]=\"isDisabledFemale\"\n                (click)=\"enableDisableGenderBasedAlarm(femaleAlarm)\"></p-checkbox>\n            <!-- <input class=\"checkBx\" type=\"checkbox\" name=\"gender\" [(ngModel)]=\"isDisabledFemale\" > -->\n        </div>\n\n        <div class=\"enableGenderArea col-lg-4 col-md-4 col-sm-12\">\n            <div class=\"enabled\">\n                <span class=\"fields\" *ngIf=\"maleAlarm;else disablealarm\">Alarm Enabled:</span>\n                <div class=\"fields status\" [ngClass]=\"maleAlarm ? 'statusG' : 'statusR'\">MALE</div>\n            </div>\n            <label for=\"gender\" class=\"label\" *ngIf=\"maleAlarm;else lableChange\">Disable:</label>\n            <p-checkbox name=\"groupname\" value=\"0\" [(ngModel)]=\"isDisabledFemale\"\n                (click)=\"enableDisableGenderBasedAlarm(maleAlarm)\"></p-checkbox>\n            <!-- <input class=\"checkBx\" type=\"checkbox\" name=\"gender\" [(ngModel)]=\"isDisabledMale\" (click)=\"enableDisableGenderBasedAlarm()\"> -->\n        </div>\n        <!-- <div class=\"dropdown col-lg-3 col-md-3 col-sm-12\">\n            <p-dropdown [options]=\"genderValues\" [(ngModel)]=\"genderalarm\"></p-dropdown>\n            <button type=\"submit\" class=\"btn-search\" (click)=\"enableDisableGenderBasedAlarm()\">Submit</button>\n        </div> -->\n\n        <form [formGroup]=\"searchForm\" class=\"searchForm col-lg-3 col-md-3 col-sm-12\" novalidate\n            (ngSubmit)=\"submitListUser()\">\n            <div class=\"search-area\">\n                <input type=\"text\" class=\"form-control\" formControlName=\"searchText\" id=\"inputUrl\"\n                    placeholder=\"Search Here\">\n                <div *ngIf=\"searchForm.controls['searchText'].touched\">\n                    <span *ngIf=\"searchForm.controls['searchText'].hasError('required')\" class=\"error\">\n                        Required\n                    </span>\n                </div>\n                <span *ngIf=\"searchForm.controls['searchText'].hasError('maxlength')\" class=\"error\">\n                    Length exceded\n                </span>\n            </div>\n            <button type=\"submit\" class=\"btn-search\">Search</button>\n        </form>\n    </div>\n       <!--  <cdk-virtual-scroll-viewport itemSize=\"60\" class='example-viewport'> -->\n            <div class=\"table-responsive example-itema\">\n                <table class=\"table NoTopBorder custom-table user-control-tablea \">\n                    <tbody>\n                        <tr>\n\t\t\t\t\t\t\t<th class=\"label\">Sr no</th>\n                            <th class=\"label\">Name</th>\n                            <th class=\"label\">App Version</th>\n                            <th class=\"label\">Email</th>\n                            <th class=\"label\">Gender\n                                <div class=\"dropdown\">\n                                    <select (change)=\"onGenderChangeEvent($event.target.value)\">\n                                        <option style=\"display:none\">select</option>\n                                        <option value=\"male\">Male</option>\n                                        <option value=\"female\">female</option>\n                                    </select>\n                                </div>\n                            </th>\n                            <th class=\"label\">K\n                                <div class=\"dropdown\">\n                                    <!-- <select [(ngModel)]=\"supImp\" (change)=\"onSUPIMPCHANGE($event.target.value)\">\n                                        <option style=\"display:none\">select</option>\n                                        <option value=\"Keeping Kosher\">K</option>\n                                        <option value=\"Not Keeping Kosher\">NK</option>\n                                    </select> -->\n                                </div>\n                            </th>\n                            <th class=\"label\">S\n                                <div class=\"dropdown\">\n                                    <!-- <select [(ngModel)]=\"supImp1\" (change)=\"onSUPIMPCHANGE($event.target.value)\">\n                                        <option style=\"display:none\">select</option>\n                                        <option value=\"Keeping Shabbos\">S</option>\n                                        <option value=\"Not Keeping Shabbos\">NS</option>\n                                    </select> -->\n                                </div>\n                            </th>\n                            <th class=\"label\">T\n                                <div class=\"dropdown\">\n                                    <!-- <select [(ngModel)]=\"supImp2\" (change)=\"onSUPIMPCHANGE($event.target.value)\">\n                                        <option style=\"display:none\">select</option>\n                                        <option value=\"Wearing Tefillin\">T</option>\n                                        <option value=\"Not Wearing Tefillin\">NT</option>\n                                    </select> -->\n                                </div>\n                            </th>\n                            <th class=\"label\">C\n                                <!-- <div>\n                                                <input type=\"checkbox\" data-md-icheck (change)=\"addprop1($event)\" />\n                                            </div> -->\n                            </th>\n                            <th class=\"label\">DOB</th>\n                            <th class=\"label\">Age\n                                <div class=\"dropdown\">\n                                    <select (change)=\"onAgeChangeEvent($event.target.value)\">\n                                        <option style=\"display:none\">Select</option>\n                                        <option *ngFor=\"let item of ageLists\" value={{item._id.age}}>{{item._id.age}}\n                                        </option>\n                                    </select>\n                                </div>\n                            </th>\n                            <!-- <th>\n                                            Last Online\n                                        </th>\n                                        <th>Last Online Date</th>\n                                        <th>\n                                            Last Offline\n                                        </th>\n                                        <th>Last Offline Date</th> -->\n                            <th class=\"label\">Last seen</th>\n                            <th class=\"label\">Device Type</th>\n                            <th class=\"label\">Location Alarm Enabled</th>\n                            <th class=\"label\"> Gender Alarm Enabled</th>\n                            <th class=\"label\">City</th>\n                            <th class=\"label\">Country</th>\n                            <th class=\"label\"> Subscription Done</th>\n                            <th class=\"label\">Subscription</th>\n                            <th class=\"label\">Action</th>\n                        </tr>\n                        <tr *ngFor=\"let user of onusers;let i = index\">\n\t\t\t\t\t\t\t<td>{{(this.page*40)+i+1}}</td>\n                            <td class=\"posRelative\" [routerLink]=\"['/admin/user/video-log/',user._id]\">\n                                <!-- <td class=\"posRelative\" [routerLink]=\"['/video-log/',user._id]\"> -->\n\n                                <span [ngClass]=\"user.isOnline ? 'dotGreen' : 'dotRed'\"></span>\n                                <a> {{user?.firstName}}</a>\n                            </td>\n                            <td>\n                                {{user?.appVersion}}\n                            </td>\n                            <td>\n                                {{user?.email}}\n                            </td>\n                            <td (click)=\"openGenderModal(user?._id,user.gender)\">\n                                <div *ngIf=\"!user.gender;else other\">\n                                    Male\n                                </div>\n                            </td>\n                            <td>\n                                <div *ngFor=\"let supImpAns of user?.sup_imp_ans;let i = index \">\n                                    <div\n                                        *ngIf=\"(supImpAns?.answer_text=='Keeping Kosher')||(supImpAns?.answer_text=='Not Keeping Kosher')\">\n                                        <div *ngIf=\"(supImpAns?.answer_text=='Keeping Kosher');else abbrivated\">\n                                            Y\n                                        </div>\n                                    </div>\n                                </div>\n                            </td>\n                            <td>\n                                <div *ngFor=\"let supImpAns of user?.sup_imp_ans;let i = index \">\n                                    <div\n                                        *ngIf=\"(supImpAns?.answer_text=='Keeping Shabbos')||(supImpAns?.answer_text=='Not Keeping Shabbos')\">\n                                        <div *ngIf=\"(supImpAns?.answer_text=='Keeping Shabbos');else abbrivated\">\n                                            Y\n                                        </div>\n                                    </div>\n                                </div>\n                            </td>\n                            <td>\n                                <div *ngFor=\"let supImpAns of  user?.sup_imp_ans;let i = index \">\n                                    <div\n                                        *ngIf=\"(supImpAns?.answer_text=='Wearing Tefillin')||(supImpAns?.answer_text=='Not Wearing Tefillin')\">\n                                        <div *ngIf=\"(supImpAns?.answer_text=='Wearing Tefillin');else abbrivated\">\n                                            Y\n                                        </div>\n                                    </div>\n                                </div>\n                            </td>\n                            <td *ngIf=\"!user?.gender\">\n                                <div *ngIf=\"user?.isCohen;else cohen\">\n                                    Y\n                                </div>\n                            </td>\n                            <td *ngIf=\"user?.gender\">\n                                <div *ngIf=\"user?.isAbleToMarryCohen;else AbleToMarryCohen\">\n                                    Y\n                                </div>\n                            </td>\n\n                            <td (click)=\"openAgeModal(user?._id,user?.DOB)\">\n                                {{user?.DOB}}\n                            </td>\n                            <td>\n                                {{user?.age}}\n                            </td>\n                            <td>\n                                {{user?.updatedAt| date: 'dd/MM/yyyy'}}\n                            </td>\n                            <!-- <td>\n                                            {{user.lastOnlineTime}}\n                                        </td>\n                                        <td>\n                                            {{user.lastOnlineDateWithTZ| date: 'dd/MM/yyyy'}}\n                                        </td>\n                                        <td>\n                                            {{user.lastOfflineTime}}\n                                        </td>\n                                        <td>\n                                            {{user.lastOfflineDateWithTZ| date: 'dd/MM/yyyy'}}\n                                        </td> -->\n                            <td>\n                                {{user?.device_type}} </td>\n                            <td>\n                                {{user?.isLocationAlarmEnabled | yesNo:user?.isLocationAlarmEnabled }}\n                            </td>\n                            <td>\n                                {{user?.isGenderAlarmEnabled | yesNo:user?.isGenderAlarmEnabled}}\n                            </td>\n                            <td>\n                                {{user?.city}}\n                            </td>\n                            <td>\n                                {{user?.country}}\n                            </td>\n                            <td *ngIf=\"user?.isSubscriptionDone;else no\">\n                                Yes\n                            </td>\n\n                            <td (click)=\"enableSubscription(user?._id,user?.isSubscriptionFree)\">\n                                <!-- <div class=\"box-video__item\">\n                                                            <form [formGroup]=\"checkBoxForm\">\n                                                              <input type=\"checkbox\" (change)=\"onCheckboxChagen(user._id, $event.target.checked)\">\n                                                            </form>\n                                                          </div> -->\n                                <div *ngIf=\"user.isSubscriptionFree;else subscriptionFree\">\n                                    <!-- <div *ngIf=\"isSubscriptionDone\"> -->\n                                    <!-- <a title=\"Enable Subscription\"> -->\n                                    <button pButton type=\"button\" label=\"Enable\"\n                                        class=\"ui-button-rounded ui-button-success\"></button>\n                                    <!-- <img src=\"../../../../../assets/img/subscription.png\" alt=\"Shidduch View\"> -->\n                                    <!-- </a> -->\n\n                                    <!-- <button >Enable Subscription</button> -->\n                                    <!-- </div> -->\n                                </div>\n                                <!-- <p-checkbox [(ngModel)]=\"checkSubscription\" binary=\"true\"></p-checkbox> -->\n                            </td>\n\n                            <td>\n                                <ul class=\"listItem\">\n                                    <li>\n                                        <a title=\"Edit\">\n                                            <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                                        </a>\n                                    </li>\n                                    <li>\n                                        <a (click)=\"delete(user?._id)\" title=\"Delete\">\n                                            <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n                                        </a>\n                                    </li>\n                                    <li>\n                                        <a (click)=\"sendNotification(user?._id)\" title=\"Send Notification\">\n                                            <i class=\"fa fa-send-o\" aria-hidden=\"true\"></i>\n                                        </a>\n                                    </li>\n                                    <li>\n                                        <a *ngIf=\"user?.isBlocked==true\" (click)=\"Unblock(user?._id)\" title=\"Block\">\n                                            <i class=\"fa fa-bell-slash\" aria-hidden=\"true\"></i>\n                                        </a>\n                                        <a *ngIf=\"user?.isBlocked==false\" (click)=\"Block(user?._id)\" title=\"Unblock\">\n                                            <i class=\"fa fa-bell\" aria-hidden=\"true\"></i>\n                                        </a>\n                                    </li>\n                                </ul>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n\t\t\t\t\n            </div>\n\t\t\t<div id=\"userList\">\n\t\t\t\t<p-paginator  [rows]=\"40\" [totalRecords]=totalCount (onPageChange)=\"paginateUsers($event)\"></p-paginator>\n\t\t\t</div>\n\t\t\t<div id=\"userGenderList\" style=\"display:none\">\n\t\t\t\t<p-paginator [rows]=\"40\" [totalRecords]=totalCount (onPageChange)=\"paginateUsers($event)\"></p-paginator>\n\t\t\t</div>\n        <!-- </cdk-virtual-scroll-viewport> -->\n    </div>\n    <!-- </div>\n\n        </div>\n\n    </div> -->\n    <!-- <p-paginator [rows]=\"20\" [totalRecords]=totalCount (onPageChange)=\"paginate($event)\"></p-paginator> -->\n<ng-template #disablealarm>\n    <span class=\"fields\">Alarm Disabled:</span>\n\n</ng-template>\n<ng-template #lableChange>\n    <label for=\"gender\" class=\"label\">Enable:</label>\n</ng-template>\n\n\n<ng-template #other>\n    <td>Female</td>\n</ng-template>\n\n<ng-template #abbrivated>\n    <td>N</td>\n</ng-template>\n\n<ng-template #no>\n    <td>No</td>\n</ng-template>\n<ng-template #AbleToMarryCohen>\n    <td>N</td>\n</ng-template>\n<ng-template #subscriptionFree>\n    <!-- <a title=\"Disable Subscription\">\n            <img src=\"../../../../../assets/img/unsubscribe.png\" alt=\"Shidduch View\">\n    </a> -->\n    <button pButton type=\"button\" label=\"Disable\" class=\"ui-button-rounded ui-button-danger\"></button>\n</ng-template>\n<ng-template #cohen>\n    <td>N</td>\n</ng-template>\n<div class=\"modal\" id=\"myModalEditAge\">\n    <div class=\"modal-box\">\n        <button title=\"Close (Esc)\" class=\"modal-close\" (click)=\"closeEditAgeModal()\">×</button>\n        <form [formGroup]=\"editAgeForm\" novalidate (ngSubmit)=\"onEditAge()\" class=\"form-default\">\n            <div class=\"modal-header__title\">\n                <span class=\"modal-header__icon\">\n                    <i class=\"fa fa-plus-circle\"></i>\n                </span>\n                Edit D.O.B.\n            </div>\n            <div class=\"modal-form-body\">\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"id\" placeholder=\"\" style=\"display: none;\">\n                </label>\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"DOB\"\n                        placeholder=\"Enter the DOB (dd/mm/yyyy)\">\n                </label>\n\n                <div class=\"btn-group btn-group--c\">\n                    <button type=\"submit\" class=\"btn btn--orange\">submit</button>\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n\n\n\n\n<div class=\"modal\" id=\"myModalEditGender\">\n    <div class=\"modal-box\">\n        <button title=\"Close (Esc)\" class=\"modal-close\" (click)=\"closeEditGenderModal()\">×</button>\n        <form [formGroup]=\"editGenderForm\" novalidate (ngSubmit)=\"onEditGender()\" class=\"form-default\">\n            <div class=\"modal-header__title\">\n                <span class=\"modal-header__icon\">\n                    <i class=\"fa fa-plus-circle\"></i>\n                </span>\n                Edit D.O.B.\n            </div>\n            <div class=\"modal-form-body\">\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"id\" placeholder=\"\" style=\"display: none;\">\n                </label>\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"gender\"\n                        placeholder=\"Enter the DOB (dd/mm/yyyy)\">\n                </label>\n\n                <div class=\"btn-group btn-group--c\">\n                    <button type=\"submit\" class=\"btn btn--orange\">submit</button>\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n\n<div class=\"modal\" id=\"sendNotifcationIndividual\">\n    <div class=\"modal-box\">\n        <button title=\"Close (Esc)\" class=\"modal-close\" (click)=\"closesendNotificationModal()\">×</button>\n        <form [formGroup]=\"sendNotificationForm\" novalidate (ngSubmit)=\"onSendNotifcation()\" class=\"form-default\">\n            <div class=\"modal-header__title\">\n                <span class=\"modal-header__icon\">\n                    <i class=\"fa fa-plus-circle\"></i>\n                </span>\n                Send Notification\n            </div>\n            <div class=\"modal-form-body\">\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"id\" placeholder=\"\" style=\"display: none;\">\n                </label>\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"title\" placeholder=\"Enter title\">\n                </label>\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"message\" placeholder=\"Enter message\">\n                </label>\n\n                <div class=\"btn-group btn-group--c\">\n                    <button type=\"submit\" class=\"btn btn--orange\">Send</button>\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n\n<ngx-spinner bdOpacity=0.1 size=\"medium\" color=\"#50008e\" type=\"line-scale\" [fullScreen]=\"true\">\n    <p style=\"color: white\"> Loading... </p>\n</ngx-spinner>\n\n\n\n\n\n\n\n\n\n\n\n<!-- <ngx-spinner bdOpacity=0 .1 size=\"medium\" color=\"#50008e\" type=\"line-scale\" [fullScreen]=\"true\">\n    <p style=\"color: white\"> Loading... </p>\n</ngx-spinner> -->\n\n<!-- <td>\n    <select [(ngModel)]=\"item.category\">\n         <option style=\"display:none\">select a category</option>\n         <option *ngFor=\"let item of categories\" [ngValue]=\"item.category\" value=\"item.category\">{{item.category}}</option>\n       </select>\n     </td> \n    -->"
+module.exports = "<!-- <div class=\"admin-bar\">\n    <div class=\"wrapper dashboard\">\n        <div class=\"admin-main-container\"> -->\n<!-- <div class=\"admin-main-content\"> -->\n<div class=\"admin-main-content\">\n    <h3>List of Users</h3>\n    <div class=\"admin-box-controls\">\n        <div class=\"enableGenderArea col-lg-4 col-md-4 col-sm-12\">\n\n            <div class=\"enabled\">\n                <span class=\"fields\" *ngIf=\"femaleAlarm;else disablealarm\">Alarm Enabled:</span>\n                <div class=\"fields\" [ngClass]=\"femaleAlarm ? 'statusG' : 'statusR'\">FEMALE</div>\n            </div>\n            <label for=\"gender\" class=\"label\" *ngIf=\"femaleAlarm;else lableChange\">Disable:</label>\n            <p-checkbox name=\"groupname\" value=\"1\" [(ngModel)]=\"isDisabledFemale\"\n                (click)=\"enableDisableGenderBasedAlarm(femaleAlarm)\"></p-checkbox>\n            <!-- <input class=\"checkBx\" type=\"checkbox\" name=\"gender\" [(ngModel)]=\"isDisabledFemale\" > -->\n        </div>\n\n        <div class=\"enableGenderArea col-lg-4 col-md-4 col-sm-12\">\n            <div class=\"enabled\">\n                <span class=\"fields\" *ngIf=\"maleAlarm;else disablealarm\">Alarm Enabled:</span>\n                <div class=\"fields status\" [ngClass]=\"maleAlarm ? 'statusG' : 'statusR'\">MALE</div>\n            </div>\n            <label for=\"gender\" class=\"label\" *ngIf=\"maleAlarm;else lableChange\">Disable:</label>\n            <p-checkbox name=\"groupname\" value=\"0\" [(ngModel)]=\"isDisabledFemale\"\n                (click)=\"enableDisableGenderBasedAlarm(maleAlarm)\"></p-checkbox>\n            <!-- <input class=\"checkBx\" type=\"checkbox\" name=\"gender\" [(ngModel)]=\"isDisabledMale\" (click)=\"enableDisableGenderBasedAlarm()\"> -->\n        </div>\n        <!-- <div class=\"dropdown col-lg-3 col-md-3 col-sm-12\">\n            <p-dropdown [options]=\"genderValues\" [(ngModel)]=\"genderalarm\"></p-dropdown>\n            <button type=\"submit\" class=\"btn-search\" (click)=\"enableDisableGenderBasedAlarm()\">Submit</button>\n        </div> -->\n\n        <form [formGroup]=\"searchForm\" class=\"searchForm col-lg-3 col-md-3 col-sm-12\" novalidate\n            (ngSubmit)=\"submitListUser()\">\n            <div class=\"search-area\">\n                <input type=\"text\" class=\"form-control\" formControlName=\"searchText\" id=\"inputUrl\"\n                    placeholder=\"Search Here\">\n                <div *ngIf=\"searchForm.controls['searchText'].touched\">\n                    <span *ngIf=\"searchForm.controls['searchText'].hasError('required')\" class=\"error\">\n                        Required\n                    </span>\n                </div>\n                <span *ngIf=\"searchForm.controls['searchText'].hasError('maxlength')\" class=\"error\">\n                    Length exceded\n                </span>\n            </div>\n            <button type=\"submit\" class=\"btn-search\">Search</button>\n        </form>\n    </div>\n       <!--  <cdk-virtual-scroll-viewport itemSize=\"60\" class='example-viewport'> -->\n            <div class=\"table-responsive example-itema\">\n                <table class=\"table NoTopBorder custom-table user-control-tablea \">\n                    <tbody>\n                        <tr>\n\t\t\t\t\t\t\t<th class=\"label\">Sr no</th>\n                            <th class=\"label\">Name</th>\n                            <th class=\"label\">App Version</th>\n                            <th class=\"label\">Email</th>\n                            <th class=\"label\">Gender\n                                <div class=\"dropdown\">\n                                    <select (change)=\"onGenderChangeEvent($event.target.value)\">\n                                        <option style=\"display:none\">select</option>\n                                        <option value=\"male\">Male</option>\n                                        <option value=\"female\">female</option>\n                                    </select>\n                                </div>\n                            </th>\n                            <th class=\"label\">K\n                                <div class=\"dropdown\">\n                                    <!-- <select [(ngModel)]=\"supImp\" (change)=\"onSUPIMPCHANGE($event.target.value)\">\n                                        <option style=\"display:none\">select</option>\n                                        <option value=\"Keeping Kosher\">K</option>\n                                        <option value=\"Not Keeping Kosher\">NK</option>\n                                    </select> -->\n                                </div>\n                            </th>\n                            <th class=\"label\">S\n                                <div class=\"dropdown\">\n                                    <!-- <select [(ngModel)]=\"supImp1\" (change)=\"onSUPIMPCHANGE($event.target.value)\">\n                                        <option style=\"display:none\">select</option>\n                                        <option value=\"Keeping Shabbos\">S</option>\n                                        <option value=\"Not Keeping Shabbos\">NS</option>\n                                    </select> -->\n                                </div>\n                            </th>\n                            <th class=\"label\">T\n                                <div class=\"dropdown\">\n                                    <!-- <select [(ngModel)]=\"supImp2\" (change)=\"onSUPIMPCHANGE($event.target.value)\">\n                                        <option style=\"display:none\">select</option>\n                                        <option value=\"Wearing Tefillin\">T</option>\n                                        <option value=\"Not Wearing Tefillin\">NT</option>\n                                    </select> -->\n                                </div>\n                            </th>\n                            <th class=\"label\">C\n                                <!-- <div>\n                                                <input type=\"checkbox\" data-md-icheck (change)=\"addprop1($event)\" />\n                                            </div> -->\n                            </th>\n                            <th class=\"label\">DOB</th>\n                            <th class=\"label\">Age\n                                <div class=\"dropdown\">\n                                    <select (change)=\"onAgeChangeEvent($event.target.value)\">\n                                        <option style=\"display:none\">Select</option>\n                                        <option *ngFor=\"let item of ageLists\" value={{item._id.age}}>{{item._id.age}}\n                                        </option>\n                                    </select>\n                                </div>\n                            </th>\n                            <!-- <th>\n                                            Last Online\n                                        </th>\n                                        <th>Last Online Date</th>\n                                        <th>\n                                            Last Offline\n                                        </th>\n                                        <th>Last Offline Date</th> -->\n                            <th class=\"label\">Last seen</th>\n                            <th class=\"label\">Device Type</th>\n                            <th class=\"label\">Location Alarm Enabled</th>\n                            <th class=\"label\"> Gender Alarm Enabled</th>\n                            <th class=\"label\">City</th>\n                            <th class=\"label\">Country</th>\n                            <th class=\"label\"> Subscription Done</th>\n                            <th class=\"label\">Subscription</th>\n                            <th class=\"label\">Action</th>\n                        </tr>\n                        <tr *ngFor=\"let user of onusers;let i = index\">\n\t\t\t\t\t\t\t<td>{{(this.page*40)+i+1}}</td>\n                            <td class=\"posRelative\" [routerLink]=\"['/admin/user/video-log/',user._id]\">\n                                <!-- <td class=\"posRelative\" [routerLink]=\"['/video-log/',user._id]\"> -->\n\n                                <span [ngClass]=\"user.isOnline ? 'dotGreen' : 'dotRed'\"></span>\n                                <a> {{user?.firstName}}</a>\n                            </td>\n                            <td>\n                                {{user?.appVersion}}\n                            </td>\n                            <td>\n                                {{user?.email}}\n                            </td>\n                            <td (click)=\"openGenderModal(user?._id,user.gender)\">\n                                <div *ngIf=\"!user.gender;else other\">\n                                    Male\n                                </div>\n                            </td>\n                            <td>\n                                <div *ngFor=\"let supImpAns of user?.sup_imp_ans;let i = index \">\n                                    <div\n                                        *ngIf=\"(supImpAns?.answer_text=='Keeping Kosher')||(supImpAns?.answer_text=='Not Keeping Kosher')\">\n                                        <div *ngIf=\"(supImpAns?.answer_text=='Keeping Kosher');else abbrivated\">\n                                            Y\n                                        </div>\n                                    </div>\n                                </div>\n                            </td>\n                            <td>\n                                <div *ngFor=\"let supImpAns of user?.sup_imp_ans;let i = index \">\n                                    <div\n                                        *ngIf=\"(supImpAns?.answer_text=='Keeping Shabbos')||(supImpAns?.answer_text=='Not Keeping Shabbos')\">\n                                        <div *ngIf=\"(supImpAns?.answer_text=='Keeping Shabbos');else abbrivated\">\n                                            Y\n                                        </div>\n                                    </div>\n                                </div>\n                            </td>\n                            <td>\n                                <div *ngFor=\"let supImpAns of  user?.sup_imp_ans;let i = index \">\n                                    <div\n                                        *ngIf=\"(supImpAns?.answer_text=='Wearing Tefillin')||(supImpAns?.answer_text=='Not Wearing Tefillin')\">\n                                        <div *ngIf=\"(supImpAns?.answer_text=='Wearing Tefillin');else abbrivated\">\n                                            Y\n                                        </div>\n                                    </div>\n                                </div>\n                            </td>\n                            <td *ngIf=\"!user?.gender\">\n                                <div *ngIf=\"user?.isCohen;else cohen\">\n                                    Y\n                                </div>\n                            </td>\n                            <td *ngIf=\"user?.gender\">\n                                <div *ngIf=\"user?.isAbleToMarryCohen;else AbleToMarryCohen\">\n                                    Y\n                                </div>\n                            </td>\n\n                            <td (click)=\"openAgeModal(user?._id,user?.DOB)\">\n                                {{user?.DOB}}\n                            </td>\n                            <td>\n                                {{user?.age}}\n                            </td>\n                            <td>\n                                {{user?.updatedAt| date: 'dd/MM/yyyy'}}\n                            </td>\n                            <!-- <td>\n                                            {{user.lastOnlineTime}}\n                                        </td>\n                                        <td>\n                                            {{user.lastOnlineDateWithTZ| date: 'dd/MM/yyyy'}}\n                                        </td>\n                                        <td>\n                                            {{user.lastOfflineTime}}\n                                        </td>\n                                        <td>\n                                            {{user.lastOfflineDateWithTZ| date: 'dd/MM/yyyy'}}\n                                        </td> -->\n                            <td>\n                                {{user?.device_type}} </td>\n                            <td>\n                                {{user?.isLocationAlarmEnabled | yesNo:user?.isLocationAlarmEnabled }}\n                            </td>\n                            <td>\n                                {{user?.isGenderAlarmEnabled | yesNo:user?.isGenderAlarmEnabled}}\n                            </td>\n                            <td>\n                                {{user?.city}}\n                            </td>\n                            <td>\n                                {{user?.country}}\n                            </td>\n                            <td *ngIf=\"user?.isSubscriptionDone;else no\">\n                                Yes\n                            </td>\n\n                            <td (click)=\"enableSubscription(user?._id,user?.isSubscriptionFree)\">\n                                <!-- <div class=\"box-video__item\">\n                                                            <form [formGroup]=\"checkBoxForm\">\n                                                              <input type=\"checkbox\" (change)=\"onCheckboxChagen(user._id, $event.target.checked)\">\n                                                            </form>\n                                                          </div> -->\n                                <div *ngIf=\"user.isSubscriptionFree;else subscriptionFree\">\n                                    <!-- <div *ngIf=\"isSubscriptionDone\"> -->\n                                    <!-- <a title=\"Enable Subscription\"> -->\n                                    <button pButton type=\"button\" label=\"Enable\"\n                                        class=\"ui-button-rounded ui-button-success\"></button>\n                                    <!-- <img src=\"../../../../../assets/img/subscription.png\" alt=\"Shidduch View\"> -->\n                                    <!-- </a> -->\n\n                                    <!-- <button >Enable Subscription</button> -->\n                                    <!-- </div> -->\n                                </div>\n                                <!-- <p-checkbox [(ngModel)]=\"checkSubscription\" binary=\"true\"></p-checkbox> -->\n                            </td>\n\n                            <td>\n                                <ul class=\"listItem\">\n                                    <li>\n                                        <a title=\"Edit\">\n                                            <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                                        </a>\n                                    </li>\n                                    <li>\n                                        <a (click)=\"delete(user?._id)\" title=\"Delete\">\n                                            <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n                                        </a>\n                                    </li>\n                                    <li>\n                                        <a (click)=\"sendNotification(user?._id)\" title=\"Send Notification\">\n                                            <i class=\"fa fa-send-o\" aria-hidden=\"true\"></i>\n                                        </a>\n                                    </li>\n                                    <li>\n                                        <a *ngIf=\"user?.isBlocked==true\" (click)=\"Unblock(user?._id)\" title=\"Block\">\n                                            <i class=\"fa fa-bell-slash\" aria-hidden=\"true\"></i>\n                                        </a>\n                                        <a *ngIf=\"user?.isBlocked==false\" (click)=\"Block(user?._id)\" title=\"Unblock\">\n                                            <i class=\"fa fa-bell\" aria-hidden=\"true\"></i>\n                                        </a>\n                                    </li>\n                                </ul>\n                            </td>\n                        </tr>\n                    </tbody>\n                </table>\n\t\t\t\t\n            </div>\n\t\t\t<div id=\"userList\">\n\t\t\t\t<p-paginator  [rows]=\"40\" [totalRecords]=totalCount (onPageChange)=\"paginateUsers($event)\"></p-paginator>\n\t\t\t</div>\n\t\t\t<div id=\"userGenderList\" style=\"display:none\">\n\t\t\t\t<p-paginator [rows]=\"40\" [totalRecords]=totalCount (onPageChange)=\"paginateUsers($event)\"></p-paginator>\n\t\t\t</div>\n        <!-- </cdk-virtual-scroll-viewport> -->\n    </div>\n    <!-- </div>\n\n        </div>\n\n    </div> -->\n    <!-- <p-paginator [rows]=\"20\" [totalRecords]=totalCount (onPageChange)=\"paginate($event)\"></p-paginator> -->\n<ng-template #disablealarm>\n    <span class=\"fields\">Alarm Disabled:</span>\n\n</ng-template>\n<ng-template #lableChange>\n    <label for=\"gender\" class=\"label\">Enable:</label>\n</ng-template>\n\n\n<ng-template #other>\n    <td>Female</td>\n</ng-template>\n\n<ng-template #abbrivated>\n    <td>N</td>\n</ng-template>\n\n<ng-template #no>\n    <td>No</td>\n</ng-template>\n<ng-template #AbleToMarryCohen>\n    <td>N</td>\n</ng-template>\n<ng-template #subscriptionFree>\n    <!-- <a title=\"Disable Subscription\">\n            <img src=\"../../../../../assets/img/unsubscribe.png\" alt=\"Shidduch View\">\n    </a> -->\n    <button pButton type=\"button\" label=\"Disable\" class=\"ui-button-rounded ui-button-danger\"></button>\n</ng-template>\n<ng-template #cohen>\n    <td>N</td>\n</ng-template>\n<div class=\"modal\" id=\"myModalEditAge\">\n    <div class=\"modal-box\">\n        <button title=\"Close (Esc)\" class=\"modal-close\" (click)=\"closeEditAgeModal()\">×</button>\n        <form [formGroup]=\"editAgeForm\" novalidate (ngSubmit)=\"onEditAge()\" class=\"form-default\">\n            <div class=\"modal-header__title\">\n                <span class=\"modal-header__icon\">\n                    <i class=\"fa fa-plus-circle\"></i>\n                </span>\n                Edit D.O.B.\n            </div>\n            <div class=\"modal-form-body\">\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"id\" placeholder=\"\" style=\"display: none;\">\n                </label>\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"DOB\"\n                        placeholder=\"Enter the DOB (dd/mm/yyyy)\">\n                </label>\n\n                <div class=\"btn-group btn-group--c\">\n                    <button type=\"submit\" class=\"btn btn--orange\">submit</button>\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n\n\n\n\n<div class=\"modal\" id=\"myModalEditGender\">\n    <div class=\"modal-box\">\n        <button title=\"Close (Esc)\" class=\"modal-close\" (click)=\"closeEditGenderModal()\">×</button>\n        <form [formGroup]=\"editGenderForm\" novalidate (ngSubmit)=\"onEditGender()\" class=\"form-default\">\n            <div class=\"modal-header__title\">\n                <span class=\"modal-header__icon\">\n                    <i class=\"fa fa-plus-circle\"></i>\n                </span>\n                Edit D.O.B.\n            </div>\n            <div class=\"modal-form-body\">\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"id\" placeholder=\"\" style=\"display: none;\">\n                </label>\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"gender\"\n                        placeholder=\"Enter the DOB (dd/mm/yyyy)\">\n                </label>\n\n                <div class=\"btn-group btn-group--c\">\n                    <button type=\"submit\" class=\"btn btn--orange\">submit</button>\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n\n<div class=\"modal\" id=\"sendNotifcationIndividual\">\n    <div class=\"modal-box\">\n        <button title=\"Close (Esc)\" class=\"modal-close\" (click)=\"closesendNotificationModal()\">×</button>\n        <form [formGroup]=\"sendNotificationForm\" novalidate (ngSubmit)=\"onSendNotifcation()\" class=\"form-default\">\n            <div class=\"modal-header__title\">\n                <span class=\"modal-header__icon\">\n                    <i class=\"fa fa-plus-circle\"></i>\n                </span>\n                Send Notification\n            </div>\n            <div class=\"modal-form-body\">\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"id\" placeholder=\"\" style=\"display: none;\">\n                </label>\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"title\" placeholder=\"Enter title\">\n                </label>\n                <label class=\"form__label\">\n                    <input type=\"text\" class=\"form__control\" formControlName=\"message\" placeholder=\"Enter message\">\n                </label>\n\n                <div class=\"btn-group btn-group--c\">\n                    <button type=\"submit\" class=\"btn btn--orange\">Send</button>\n                </div>\n            </div>\n        </form>\n    </div>\n</div>\n\n\n<ngx-spinner bdOpacity=0.1 size=\"medium\" color=\"#50008e\" type=\"line-scale\" [fullScreen]=\"true\">\n    <p style=\"color: white\"> Loading... </p>\n</ngx-spinner>\n\n\n\n\n\n\n\n\n\n\n\n<!-- <ngx-spinner bdOpacity=0 .1 size=\"medium\" color=\"#50008e\" type=\"line-scale\" [fullScreen]=\"true\">\n    <p style=\"color: white\"> Loading... </p>\n</ngx-spinner> -->\n\n<!-- <td>\n    <select [(ngModel)]=\"item.category\">\n         <option style=\"display:none\">select a category</option>\n         <option *ngFor=\"let item of categories\" [ngValue]=\"item.category\" value=\"item.category\">{{item.category}}</option>\n       </select>\n     </td> \n    -->"
 
 /***/ }),
 
@@ -4185,10 +4754,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _add_users_add_users_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./add-users/add-users.component */ "./src/app/admin/modules/manage-users/add-users/add-users.component.ts");
 /* harmony import */ var _list_users_list_users_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./list-users/list-users.component */ "./src/app/admin/modules/manage-users/list-users/list-users.component.ts");
-/* harmony import */ var _edit_users_edit_users_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./edit-users/edit-users.component */ "./src/app/admin/modules/manage-users/edit-users/edit-users.component.ts");
-/* harmony import */ var _send_notifcations_send_notifcations_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./send-notifcations/send-notifcations.component */ "./src/app/admin/modules/manage-users/send-notifcations/send-notifcations.component.ts");
-/* harmony import */ var _video_log_video_log_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./video-log/video-log.component */ "./src/app/admin/modules/manage-users/video-log/video-log.component.ts");
-/* harmony import */ var _alert_video_user_alert_video_user_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./alert-video-user/alert-video-user.component */ "./src/app/admin/modules/manage-users/alert-video-user/alert-video-user.component.ts");
+/* harmony import */ var _list_online_users_list_online_users_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./list-online-users/list-online-users.component */ "./src/app/admin/modules/manage-users/list-online-users/list-online-users.component.ts");
+/* harmony import */ var _edit_users_edit_users_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./edit-users/edit-users.component */ "./src/app/admin/modules/manage-users/edit-users/edit-users.component.ts");
+/* harmony import */ var _send_notifcations_send_notifcations_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./send-notifcations/send-notifcations.component */ "./src/app/admin/modules/manage-users/send-notifcations/send-notifcations.component.ts");
+/* harmony import */ var _video_log_video_log_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./video-log/video-log.component */ "./src/app/admin/modules/manage-users/video-log/video-log.component.ts");
+/* harmony import */ var _alert_video_user_alert_video_user_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./alert-video-user/alert-video-user.component */ "./src/app/admin/modules/manage-users/alert-video-user/alert-video-user.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4203,10 +4773,15 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     {
         path: 'add-user',
         component: _add_users_add_users_component__WEBPACK_IMPORTED_MODULE_2__["AddUsersComponent"]
+    },
+    {
+        path: 'list-online-user',
+        component: _list_online_users_list_online_users_component__WEBPACK_IMPORTED_MODULE_4__["ListOnlineUsersComponent"]
     },
     {
         path: 'list-user',
@@ -4214,19 +4789,19 @@ var routes = [
     },
     {
         path: 'edit-user/:id',
-        component: _edit_users_edit_users_component__WEBPACK_IMPORTED_MODULE_4__["EditUsersComponent"]
+        component: _edit_users_edit_users_component__WEBPACK_IMPORTED_MODULE_5__["EditUsersComponent"]
     },
     {
         path: 'video-log/:id',
-        component: _video_log_video_log_component__WEBPACK_IMPORTED_MODULE_6__["VideoLogComponent"]
+        component: _video_log_video_log_component__WEBPACK_IMPORTED_MODULE_7__["VideoLogComponent"]
     },
     {
         path: 'send-notification',
-        component: _send_notifcations_send_notifcations_component__WEBPACK_IMPORTED_MODULE_5__["SendNotifcationsComponent"]
+        component: _send_notifcations_send_notifcations_component__WEBPACK_IMPORTED_MODULE_6__["SendNotifcationsComponent"]
     },
     {
         path: 'alert-user',
-        component: _alert_video_user_alert_video_user_component__WEBPACK_IMPORTED_MODULE_7__["AlertVideoUserComponent"]
+        component: _alert_video_user_alert_video_user_component__WEBPACK_IMPORTED_MODULE_8__["AlertVideoUserComponent"]
     }
 ];
 var ManageUsersRoutingModule = /** @class */ (function () {
@@ -4261,37 +4836,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _manage_users_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./manage-users-routing.module */ "./src/app/admin/modules/manage-users/manage-users-routing.module.ts");
 /* harmony import */ var _add_users_add_users_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./add-users/add-users.component */ "./src/app/admin/modules/manage-users/add-users/add-users.component.ts");
 /* harmony import */ var _list_users_list_users_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./list-users/list-users.component */ "./src/app/admin/modules/manage-users/list-users/list-users.component.ts");
-/* harmony import */ var _edit_users_edit_users_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./edit-users/edit-users.component */ "./src/app/admin/modules/manage-users/edit-users/edit-users.component.ts");
-/* harmony import */ var _send_notifcations_send_notifcations_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./send-notifcations/send-notifcations.component */ "./src/app/admin/modules/manage-users/send-notifcations/send-notifcations.component.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _video_log_video_log_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./video-log/video-log.component */ "./src/app/admin/modules/manage-users/video-log/video-log.component.ts");
-/* harmony import */ var primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! primeng/overlaypanel */ "./node_modules/primeng/overlaypanel.js");
-/* harmony import */ var primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var ngx_spinner__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ngx-spinner */ "./node_modules/ngx-spinner/fesm5/ngx-spinner.js");
-/* harmony import */ var _alert_video_user_alert_video_user_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./alert-video-user/alert-video-user.component */ "./src/app/admin/modules/manage-users/alert-video-user/alert-video-user.component.ts");
-/* harmony import */ var _shared_service_conformation_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../shared/service/conformation.service */ "./src/app/shared/service/conformation.service.ts");
-/* harmony import */ var _shared_service_notifiation_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../shared/service/notifiation.service */ "./src/app/shared/service/notifiation.service.ts");
-/* harmony import */ var angular_tabs_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! angular-tabs-component */ "./node_modules/angular-tabs-component/dist/index.js");
-/* harmony import */ var primeng_paginator__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! primeng/paginator */ "./node_modules/primeng/paginator.js");
-/* harmony import */ var primeng_paginator__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(primeng_paginator__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var primeng_checkbox__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! primeng/checkbox */ "./node_modules/primeng/checkbox.js");
-/* harmony import */ var primeng_checkbox__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(primeng_checkbox__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/cdk/scrolling */ "./node_modules/@angular/cdk/esm5/scrolling.es5.js");
-/* harmony import */ var primeng_dialog__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! primeng/dialog */ "./node_modules/primeng/dialog.js");
-/* harmony import */ var primeng_dialog__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(primeng_dialog__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var primeng_button__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! primeng/button */ "./node_modules/primeng/button.js");
-/* harmony import */ var primeng_button__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(primeng_button__WEBPACK_IMPORTED_MODULE_20__);
-/* harmony import */ var primeng_dropdown__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! primeng/dropdown */ "./node_modules/primeng/dropdown.js");
-/* harmony import */ var primeng_dropdown__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(primeng_dropdown__WEBPACK_IMPORTED_MODULE_21__);
-/* harmony import */ var src_app_shared_shared_module__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! src/app/shared/shared.module */ "./src/app/shared/shared.module.ts");
-/* harmony import */ var primeng_rating__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! primeng/rating */ "./node_modules/primeng/rating.js");
-/* harmony import */ var primeng_rating__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(primeng_rating__WEBPACK_IMPORTED_MODULE_23__);
+/* harmony import */ var _list_online_users_list_online_users_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./list-online-users/list-online-users.component */ "./src/app/admin/modules/manage-users/list-online-users/list-online-users.component.ts");
+/* harmony import */ var _edit_users_edit_users_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./edit-users/edit-users.component */ "./src/app/admin/modules/manage-users/edit-users/edit-users.component.ts");
+/* harmony import */ var _send_notifcations_send_notifcations_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./send-notifcations/send-notifcations.component */ "./src/app/admin/modules/manage-users/send-notifcations/send-notifcations.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _video_log_video_log_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./video-log/video-log.component */ "./src/app/admin/modules/manage-users/video-log/video-log.component.ts");
+/* harmony import */ var primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! primeng/overlaypanel */ "./node_modules/primeng/overlaypanel.js");
+/* harmony import */ var primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var ngx_spinner__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ngx-spinner */ "./node_modules/ngx-spinner/fesm5/ngx-spinner.js");
+/* harmony import */ var _alert_video_user_alert_video_user_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./alert-video-user/alert-video-user.component */ "./src/app/admin/modules/manage-users/alert-video-user/alert-video-user.component.ts");
+/* harmony import */ var _shared_service_conformation_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../shared/service/conformation.service */ "./src/app/shared/service/conformation.service.ts");
+/* harmony import */ var _shared_service_notifiation_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../shared/service/notifiation.service */ "./src/app/shared/service/notifiation.service.ts");
+/* harmony import */ var angular_tabs_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! angular-tabs-component */ "./node_modules/angular-tabs-component/dist/index.js");
+/* harmony import */ var primeng_paginator__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! primeng/paginator */ "./node_modules/primeng/paginator.js");
+/* harmony import */ var primeng_paginator__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(primeng_paginator__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var primeng_checkbox__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! primeng/checkbox */ "./node_modules/primeng/checkbox.js");
+/* harmony import */ var primeng_checkbox__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(primeng_checkbox__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/cdk/scrolling */ "./node_modules/@angular/cdk/esm5/scrolling.es5.js");
+/* harmony import */ var primeng_dialog__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! primeng/dialog */ "./node_modules/primeng/dialog.js");
+/* harmony import */ var primeng_dialog__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(primeng_dialog__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var primeng_button__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! primeng/button */ "./node_modules/primeng/button.js");
+/* harmony import */ var primeng_button__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(primeng_button__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var primeng_dropdown__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! primeng/dropdown */ "./node_modules/primeng/dropdown.js");
+/* harmony import */ var primeng_dropdown__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(primeng_dropdown__WEBPACK_IMPORTED_MODULE_22__);
+/* harmony import */ var src_app_shared_shared_module__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! src/app/shared/shared.module */ "./src/app/shared/shared.module.ts");
+/* harmony import */ var primeng_rating__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! primeng/rating */ "./node_modules/primeng/rating.js");
+/* harmony import */ var primeng_rating__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(primeng_rating__WEBPACK_IMPORTED_MODULE_24__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -4324,26 +4901,27 @@ var ManageUsersModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             declarations: [_add_users_add_users_component__WEBPACK_IMPORTED_MODULE_4__["AddUsersComponent"],
                 _list_users_list_users_component__WEBPACK_IMPORTED_MODULE_5__["ListUsersComponent"],
-                _edit_users_edit_users_component__WEBPACK_IMPORTED_MODULE_6__["EditUsersComponent"],
-                _send_notifcations_send_notifcations_component__WEBPACK_IMPORTED_MODULE_7__["SendNotifcationsComponent"],
-                _video_log_video_log_component__WEBPACK_IMPORTED_MODULE_9__["VideoLogComponent"],
-                _alert_video_user_alert_video_user_component__WEBPACK_IMPORTED_MODULE_12__["AlertVideoUserComponent"]],
+                _list_online_users_list_online_users_component__WEBPACK_IMPORTED_MODULE_6__["ListOnlineUsersComponent"],
+                _edit_users_edit_users_component__WEBPACK_IMPORTED_MODULE_7__["EditUsersComponent"],
+                _send_notifcations_send_notifcations_component__WEBPACK_IMPORTED_MODULE_8__["SendNotifcationsComponent"],
+                _video_log_video_log_component__WEBPACK_IMPORTED_MODULE_10__["VideoLogComponent"],
+                _alert_video_user_alert_video_user_component__WEBPACK_IMPORTED_MODULE_13__["AlertVideoUserComponent"]],
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
-                src_app_shared_shared_module__WEBPACK_IMPORTED_MODULE_22__["SharedModule"],
+                src_app_shared_shared_module__WEBPACK_IMPORTED_MODULE_23__["SharedModule"],
                 _manage_users_routing_module__WEBPACK_IMPORTED_MODULE_3__["ManageUsersRoutingModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_8__["ReactiveFormsModule"],
-                primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_10__["OverlayPanelModule"],
-                ngx_spinner__WEBPACK_IMPORTED_MODULE_11__["NgxSpinnerModule"],
-                angular_tabs_component__WEBPACK_IMPORTED_MODULE_15__["TabModule"],
-                primeng_paginator__WEBPACK_IMPORTED_MODULE_16__["PaginatorModule"],
-                primeng_button__WEBPACK_IMPORTED_MODULE_20__["ButtonModule"],
-                _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_18__["ScrollDispatchModule"],
-                primeng_dialog__WEBPACK_IMPORTED_MODULE_19__["DialogModule"],
-                primeng_checkbox__WEBPACK_IMPORTED_MODULE_17__["CheckboxModule"],
-                primeng_dropdown__WEBPACK_IMPORTED_MODULE_21__["DropdownModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"],
-                primeng_rating__WEBPACK_IMPORTED_MODULE_23__["RatingModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"],
+                primeng_overlaypanel__WEBPACK_IMPORTED_MODULE_11__["OverlayPanelModule"],
+                ngx_spinner__WEBPACK_IMPORTED_MODULE_12__["NgxSpinnerModule"],
+                angular_tabs_component__WEBPACK_IMPORTED_MODULE_16__["TabModule"],
+                primeng_paginator__WEBPACK_IMPORTED_MODULE_17__["PaginatorModule"],
+                primeng_button__WEBPACK_IMPORTED_MODULE_21__["ButtonModule"],
+                _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_19__["ScrollDispatchModule"],
+                primeng_dialog__WEBPACK_IMPORTED_MODULE_20__["DialogModule"],
+                primeng_checkbox__WEBPACK_IMPORTED_MODULE_18__["CheckboxModule"],
+                primeng_dropdown__WEBPACK_IMPORTED_MODULE_22__["DropdownModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormsModule"],
+                primeng_rating__WEBPACK_IMPORTED_MODULE_24__["RatingModule"],
                 angular2_ladda__WEBPACK_IMPORTED_MODULE_2__["LaddaModule"].forRoot({
                     style: 'contract',
                     spinnerSize: 40,
@@ -4351,7 +4929,7 @@ var ManageUsersModule = /** @class */ (function () {
                     spinnerLines: 12
                 }),
             ],
-            providers: [_shared_service_conformation_service__WEBPACK_IMPORTED_MODULE_13__["ConformService"], _shared_service_notifiation_service__WEBPACK_IMPORTED_MODULE_14__["NotificationService"], _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_18__["ScrollDispatcher"]],
+            providers: [_shared_service_conformation_service__WEBPACK_IMPORTED_MODULE_14__["ConformService"], _shared_service_notifiation_service__WEBPACK_IMPORTED_MODULE_15__["NotificationService"], _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_19__["ScrollDispatcher"]],
             schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["CUSTOM_ELEMENTS_SCHEMA"]]
         })
     ], ManageUsersModule);

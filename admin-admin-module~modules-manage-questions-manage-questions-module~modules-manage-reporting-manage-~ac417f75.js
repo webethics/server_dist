@@ -523,6 +523,14 @@ var AdminService = /** @class */ (function () {
             return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].create(function (observer) { return observer.error(_shared_utils_string_constants__WEBPACK_IMPORTED_MODULE_4__["StringConst"].INVALID_INFORMATION); });
         }
     };
+    AdminService.prototype.listOnlineUsers = function (data) {
+        if (data) {
+            return this.http.post(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].LIST_ONLINE_USERS, data);
+        }
+        else {
+            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].create(function (observer) { return observer.error(_shared_utils_string_constants__WEBPACK_IMPORTED_MODULE_4__["StringConst"].INVALID_INFORMATION); });
+        }
+    };
     AdminService.prototype.editYoutubeLink = function (data) {
         if (data) {
             return this.http.put(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].EDIT_YOUTUBE_LINKS, data);

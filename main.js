@@ -2609,6 +2609,11 @@ var ElesAppConst = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ElesAppConst, "LIST_ONLINE_USERS", {
+        get: function () { return this.appurl + 'admin/listOnlineUsers'; },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ElesAppConst, "ADD_YOUTUBE_LINK", {
         get: function () { return this.appurl + 'youtube/addYouTubeLink'; },
         enumerable: true,
@@ -3242,7 +3247,7 @@ var environment = {
     production: true,
     // url: 'https://meanstack.stagingsdei.com:5952/apis/'
     url: 'https://theaishadchan.com/apis/'
-    // url: 'http://23.251.151.250:5952/apis/'
+    //url: 'http://23.251.151.250:5952/apis/'
 };
 /*
  * In development mode, for easier debugging, you can ignore zone related error
