@@ -298,25 +298,26 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 var map = {
 	"./admin/admin.module": [
 		"./src/app/admin/admin.module.ts",
-		"admin-admin-module~modules-manage-questions-manage-questions-module~modules-manage-reporting-manage-~ac417f75",
+		"admin-admin-module~modules-manage-backgroundmusic-manage-backgroundmusic-module~modules-manage-quest~f9615d30",
 		"common",
 		"admin-admin-module"
 	],
 	"./modules/manage-backgroundmusic/manage-backgroundmusic.module": [
 		"./src/app/admin/modules/manage-backgroundmusic/manage-backgroundmusic.module.ts",
+		"admin-admin-module~modules-manage-backgroundmusic-manage-backgroundmusic-module~modules-manage-quest~f9615d30",
 		"common",
 		"modules-manage-backgroundmusic-manage-backgroundmusic-module"
 	],
 	"./modules/manage-questions/manage-questions.module": [
 		"./src/app/admin/modules/manage-questions/manage-questions.module.ts",
-		"admin-admin-module~modules-manage-questions-manage-questions-module~modules-manage-reporting-manage-~ac417f75",
+		"admin-admin-module~modules-manage-backgroundmusic-manage-backgroundmusic-module~modules-manage-quest~f9615d30",
 		"modules-manage-questions-manage-questions-module~modules-manage-reporting-manage-reporting-module~mo~75358f0b",
 		"common",
 		"modules-manage-questions-manage-questions-module"
 	],
 	"./modules/manage-reporting/manage-reporting.module": [
 		"./src/app/admin/modules/manage-reporting/manage-reporting.module.ts",
-		"admin-admin-module~modules-manage-questions-manage-questions-module~modules-manage-reporting-manage-~ac417f75",
+		"admin-admin-module~modules-manage-backgroundmusic-manage-backgroundmusic-module~modules-manage-quest~f9615d30",
 		"modules-manage-questions-manage-questions-module~modules-manage-reporting-manage-reporting-module~mo~75358f0b",
 		"modules-manage-reporting-manage-reporting-module~modules-manage-users-manage-users-module",
 		"common",
@@ -324,7 +325,7 @@ var map = {
 	],
 	"./modules/manage-users/manage-users.module": [
 		"./src/app/admin/modules/manage-users/manage-users.module.ts",
-		"admin-admin-module~modules-manage-questions-manage-questions-module~modules-manage-reporting-manage-~ac417f75",
+		"admin-admin-module~modules-manage-backgroundmusic-manage-backgroundmusic-module~modules-manage-quest~f9615d30",
 		"modules-manage-questions-manage-questions-module~modules-manage-reporting-manage-reporting-module~mo~75358f0b",
 		"modules-manage-reporting-manage-reporting-module~modules-manage-users-manage-users-module",
 		"common",
@@ -332,7 +333,7 @@ var map = {
 	],
 	"./modules/manage-youtubelink/manage-youtubelink.module": [
 		"./src/app/admin/modules/manage-youtubelink/manage-youtubelink.module.ts",
-		"admin-admin-module~modules-manage-questions-manage-questions-module~modules-manage-reporting-manage-~ac417f75",
+		"admin-admin-module~modules-manage-backgroundmusic-manage-backgroundmusic-module~modules-manage-quest~f9615d30",
 		"modules-manage-questions-manage-questions-module~modules-manage-reporting-manage-reporting-module~mo~75358f0b",
 		"common",
 		"modules-manage-youtubelink-manage-youtubelink-module"
@@ -3246,8 +3247,8 @@ __webpack_require__.r(__webpack_exports__);
 var environment = {
     production: true,
     // url: 'https://meanstack.stagingsdei.com:5952/apis/'
-    //url: 'https://theaishadchan.com/apis/'
-    url: 'http://23.251.151.250:5952/apis/'
+    url: 'https://theaishadchan.com/apis/'
+    // url: 'http://23.251.151.250:5952/apis/'
 };
 /*
  * In development mode, for easier debugging, you can ignore zone related error
