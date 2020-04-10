@@ -5284,7 +5284,7 @@ var VideoLogComponent = /** @class */ (function () {
                         console.log(res);
                         _this.getNotes();
                         _this.addNotes.reset();
-                        _this.toastr.error('Notes Added Successfully.');
+                        _this.toastr.success('Notes Added Successfully.');
                     }
                 });
             });
