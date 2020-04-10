@@ -2914,6 +2914,16 @@ var ElesAppConst = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ElesAppConst, "ADD_USER_NOTES", {
+        get: function () { return this.appurl + 'admin/addUserNotes'; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ElesAppConst, "GET_USER_NOTES", {
+        get: function () { return this.appurl + 'admin/getUserNotes'; },
+        enumerable: true,
+        configurable: true
+    });
     ElesAppConst.appurl = _environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].url;
     ElesAppConst.webApp = _environments_environment__WEBPACK_IMPORTED_MODULE_0__["environment"].url;
     return ElesAppConst;
@@ -3248,7 +3258,7 @@ var environment = {
     production: true,
     // url: 'https://meanstack.stagingsdei.com:5952/apis/'
     url: 'https://theaishadchan.com/apis/'
-    // url: 'http://23.251.151.250:5952/apis/'
+    //url: 'http://23.251.151.250:5952/apis/'
 };
 /*
  * In development mode, for easier debugging, you can ignore zone related error

@@ -6479,7 +6479,12 @@ var AdminService = /** @class */ (function () {
         return this.http.get(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].REGISTERED_USERS);
     };
     AdminService.prototype.onlineUser = function () {
-        return this.http.get(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].ONLINE_USERS);
+        //return this.http.get(ElesAppConst.ONLINE_USERS);
+        var _this = this;
+        return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].interval(10000).flatMap(function () {
+            return _this.http.get(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].ONLINE_USERS)
+                .map(function (res) { return res; });
+        });
     };
     AdminService.prototype.onlineMaleFemale = function () {
         return this.http.get(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].ONLINE_MALE_FEMALE);
@@ -6697,6 +6702,35 @@ var AdminService = /** @class */ (function () {
         if (data) {
             // console.log('csassa',data)
             return this.http.post(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].EDIT_AGE_DOB, data);
+        }
+        else {
+            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].create(function (observer) { return observer.error(_shared_utils_string_constants__WEBPACK_IMPORTED_MODULE_4__["StringConst"].INVALID_INFORMATION); });
+        }
+    };
+    AdminService.prototype.addUserNotes = function (data) {
+        if (data) {
+            return this.http.post(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].ADD_USER_NOTES, data);
+        }
+        else {
+            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].create(function (observer) { return observer.error(_shared_utils_string_constants__WEBPACK_IMPORTED_MODULE_4__["StringConst"].INVALID_INFORMATION); });
+        }
+    };
+    AdminService.prototype.addUserNotesWithFile = function (data, image) {
+        if (data) {
+            var formData = new FormData();
+            formData.append('notes', data.notes);
+            if (image !== undefined) {
+                formData.append('file', image);
+            }
+            return this.http.post(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].ADD_USER_NOTES, formData);
+        }
+        else {
+            return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].create(function (observer) { return observer.error(_shared_utils_string_constants__WEBPACK_IMPORTED_MODULE_4__["StringConst"].INVALID_INFORMATION); });
+        }
+    };
+    AdminService.prototype.getUserNotes = function (data) {
+        if (data) {
+            return this.http.post(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].GET_USER_NOTES, data);
         }
         else {
             return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].create(function (observer) { return observer.error(_shared_utils_string_constants__WEBPACK_IMPORTED_MODULE_4__["StringConst"].INVALID_INFORMATION); });
