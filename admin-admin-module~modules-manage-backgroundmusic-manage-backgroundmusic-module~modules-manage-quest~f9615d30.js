@@ -6336,6 +6336,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AdminService = /** @class */ (function () {
     function AdminService(http) {
         this.http = http;
@@ -6717,12 +6718,19 @@ var AdminService = /** @class */ (function () {
     };
     AdminService.prototype.addUserNotesWithFile = function (data, image) {
         if (data) {
+            //data.file = image;
+            var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]();
+            headers.append('Content-Type', 'multipart/form-data');
+            headers.append('Accept', 'application/json');
             var formData = new FormData();
             formData.append('notes', data.notes);
+            formData.append('added_by', data.added_by);
+            formData.append('added_for', data.added_for);
             if (image !== undefined) {
                 formData.append('file', image);
             }
-            return this.http.post(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].ADD_USER_NOTES, formData);
+            console.log(data);
+            return this.http.post(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].ADD_USER_NOTES, formData, { headers: headers });
         }
         else {
             return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].create(function (observer) { return observer.error(_shared_utils_string_constants__WEBPACK_IMPORTED_MODULE_4__["StringConst"].INVALID_INFORMATION); });
