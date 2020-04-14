@@ -4370,20 +4370,20 @@ var ListUsersComponent = /** @class */ (function () {
         console.log('156 page number', page);
         if (this.searchForm.valid) {
             // console.log(this.searchForm.value, 'this.searchForm.value');
-            // this.spinner.show()
+            this.spinner.show();
             var pageObj = {
                 page: page,
                 searchText: this.searchForm.value
             };
             this.adminService.listUsers(pageObj).subscribe(function (res) {
-                // console.log('users onlinelistUsers', res);
+                console.log('users onlinelistUsers', res);
                 if (res.code === 200) {
-                    // this.spinner.hide();
+                    _this.spinner.hide();
                     _this.onusers = [];
                     _this.onusers = _this.onusers.concat(res.data.data);
                     _this.totalCount = res.data.totalCount;
-                    _this.maleAlarm = res.data[0].maleAlarm.isGenderAlarmEnabled;
-                    _this.femaleAlarm = res.data[0].femaleAlarm.isGenderAlarmEnabled;
+                    _this.maleAlarm = res.data.maleAlarm[0].isGenderAlarmEnabled;
+                    _this.femaleAlarm = res.data.femaleAlarm[0].isGenderAlarmEnabled;
                     // console.log('this.onusersthis.onusers', this.femaleAlarm, this.maleAlarm);
                 }
             });

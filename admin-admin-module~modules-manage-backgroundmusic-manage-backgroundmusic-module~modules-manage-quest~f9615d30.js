@@ -6480,12 +6480,12 @@ var AdminService = /** @class */ (function () {
         return this.http.get(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].REGISTERED_USERS);
     };
     AdminService.prototype.onlineUser = function () {
-        //return this.http.get(ElesAppConst.ONLINE_USERS);
-        var _this = this;
-        return rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"].interval(10000).flatMap(function () {
-            return _this.http.get(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].ONLINE_USERS)
-                .map(function (res) { return res; });
+        return this.http.get(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].ONLINE_USERS);
+        /* return Observable.interval(10000).flatMap(() => {
+            return this.http.get(ElesAppConst.ONLINE_USERS)
+                .map(res => res);
         });
+         */
     };
     AdminService.prototype.onlineMaleFemale = function () {
         return this.http.get(_shared_utils_eles_app_constant__WEBPACK_IMPORTED_MODULE_3__["ElesAppConst"].ONLINE_MALE_FEMALE);
