@@ -3634,7 +3634,8 @@ var DisplayReportingComponent = /** @class */ (function () {
         this.now.setDate(d.getDate() - 1);
         this.mySimpleFormat = this.pipe.transform(this.now, 'yyyy-MM-dd');
         console.log(this.mySimpleFormat);
-        this.displayReport(this.mySimpleFormat);
+        //	this.displayReport(this.mySimpleFormat);
+        this.displayReport('2020-04-05');
     };
     DisplayReportingComponent.prototype.displayReport = function (createDate) {
         // console.log(createDate);
@@ -3658,7 +3659,7 @@ var DisplayReportingComponent = /** @class */ (function () {
             }
         });
         this.admin.actualDateReport(date).subscribe(function (res) {
-            //console.log('actualDateReport', res);
+            console.log('actualDateReport', res);
             if (res.code == 200 && res.data.length) {
                 _this.actualDateUsers = res.data;
                 _this.actualDateCount = res.data.length;
@@ -3723,19 +3724,19 @@ var DisplayReportingComponent = /** @class */ (function () {
     };
     DisplayReportingComponent.prototype.exportAsXLSXReports = function () {
         var reportArr = [
-            ["S.No.", "First Name", "Age", "Gender", "Device Type", "App Version", "First Name", "Age", "Gender", "Device Type", "App Version", "Matched Based On", "Date"]
+            ["S.No.", "First Name", "Age", "Gender", "Device Type", "App Version", "First Name", "Age", "Gender", "Device Type", "App Version", "Number of answer Matched", "Matched Based On", "Date"]
         ];
         var reportArr1 = [
             ["S.No.", "First Name", "Age", "Gender", "Device Type", "App Version", "First Name", "Age", "Gender", "Device Type", "App Version", "Date"]
         ];
         var reportArr2 = [
-            ["S.No.", "First Name", "Age", "Gender", "Device Type", "App Version", "Date"]
+            ["S.No.", "First Name", "Age", "Gender", "Device Type", "App Version", "Number of questions answered", "Date"]
         ];
         var reportArr3 = [
-            ["S.No.", "First Name", "Age", "Gender", "Device Type", "App Version", "Date"]
+            ["S.No.", "First Name", "Age", "Gender", "Device Type", "App Version", "Number of questions answered", "Date"]
         ];
         var reportArr4 = [
-            ["S.No.", "First Name", "Age", "Gender", "Device Type", "App Version", "Date"]
+            ["S.No.", "First Name", "Age", "Gender", "Device Type", "App Version", "Number of questions answered", "Date"]
         ];
         var reportArr5 = [
             ["S.No.", "First Name", "Age", "Gender", "Device Type", "App Version", "Date"]
@@ -3744,7 +3745,7 @@ var DisplayReportingComponent = /** @class */ (function () {
             ["S.No.", "First Name", "Age", "Gender", "Device Type", "App Version", "First Name", "Age", "Gender", "Device Type", "App Version", "Date"]
         ];
         var reportArr7 = [
-            ["S.No.", "First Name", "Age", "Gender", "Device Type", "App Version", "First Name", "Age", "Gender", "Device Type", "App Version", "Date"]
+            ["S.No.", "First Name", "Age", "Gender", "Device Type", "App Version", "First Name", "Age", "Gender", "Device Type", "App Version", "Date", "Status"]
         ];
         if (this.reports && this.reports.length) {
             var i_1 = 1;
@@ -3761,6 +3762,7 @@ var DisplayReportingComponent = /** @class */ (function () {
                     element.userInfo2.gender ? 'Female' : 'Male',
                     element.userInfo2.device_type,
                     element.userInfo2.appVersion,
+                    element.answersMatched,
                     element.matchedBasedon,
                     element.dateWithTimeZone
                 ]);
@@ -3795,6 +3797,7 @@ var DisplayReportingComponent = /** @class */ (function () {
                     element.userInfo.gender ? 'Female' : 'Male',
                     element.userInfo.device_type,
                     element.userInfo.appVersion,
+                    element.questionAnswered,
                     element.dateWithTimeZone
                 ]);
             });
@@ -3809,6 +3812,7 @@ var DisplayReportingComponent = /** @class */ (function () {
                     element.userInfo.gender ? 'Female' : 'Male',
                     element.userInfo.device_type,
                     element.userInfo.appVersion,
+                    element.questionAnswered,
                     element.dateWithTimeZone
                 ]);
             });
@@ -3823,6 +3827,7 @@ var DisplayReportingComponent = /** @class */ (function () {
                     element.userInfo.gender ? 'Female' : 'Male',
                     element.userInfo.device_type,
                     element.userInfo.appVersion,
+                    element.questionAnswered,
                     element.dateWithTimeZone
                 ]);
             });
@@ -3875,7 +3880,8 @@ var DisplayReportingComponent = /** @class */ (function () {
                     element.userInfo2.gender ? 'Female' : 'Male',
                     element.userInfo2.device_type,
                     element.userInfo2.appVersion,
-                    element.dateWithTimeZone
+                    element.dateWithTimeZone,
+                    element.status
                 ]);
             });
         }
