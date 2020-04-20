@@ -3257,8 +3257,8 @@ __webpack_require__.r(__webpack_exports__);
 var environment = {
     production: true,
     // url: 'https://meanstack.stagingsdei.com:5952/apis/'
-    //url: 'https://theaishadchan.com/apis/'
-    url: 'http://99.79.104.155:5952/apis/'
+    url: 'https://theaishadchan.com/apis/'
+    //url: 'http://99.79.104.155:5952/apis/'
 };
 /*
  * In development mode, for easier debugging, you can ignore zone related error
