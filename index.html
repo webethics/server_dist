@@ -1,41 +1,101 @@
-<!DOCTYPE html><html lang="en"><head>
-  <meta charset="utf-8">
-  <title>Shidduch View</title>
+<!--
+* CoreUI - Free Angular Admin Template
+* @version v2.4.0
+* @link https://coreui.io/angular/
+* Copyright (c) 2018 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+<!doctype html>
+<html>
+<head>
   <base href="/">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="./assets/css/animate.min.css" rel="stylesheet">
-  <link href="./assets/css/vendor-styles.css" rel="stylesheet">
-  <link rel="stylesheet" href="node_modules/ladda/dist/ladda.min.css">
-  <!-- <link rel="stylesheet" type="text/css" href="/node_modules/primeicons/primeicons.css" />
-  <link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/themes/nova-light/theme.css" />
-  <link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/primeng.min.css" /> -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:100, 300, 400, 500, 700, 900&amp;display=swap">
-  <link href="https: //fonts.googleapis.com/css?family=Montserrat:300, 400, 500, 600, 700, 900&amp;display=swap&amp;subset=cyrillic">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-  <link rel="stylesheet" href="./assets/css/styles.css">
-  <link rel="stylesheet" href="./assets/css/main.min.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Free Angular Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Free,Angular,Dashboard,Typescript">
+	<link rel="shortcut icon" href="assets/favicon.ico">
+	<title>Movers and Packers</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script> -->
+ <!--  <script src="https://js.stripe.com/v3/"></script> -->
+  <script type="text/javascript">
+   /* var stripe = Stripe('pk_test_oUX3CoG5KpQL5KxzgxwE6rQd'); // use your test publishable key
+    var elements = stripe.elements();*/
+  </script>
+  <script>
+   /* window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    // Shared ID
+    gtag('config', 'UA-118965717-3');
+    // Angular ID
+    gtag('config', 'UA-118965717-4');*/
+  </script>
+ <style type="text/css">
+      body, html {
+        height: 100%;
+      }
+      .app-loading {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+	  
+		  .spinner_logo {
+			width: 100px;
+			height: 100px;
+			background: url(./assets/images/spinner.gif) center center no-repeat; 
+	
+		}
+      .app-loading .spinner {
+        height: 200px;
+        width: 200px;
+        animation: rotate 2s linear infinite;
+        transform-origin: center center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+      .app-loading .spinner .path {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        animation: dash 1.5s ease-in-out infinite;
+        stroke-linecap: round;
+        stroke: #ddd;
+      }
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes dash {
+        0% {
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+        }
+        50% {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -35px;
+        }
+        100% {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -124px;
+        }
+      }
+    </style>
 </head>
+<body class="app">
+ <div class="app-loading">
+        <div class="spinner_logo"></div>
 
-<body>
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-  <script src="./assets/js-plugins/jquery-3.1.1.min.js" type="text/javascript"></script>
-  <script src="./assets/js-plugins/bootstrap.min.js" type="text/javascript"></script>
-  <script src="./assets/js-plugins/moment.min.js" type="text/javascript"></script>
-  <script src="./assets/js-plugins/daterangepicker.js" type="text/javascript"></script>
-  <script src="./assets/js-plugins/wow.min.js" type="text/javascript"></script>
-  <script src="./assets/js-plugins/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
-  <script src="./assets/js-plugins/selectize.min.js" type="text/javascript"></script>
-  <script src="./assets/js-plugins/owl.carousel.min.js" type="text/javascript"></script>
-  <script src="./assets/js-plugins/Chart.min.js" type="text/javascript"></script>
-  <script src="./assets/js-plugins/circle-progress.min.js" type="text/javascript"></script>
-  <!-- <script src="./assets/js/loader.js" type="text/javascript"></script> -->
-
-  <!--  MAIN SCRIPTS START FROM HERE  above scripts from plugin   -->
-  <!-- <script src="./assets/js/scripts.js" type="text/javascript"></script> -->
-  <app-root></app-root>
-
-
-<script type="text/javascript" src="runtime.js"></script><script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="styles.js"></script><script type="text/javascript" src="scripts.js"></script><script type="text/javascript" src="vendor.js"></script><script type="text/javascript" src="main.js"></script></body></html>
+</div>
+<script type="text/javascript" src="runtime.js"></script><script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="styles.js"></script><script type="text/javascript" src="scripts.js"></script><script type="text/javascript" src="vendor.js"></script><script type="text/javascript" src="main.js"></script></body>
+</html>
