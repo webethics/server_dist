@@ -1386,12 +1386,12 @@ var FrontendLayoutComponent = /** @class */ (function () {
             this.isLoggedIn = true;
             this.setusertype = localStorage.getItem('user_role');
             this.userdetail = { firstname: localStorage.getItem('firstname'), lastname: localStorage.getItem('lastname'), customer_id: localStorage.getItem('customer_id'), totalbid: localStorage.getItem('total_bid') };
+            this.setFirstChar = localStorage.getItem('firstname')[0];
         }
         else {
             this.router.navigate([this.router.url]);
             this.isLoggedIn = false;
         }
-        this.setFirstChar = localStorage.getItem('firstname')[0];
         //console.log('fist='+this.setFirstChar);
     };
     FrontendLayoutComponent.prototype.logout = function () {
@@ -9943,6 +9943,7 @@ var DashboardComponent = /** @class */ (function () {
                     day = '0' + day;
                 var mindateset = [year, month, day].join('-');
                 _this.allJobs = result.job;
+                var default2val_1 = [];
                 _this.allJobs.forEach(function (x, key) {
                     var d1 = new Date(x.jobStart);
                     var month1 = '' + (d1.getMonth() + 1);
@@ -9953,28 +9954,32 @@ var DashboardComponent = /** @class */ (function () {
                     if (day1.length < 2)
                         day1 = '0' + day1;
                     var mindateset1 = [year1, month1, day1].join('-');
-                    if (mindateset1 < mindateset) {
-                        result.job[key].jobStatus = 'Old';
+                    if (x.bidcount > 0) {
+                        default2val_1.push(x);
+                        /* if(mindateset1 < mindateset){
+                            result.job[key].jobStatus =  'Old';
+                        }else{
+                            result.job[key].jobStatus =  'New';
+                        } */
                     }
-                    else {
-                        result.job[key].jobStatus = 'New';
-                    }
+                });
+                var default2 = [];
+                default2val_1.forEach(function (x, key) {
                     _this.jobservice.getJobBids(x._id).subscribe(function (result) {
                         //console.log(result.users);
                         $.each(result.users, function (index, value) {
-                            result.users[index].width = value.userRating * 20;
-                            result.users[index].jobId = x.jobId;
-                            result.users[index].job_created = x.created_at;
-                            result.users[index].bidStatus = value.bidStatus;
-                            result.users[index].user_id = value._id;
-                            result.users[index].job_id = x._id;
+                            default2val_1[key].width = value.userRating * 20;
+                            default2val_1[key].jobId = x.jobId;
+                            default2val_1[key].companyName = value.companyName;
+                            default2val_1[key].job_created = x.created_at;
+                            default2val_1[key].bidStatus = value.bidStatus;
+                            default2val_1[key].user_id = value._id;
+                            default2val_1[key].job_id = x._id;
                             //this.allJobs[index].userEmail =  value.email;
                         });
-                        console.log(result);
-                        _this.userslist = result.users;
                     });
                 });
-                //console.log(this.allJobs);
+                _this.userslist = default2val_1;
             }
             else {
                 _this.isValid = true;
