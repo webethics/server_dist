@@ -9545,7 +9545,7 @@ var UsersCompletedJobsComponent = /** @class */ (function () {
     };
     UsersCompletedJobsComponent.prototype.getAllJobs = function () {
         var _this = this;
-        this.jobservice.getFilteredJobsForUser(2).subscribe(function (result) {
+        this.jobservice.getFilteredJobsForUserDashboard(2).subscribe(function (result) {
             if (result.success) {
                 _this.isValid = true;
                 var d = new Date();
@@ -9557,48 +9557,59 @@ var UsersCompletedJobsComponent = /** @class */ (function () {
                 if (day.length < 2)
                     day = '0' + day;
                 var mindateset = [year, month, day].join('-');
+                console.log(result.jobs);
                 _this.allJobs = result.jobs;
+                var userslist2_1 = [];
                 _this.allJobs.forEach(function (x, key) {
-                    _this.jobservice.getJobBids(x._id).subscribe(function (result) {
-                        console.log(result.users);
-                        $.each(result.users, function (index, value) {
-                            result.users[index].width = value.userRating * 20;
-                            result.users[index].jobId = x.jobId;
-                            result.users[index].job_created = x.created_at;
-                            //this.allJobs[index].userEmail =  value.email;
-                        });
-                        console.log(result);
-                        _this.compuserslist = result.users;
+                    x.bidsData.forEach(function (value, index) {
+                        userslist2_1.push({ 'job_id': x._id, 'user_id': value.userId._id, 'bid_price': value.bid_price, 'created_at': value.created_at, 'bidStatus': value.bidStatus, 'companyName': value.userId.companyName, 'jobId': x.jobId, 'job_created': x.created_at, 'width': value.rating * 20 });
                     });
-                    /* this.jobservice.getBidsOnJob(x._id).subscribe(result1 =>
-                    {
-                        if(result1.success){
-                            this.allCompletedJobs[key].jobStatus =  'applied';
-                            
-                        }else{
-                            this.allCompletedJobs[key].jobStatus =  'Notapplied';
-                        }
-                    }); */
                 });
-                /* this.allJobs.forEach((x,key) => {
-                    this.jobservice.getBidsOnJob(x._id).subscribe(result1 =>
-                    {
-                        if(result1.success){
-                            this.allJobs[key].jobStatus =  'applied';
-                            
-                        }else{
-                            this.allJobs[key].jobStatus =  'Notapplied';
-                        }
-                    });
-                }); */
-                /* this.allJobs = result.jobs;
-                console.log(this.allJobs);   */
+                _this.compuserslist = userslist2_1;
+                console.log(_this.compuserslist);
             }
             else {
                 _this.isValid = true;
                 //this._flashMessagesService.show("No job founds", { cssClass: 'alert-danger',timeout:6000});
             }
         });
+        /*
+        this.jobservice.getFilteredJobsForUser(2).subscribe(result =>
+        {
+            if(result.success){
+                this.isValid = true;
+                var d = new Date();
+                var month = '' + (d.getMonth() + 1);
+                var day = '' + d.getDate();
+                var year = d.getFullYear();
+                if (month.length < 2) month = '0' + month;
+                if (day.length < 2) day = '0' + day;
+                var mindateset = [year, month, day].join('-');
+                
+                this.allJobs = result.jobs;
+                this.allJobs.forEach((x,key) => {
+                    this.jobservice.getJobBids(x._id).subscribe(result=>{
+                        console.log(result.users);
+                        $.each(result.users, function(index, value) {
+                            result.users[index].width = value.userRating*20;
+                            result.users[index].jobId = x.jobId;
+                            result.users[index].job_created = x.created_at;
+                            //this.allJobs[index].userEmail =  value.email;
+                        });
+                        console.log(result);
+                        this.compuserslist = result.users;
+                        
+                    });
+                    
+                    
+                });
+                
+            }else{
+                this.isValid = true;
+                //this._flashMessagesService.show("No job founds", { cssClass: 'alert-danger',timeout:6000});
+            }
+           
+        }); */
     };
     UsersCompletedJobsComponent.prototype.ngOnInit = function () {
         this.first_show = true;
