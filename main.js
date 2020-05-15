@@ -2796,6 +2796,7 @@ var OpenBidsComponent = /** @class */ (function () {
                         }
                     });
                 });
+                // this.allJobs.sort((a,b) => b.bidsOn.localeCompare(a.bidsOn));
                 $.each(result.jobs, function (index, value) {
                     /* var d1 = new Date(value.jobEnd);
                     var month1 = '' + (d1.getMonth() + 1);
@@ -9934,6 +9935,7 @@ var DashboardComponent = /** @class */ (function () {
                         userslist1_1.push({ 'job_id': x._id, 'user_id': value.userId._id, 'bid_price': value.bid_price, 'created_at': value.created_at, 'bidStatus': value.bidStatus, 'companyName': value.userId.companyName, 'jobId': x.jobId, 'job_created': x.created_at, 'width': value.rating * 20 });
                     });
                 });
+                userslist1_1.sort(function (a, b) { return b.created_at.localeCompare(a.created_at); });
                 _this.userslist = userslist1_1;
             }
             else {
@@ -9964,6 +9966,7 @@ var DashboardComponent = /** @class */ (function () {
                         userslist2_1.push({ 'job_id': x._id, 'user_id': value.userId._id, 'bid_price': value.bid_price, 'created_at': value.created_at, 'bidStatus': value.bidStatus, 'companyName': value.userId.companyName, 'jobId': x.jobId, 'job_created': x.created_at, 'width': value.rating * 20 });
                     });
                 });
+                userslist2_1.sort(function (a, b) { return b.created_at.localeCompare(a.created_at); });
                 _this.compuserslist = userslist2_1;
                 console.log(_this.compuserslist);
             }
