@@ -8887,30 +8887,43 @@ var UsersInProgressJobsComponent = /** @class */ (function () {
                     day = '0' + day;
                 var mindateset = [year, month, day].join('-');
                 _this.allJobs = result.jobs;
+                console.log(_this.allJobs);
+                var userslist1_1 = [];
                 _this.allJobs.forEach(function (x, key) {
-                    _this.jobservice.getJobBids(x._id).subscribe(function (result) {
-                        $.each(result.users, function (index, value) {
-                            result.users[index].width = value.userRating * 20;
-                            result.users[index].jobId = x.jobId;
-                            result.users[index].job_created = x.created_at;
-                            result.users[index].user_id = value._id;
-                            result.users[index].job_id = x._id;
-                            //this.allJobs[index].userEmail =  value.email;
-                        });
-                        _this.userslist = result.users;
-                    });
-                    _this.jobservice.getBidsOnJobUser(x._id).subscribe(function (result1) {
-                        console.log(result1);
-                        if (result1.success) {
-                            _this.allJobs[key].bidsOn = result1.data.hired_decline;
-                            _this.allJobs[key].bidder_id = result1.data.userId;
-                        }
-                        else {
-                            _this.allJobs[key].bidsOn = result1.data.hired_decline;
-                            _this.allJobs[key].bidder_id = result1.data.userId;
-                        }
+                    x.bidsData.forEach(function (value, index) {
+                        userslist1_1.push({ 'job_id': x._id, 'user_id': value.userId._id, 'bid_price': value.bid_price, 'created_at': value.created_at, 'bidStatus': value.bidStatus, 'companyName': value.userId.companyName, 'jobId': x.jobId, 'job_created': x.created_at, 'width': value.rating * 20 });
                     });
                 });
+                userslist1_1.sort(function (a, b) { return b.created_at.localeCompare(a.created_at); });
+                _this.userslist = userslist1_1;
+                /*this.allJobs.forEach((x,key) => {
+                 this.jobservice.getJobBids(x._id).subscribe(result=>{
+                    
+                    $.each(result.users, function(index, value) {
+                        
+                        result.users[index].width = value.userRating*20;
+                        result.users[index].jobId = x.jobId;
+                        result.users[index].job_created = x.created_at;
+                        result.users[index].user_id = value._id;
+                        result.users[index].job_id = x._id;
+                        //this.allJobs[index].userEmail =  value.email;
+                    });
+                    
+                    this.userslist = result.users;
+                    
+                }); */
+                /* 	this.jobservice.getBidsOnJobUser(x._id).subscribe(result1 =>
+                    {
+                        console.log(result1);
+                        if(result1.success){
+                            this.allJobs[key].bidsOn =  result1.data.hired_decline;
+                            this.allJobs[key].bidder_id =  result1.data.userId;
+                        }else{
+                            this.allJobs[key].bidsOn =  result1.data.hired_decline;
+                            this.allJobs[key].bidder_id =  result1.data.userId;
+                        }
+                    });
+                });*/
                 console.log(_this.userslist);
             }
             else {
@@ -9810,7 +9823,7 @@ module.exports = ".mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-chec
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container job_dashboard\">\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col\"> \r\n\t\t<h1 class=\"main_title\">Dashboard</h1>\r\n\t\t<h3 class=\"mb-4\">Open Estimates</h3>\r\n\r\n\t\t<div class=\"table-responsive\">\r\n\t\t\t<table class=\"table table-striped text-center\">\r\n\t\t\t\t<thead class=\"thead-dark\">\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>Job ID</th>\r\n\t\t\t\t\t\t<th>Request Date</th>\r\n\t\t\t\t\t\t<th>Company Name</th>\r\n\t\t\t\t\t\t<th>Response On</th>\r\n\t\t\t\t\t\t<th>$</th>\r\n\t\t\t\t\t\t<th>Attachments</th>\r\n\t\t\t\t\t\t<th>Rating</th>\r\n\t\t\t\t\t\t<th>Hiring</th>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t</thead>\r\n\t\t\t\t<tbody *ngIf=\"userslist && userslist.length > 0\">\r\n\t\t\t\t\t<tr *ngFor=\"let jobs of userslist\">\r\n\t\t\t\t\t\t<td><a class=\"job_id\" routerLink=\"/detail-job/{{jobs.job_id}}\">{{jobs.jobId}}</a></td>\r\n\t\t\t\t\t\t<td>{{jobs.job_created | date:'mediumDate'}}</td>\r\n\t\t\t\t\t\t<td>{{jobs.companyName}}</td>\r\n\t\t\t\t\t\t<td>{{jobs.created_at | date:'mediumDate'}}</td>\r\n\t\t\t\t\t\t<td>${{jobs.bid_price}}</td>\r\n\t\t\t\t\t\t<td><p *ngIf=\"jobs.attachemnt_pic\">{{jobs.attachemnt_pic}}</p><p *ngIf=\"!jobs.attachemnt_pic\">N.A.</p></td>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t<div class=\"rate\">\r\n\t\t\t\t\t\t\t\t<div class=\"star-ratings-sprite\"><span [style.width.%]=\"jobs.width\" class=\"star-ratings-sprite-rating\"></span></div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t<a class=\"hire\" *ngIf =\"!jobs.bidStatus && jobs.bidStatus ==0\" (click)=\"openDialog(1,jobs.job_id,jobs.user_id)\" href=\"javascript:void(0)\">{{hire_decline}}</a>\r\n\t\t\t\t\t\t\t<a  class=\"hire\" *ngIf =\"!jobs.bidStatus && jobs.bidStatus ==0\" (click)=\"openDialog(2,jobs.job_id,jobs.user_id)\" href=\"javascript:void(0)\">{{decline_hire}}</a>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t</tbody>\r\n\t\t\t\t<tbody *ngIf=\"!userslist || userslist.length == 0\" >\r\n\t\t\t\t\t<tr><td colspan=\"7\"><p class=\"text-center\">No Open Estimates</td></tr>\r\n\t\t\t\t</tbody>\r\n\t\t\t</table>                                \r\n\t\t</div>\r\n\r\n\r\n\t\t</div>\r\n\t</div>\r\n\r\n\r\n<div class=\"row mt-4\">\r\n<div class=\"col\"> \r\n\r\n<h3 class=\"mb-4\">History of Accepted Estimates</h3>\r\n\r\n\t\t\t\t\t<div class=\"table-responsive\">\r\n\t\t\t<table class=\"table table-striped text-center\">\r\n\t\t\t\t<thead class=\"thead-dark\">\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>Job ID</th>\r\n\t\t\t\t\t\t<th>Request Date</th>\r\n\t\t\t\t\t\t<th>Company Name</th>\r\n\t\t\t\t\t\t<th>Response On</th>\r\n\t\t\t\t\t\t<th>$</th>\r\n\t\t\t\t\t\t<th>Attachments</th>\r\n\t\t\t\t\t\t<th>Rating</th>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t</thead>\r\n\t\t\t\t<tbody *ngIf=\"compuserslist && compuserslist.length > 0\">\r\n\t\t\t\t\t<tr *ngFor=\"let jobs of compuserslist\">\r\n\t\t\t\t\t\t<td><a class=\"job_id\" routerLink=\"/detail-job/{{jobs.job_id}}\">{{jobs.jobId}}</a></td>\r\n\t\t\t\t\t\t<td>{{jobs.job_created | date:'mediumDate'}}</td>\r\n\t\t\t\t\t\t<td>{{jobs.companyName}}</td>\r\n\t\t\t\t\t\t<td>{{jobs.created_at | date:'mediumDate'}}</td>\r\n\t\t\t\t\t\t<td>${{jobs.bid_price}}</td>\r\n\t\t\t\t\t\t<td><p *ngIf=\"jobs.attachemnt_pic\">{{jobs.attachemnt_pic}}</p><p *ngIf=\"!jobs.attachemnt_pic\">N.A.</p></td>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t<div class=\"rate\">\r\n\t\t\t\t\t\t\t\t<div class=\"star-ratings-sprite\"><span [style.width.%]=\"jobs.width\" class=\"star-ratings-sprite-rating\"></span></div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t</tbody>\r\n\t\t\t\t<tbody *ngIf=\"!compuserslist || compuserslist.length == 0\" >\r\n\t\t\t\t\t<tr><td colspan=\"7\"><p class=\"text-center\">No Completed Estimates</td></tr>\r\n\t\t\t\t</tbody>\r\n\t\t\t</table>                                \r\n\t\t</div>\r\n\r\n\r\n</div>\r\n</div>\r\n\r\n\r\n</div> \r\n \r\n "
+module.exports = "<div class=\"container job_dashboard\">\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col\"> \r\n\t\t<h1 class=\"main_title\">Dashboard</h1>\r\n\t\t<h3 class=\"mb-4\">Open Estimates</h3>\r\n\t\t<div class=\"col-12\">\r\n\t\t\t<div class=\"col-12\">\r\n\t\t\t\t<flash-messages></flash-messages>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t\r\n\t\t<div class=\"table-responsive\">\r\n\t\t\t<table class=\"table table-striped text-center\">\r\n\t\t\t\t<thead class=\"thead-dark\">\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>Job ID</th>\r\n\t\t\t\t\t\t<th>Request Date</th>\r\n\t\t\t\t\t\t<th>Company Name</th>\r\n\t\t\t\t\t\t<th>Response On</th>\r\n\t\t\t\t\t\t<th>$</th>\r\n\t\t\t\t\t\t<th>Attachments</th>\r\n\t\t\t\t\t\t<th>Rating</th>\r\n\t\t\t\t\t\t<th>Hiring</th>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t</thead>\r\n\t\t\t\t<tbody *ngIf=\"userslist && userslist.length > 0\">\r\n\t\t\t\t\t<tr *ngFor=\"let jobs of userslist\" ngClass=\"myclass_{{jobs.job_id}}\">\r\n\t\t\t\t\t\t<td><a class=\"job_id\" routerLink=\"/detail-job/{{jobs.job_id}}\">{{jobs.jobId}}</a></td>\r\n\t\t\t\t\t\t<td>{{jobs.job_created | date:'mediumDate'}}</td>\r\n\t\t\t\t\t\t<td>{{jobs.companyName}}</td>\r\n\t\t\t\t\t\t<td>{{jobs.created_at | date:'mediumDate'}}</td>\r\n\t\t\t\t\t\t<td>${{jobs.bid_price}}</td>\r\n\t\t\t\t\t\t<td><p *ngIf=\"jobs.attachemnt_pic\">{{jobs.attachemnt_pic}}</p><p *ngIf=\"!jobs.attachemnt_pic\">N.A.</p></td>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t<div class=\"rate\">\r\n\t\t\t\t\t\t\t\t<div class=\"star-ratings-sprite\"><span [style.width.%]=\"jobs.width\" class=\"star-ratings-sprite-rating\"></span></div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t<a class=\"hire\" *ngIf =\"!jobs.bidStatus && jobs.bidStatus ==0\" (click)=\"openDialog(1,jobs.job_id,jobs.user_id)\" href=\"javascript:void(0)\">{{hire_decline}}</a>\r\n\t\t\t\t\t\t\t<a  class=\"hire\" *ngIf =\"!jobs.bidStatus && jobs.bidStatus ==0\" (click)=\"openDialog(2,jobs.job_id,jobs.user_id)\" href=\"javascript:void(0)\">{{decline_hire}}</a>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t</tbody>\r\n\t\t\t\t<tbody *ngIf=\"!userslist || userslist.length == 0\" >\r\n\t\t\t\t\t<tr><td colspan=\"7\"><p class=\"text-center\">No Open Estimates</td></tr>\r\n\t\t\t\t</tbody>\r\n\t\t\t</table>                                \r\n\t\t</div>\r\n\r\n\r\n\t\t</div>\r\n\t</div>\r\n\r\n\r\n<div class=\"row mt-4\">\r\n<div class=\"col\"> \r\n\r\n<h3 class=\"mb-4\">History of Accepted Estimates</h3>\r\n\r\n\t\t\t\t\t<div class=\"table-responsive\">\r\n\t\t\t<table class=\"table table-striped text-center\">\r\n\t\t\t\t<thead class=\"thead-dark\">\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>Job ID</th>\r\n\t\t\t\t\t\t<th>Request Date</th>\r\n\t\t\t\t\t\t<th>Company Name</th>\r\n\t\t\t\t\t\t<th>Response On</th>\r\n\t\t\t\t\t\t<th>$</th>\r\n\t\t\t\t\t\t<th>Attachments</th>\r\n\t\t\t\t\t\t<th>Rating</th>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t</thead>\r\n\t\t\t\t<tbody *ngIf=\"compuserslist && compuserslist.length > 0\">\r\n\t\t\t\t\t<tr *ngFor=\"let jobs of compuserslist\">\r\n\t\t\t\t\t\t<td><a class=\"job_id\" routerLink=\"/detail-job/{{jobs.job_id}}\">{{jobs.jobId}}</a></td>\r\n\t\t\t\t\t\t<td>{{jobs.job_created | date:'mediumDate'}}</td>\r\n\t\t\t\t\t\t<td>{{jobs.companyName}}</td>\r\n\t\t\t\t\t\t<td>{{jobs.created_at | date:'mediumDate'}}</td>\r\n\t\t\t\t\t\t<td>${{jobs.bid_price}}</td>\r\n\t\t\t\t\t\t<td><p *ngIf=\"jobs.attachemnt_pic\">{{jobs.attachemnt_pic}}</p><p *ngIf=\"!jobs.attachemnt_pic\">N.A.</p></td>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t<div class=\"rate\">\r\n\t\t\t\t\t\t\t\t<div class=\"star-ratings-sprite\"><span [style.width.%]=\"jobs.width\" class=\"star-ratings-sprite-rating\"></span></div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t</tbody>\r\n\t\t\t\t<tbody *ngIf=\"!compuserslist || compuserslist.length == 0\" >\r\n\t\t\t\t\t<tr><td colspan=\"7\"><p class=\"text-center\">No Completed Estimates</td></tr>\r\n\t\t\t\t</tbody>\r\n\t\t\t</table>                                \r\n\t\t</div>\r\n\r\n\r\n</div>\r\n</div>\r\n\r\n\r\n</div> \r\n \r\n "
 
 /***/ }),
 
@@ -9896,11 +9909,10 @@ var DashboardComponent = /** @class */ (function () {
             data: { jobID: jobID, type: type, userid: userid }
         });
         dialogRef.afterClosed().subscribe(function (result) {
-            if (result == 'Success') {
-                _this._flashMessagesService.show('job has been deleted successfully', { cssClass: 'alert-success', timeout: 6000 });
-            }
-            //console.log(result);
             if (result == 'Hired') {
+            }
+            if (result == 'Hired') {
+                _this._flashMessagesService.show('Estimates has been hired.', { cssClass: 'alert-success', timeout: 6000 });
                 _this.hire_decline = _this.hire_decline ? 'Hired' : 'Hire';
                 _this.decline_hire = _this.decline_hire ? 'Decline' : 'Declined';
                 setTimeout(function () {
@@ -9908,6 +9920,7 @@ var DashboardComponent = /** @class */ (function () {
                 }, 1200);
             }
             if (result == 'Declined') {
+                _this._flashMessagesService.show('Estimates has been Declined.', { cssClass: 'alert-success', timeout: 6000 });
                 _this.decline_hire = _this.decline_hire ? 'Declined' : 'Decline';
                 _this.hire_decline = _this.decline_hire ? 'Hire' : 'Hired';
             }
@@ -10017,9 +10030,13 @@ var HireDeclineDialogDashboard = /** @class */ (function () {
         console.log(this.userid);
         this.jobservice.hireDecline(type_sent, this.jobID, this.userid).subscribe(function (result) {
             if (result.success && type_sent == 1) {
+                var myElement = document.getElementsByClassName('myclass_' + _this.jobID);
+                myElement[0].style.display = "none";
                 _this.dialogRef.close('Hired');
             }
             if (result.success && type_sent == 2) {
+                var myElement = document.getElementsByClassName('myclass_' + _this.jobID);
+                myElement[0].style.display = "none";
                 _this.dialogRef.close('Declined');
             }
             _this.dialogRef.close('ignore');
