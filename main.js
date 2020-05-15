@@ -8891,7 +8891,7 @@ var UsersInProgressJobsComponent = /** @class */ (function () {
                 var userslist1_1 = [];
                 _this.allJobs.forEach(function (x, key) {
                     x.bidsData.forEach(function (value, index) {
-                        userslist1_1.push({ 'job_id': x._id, 'user_id': value.userId._id, 'bid_price': value.bid_price, 'created_at': value.created_at, 'bidStatus': value.bidStatus, 'companyName': value.userId.companyName, 'jobId': x.jobId, 'job_created': x.created_at, 'width': value.rating * 20 });
+                        userslist1_1.push({ 'job_id': x._id, 'bidder_id': value.userId._id, 'bid_price': value.bid_price, 'created_at': value.created_at, 'bidStatus': value.bidStatus, 'companyName': value.userId.companyName, 'jobId': x.jobId, 'job_created': x.created_at, 'width': value.rating * 20 });
                     });
                 });
                 userslist1_1.sort(function (a, b) { return b.created_at.localeCompare(a.created_at); });
