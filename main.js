@@ -8071,7 +8071,6 @@ var EditJobComponent = /** @class */ (function () {
             return;
         }
         else {
-            this.geSavedJob('moving');
             var selectedOptionsIds = this.angOptionsForm.value.options
                 .map(function (v, i) { return v ? _this.optionsData[i].id : null; })
                 .filter(function (v) { return v !== null; });
@@ -8079,11 +8078,16 @@ var EditJobComponent = /** @class */ (function () {
                 this.showErrorMessage1 = true;
                 return;
             }
-            this.geSavedJob('moving');
-            this.submitted = true;
+            //this.submitted = true;		
             var moving_id = this.MOVING_ID;
             var serv_type = 'moving';
-            this.setLocations(this.secondFormGroup, '');
+            //this.geSavedJob('moving');
+            if (!this.selectedServices.includes(this.MOVING_ID)) {
+                this.setLocations(this.secondFormGroup, '');
+            }
+            else {
+                this.setLocations(this.secondFormGroup, this.movingData);
+            }
             if (selectedOptionsIds.includes(1)) {
                 this.showAppliances = true;
                 this.addDropDowns(moving_id, this.FourthFormGroup, serv_type, this.movingData);
@@ -8149,7 +8153,7 @@ var EditJobComponent = /** @class */ (function () {
     EditJobComponent.prototype.setPackingOptionsAvailable = function (stepper, type) {
         var _this = this;
         if (type == 'forPacking') {
-            this.geSavedJob('packing');
+            //this.geSavedJob('packing');
             var selectedOptionsIds = this.angPackedOptionsForm.value.packingoptions
                 .map(function (v, i) { return v ? _this.optionsPackedData[i].id : null; })
                 .filter(function (v) { return v !== null; });
@@ -8163,10 +8167,16 @@ var EditJobComponent = /** @class */ (function () {
                     this.showErrorMessage2 = true;
                     return;
                 }
+                //this.geSavedJob('packing');
                 var moving_id = this.PACKING_ID;
                 var serv_type = 'packing';
+                if (!this.selectedServices.includes(this.PACKING_ID)) {
+                    this.setLocations(this.secondpackedFormGroup, '');
+                }
+                else {
+                    this.setLocations(this.secondpackedFormGroup, this.packingData);
+                }
                 //if(localStorage.getItem('jobType') == 'new'){
-                this.setLocations(this.secondpackedFormGroup, '');
                 //}
                 if (selectedOptionsIds.includes(12)) {
                     this.showPackingAppliances = true;
@@ -8247,8 +8257,11 @@ var EditJobComponent = /** @class */ (function () {
                 }
                 var moving_id = this.UNPACKING_ID;
                 var serv_type = 'unpacking';
-                if (localStorage.getItem('jobType') == 'new') {
+                if (!this.selectedServices.includes(this.UNPACKING_ID)) {
                     this.setLocations(this.secondunpackedFormGroup, '');
+                }
+                else {
+                    this.setLocations(this.secondunpackedFormGroup, this.unpackingData);
                 }
                 if (selectedOptionsIds.includes(12)) {
                     this.addDropDowns(moving_id, this.fourthunpackedFormGroup, serv_type, this.unpackingData);
@@ -8330,9 +8343,12 @@ var EditJobComponent = /** @class */ (function () {
             var moving_id = this.LOADING_ID;
             this.geSavedJob('loading');
             var serv_type = 'loading';
-            //if(localStorage.getItem('jobType') == 'new'){
-            this.setLocations(this.secondloadingFormGroup, '');
-            //}
+            if (!this.selectedServices.includes(this.LOADING_ID)) {
+                this.setLocations(this.secondloadingFormGroup, '');
+            }
+            else {
+                this.setLocations(this.secondloadingFormGroup, this.unpackingData);
+            }
             if (selectedOptionsIds.includes(12)) {
                 this.addDropDowns(moving_id, this.FourthloadingFormGroup, serv_type, this.loadingData);
                 this.showLoadingAppliances = true;
@@ -8413,9 +8429,12 @@ var EditJobComponent = /** @class */ (function () {
             console.log(selectedOptionsIds);
             var moving_id = this.UNLOADING_ID;
             var serv_type = 'unloading';
-            //if(localStorage.getItem('jobType') == 'new'){
-            this.setToLocations(this.thirdunloadingFormGroup, '');
-            //}
+            if (!this.selectedServices.includes(this.UNLOADING_ID)) {
+                this.setLocations(this.thirdunloadingFormGroup, '');
+            }
+            else {
+                this.setLocations(this.thirdunloadingFormGroup, this.unpackingData);
+            }
             if (selectedOptionsIds.includes(12)) {
                 this.addDropDowns(moving_id, this.fourthunloadingFormGroup, serv_type, this.unloadingData);
                 this.showUnloadingAppliances = true;
@@ -8486,8 +8505,31 @@ var EditJobComponent = /** @class */ (function () {
             return;
         }
         else {
+            if (serviceType == 'moving') {
+                if (!this.selectedServices.includes(this.MOVING_ID)) {
+                    this.setToLocations(this.nextFromGroup, '');
+                }
+                else {
+                    this.setToLocations(this.nextFromGroup, this.movingData);
+                }
+            }
+            if (serviceType == 'packing') {
+                if (!this.selectedServices.includes(this.PACKING_ID)) {
+                    this.setToLocations(this.nextFromGroup, '');
+                }
+                else {
+                    this.setToLocations(this.nextFromGroup, this.packingData);
+                }
+            }
+            if (serviceType == 'unpacking') {
+                if (!this.selectedServices.includes(this.UNPACKING_ID)) {
+                    this.setToLocations(this.nextFromGroup, '');
+                }
+                else {
+                    this.setToLocations(this.nextFromGroup, this.unpackingData);
+                }
+            }
             //if(localStorage.getItem('jobType') == 'new'){
-            this.setToLocations(this.nextFromGroup, '');
             //}
             var job_moving_from_info = this.whichFromGroup.value;
             var jobID = this.route.snapshot.paramMap.get('jobid');
