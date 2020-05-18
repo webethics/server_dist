@@ -5321,11 +5321,11 @@ var CreateJobComponent = /** @class */ (function () {
             var moving_id = this.MOVING_ID;
             var serv_type = 'moving';
             console.log(localStorage.getItem('jobType'));
-            //if(localStorage.getItem('jobType') == 'new'){
-            this.setLocations(this.secondFormGroup, '');
-            //}
-            if (localStorage.getItem('jobType') == 'saved') {
-                this.geSavedJob('moving');
+            if (!this.selectedServices.includes(this.MOVING_ID)) {
+                this.setLocations(this.secondFormGroup, '');
+            }
+            else {
+                this.setLocations(this.secondFormGroup, this.movingData);
             }
             if (selectedOptionsIds.includes(1)) {
                 this.showAppliances = true;
@@ -5412,9 +5412,12 @@ var CreateJobComponent = /** @class */ (function () {
                 if (localStorage.getItem('jobType') == 'saved') {
                     this.geSavedJob('packing');
                 }
-                //if(localStorage.getItem('jobType') == 'new'){
-                this.setLocations(this.secondpackedFormGroup, '');
-                //}
+                if (!this.selectedServices.includes(this.PACKING_ID)) {
+                    this.setLocations(this.secondpackedFormGroup, '');
+                }
+                else {
+                    this.setLocations(this.secondpackedFormGroup, this.packingData);
+                }
                 var moving_id = this.PACKING_ID;
                 var serv_type = 'packing';
                 if (selectedOptionsIds.includes(12)) {
@@ -5499,11 +5502,12 @@ var CreateJobComponent = /** @class */ (function () {
                 var moving_id = this.UNPACKING_ID;
                 var serv_type = 'unpacking';
                 this.setLocations(this.secondunpackedFormGroup, '');
-                if (localStorage.getItem('jobType') == 'saved') {
-                    this.geSavedJob('unpacking');
+                if (!this.selectedServices.includes(this.UNPACKING_ID)) {
+                    this.setLocations(this.secondunpackedFormGroup, '');
                 }
-                //	if(localStorage.getItem('jobType') == 'new'){
-                //	}
+                else {
+                    this.setLocations(this.secondunpackedFormGroup, this.unpackingData);
+                }
                 if (selectedOptionsIds.includes(12)) {
                     this.addDropDowns(moving_id, this.fourthunpackedFormGroup, serv_type, this.unpackingData);
                     this.showUnpackingAppliances = true;
@@ -5590,9 +5594,12 @@ var CreateJobComponent = /** @class */ (function () {
             console.log(selectedOptionsIds);
             var moving_id = this.LOADING_ID;
             var serv_type = 'loading';
-            //if(localStorage.getItem('jobType') == 'new'){
-            this.setLocations(this.secondloadingFormGroup, '');
-            //}
+            if (!this.selectedServices.includes(this.LOADING_ID)) {
+                this.setLocations(this.secondloadingFormGroup, '');
+            }
+            else {
+                this.setLocations(this.secondloadingFormGroup, this.loadingData);
+            }
             if (selectedOptionsIds.includes(12)) {
                 this.addDropDowns(moving_id, this.FourthloadingFormGroup, serv_type, this.loadingData);
                 this.showLoadingAppliances = true;
@@ -5678,9 +5685,12 @@ var CreateJobComponent = /** @class */ (function () {
             console.log(selectedOptionsIds);
             var moving_id = this.UNLOADING_ID;
             var serv_type = 'unloading';
-            //if(localStorage.getItem('jobType') == 'new'){
-            this.setToLocations(this.thirdunloadingFormGroup, '');
-            //}
+            if (!this.selectedServices.includes(this.UNLOADING_ID)) {
+                this.setLocations(this.thirdunloadingFormGroup, '');
+            }
+            else {
+                this.setLocations(this.thirdunloadingFormGroup, this.unloadingData);
+            }
             if (selectedOptionsIds.includes(12)) {
                 this.addDropDowns(moving_id, this.fourthunloadingFormGroup, serv_type, this.unloadingData);
                 this.showUnloadingAppliances = true;
@@ -5753,8 +5763,29 @@ var CreateJobComponent = /** @class */ (function () {
             return;
         }
         else {
-            if (localStorage.getItem('jobType') == 'new') {
-                this.setToLocations(this.nextFromGroup, '');
+            if (serviceType == 'moving') {
+                if (!this.selectedServices.includes(this.MOVING_ID)) {
+                    this.setToLocations(this.nextFromGroup, '');
+                }
+                else {
+                    this.setToLocations(this.nextFromGroup, this.movingData);
+                }
+            }
+            if (serviceType == 'packing') {
+                if (!this.selectedServices.includes(this.PACKING_ID)) {
+                    this.setToLocations(this.nextFromGroup, '');
+                }
+                else {
+                    this.setToLocations(this.nextFromGroup, this.packingData);
+                }
+            }
+            if (serviceType == 'unpacking') {
+                if (!this.selectedServices.includes(this.UNPACKING_ID)) {
+                    this.setToLocations(this.nextFromGroup, '');
+                }
+                else {
+                    this.setToLocations(this.nextFromGroup, this.unpackingData);
+                }
             }
             var job_moving_from_info = this.whichFromGroup.value;
             var jobID = localStorage.getItem('jobID');
@@ -8347,7 +8378,7 @@ var EditJobComponent = /** @class */ (function () {
                 this.setLocations(this.secondloadingFormGroup, '');
             }
             else {
-                this.setLocations(this.secondloadingFormGroup, this.unpackingData);
+                this.setLocations(this.secondloadingFormGroup, this.loadingData);
             }
             if (selectedOptionsIds.includes(12)) {
                 this.addDropDowns(moving_id, this.FourthloadingFormGroup, serv_type, this.loadingData);
@@ -8433,7 +8464,7 @@ var EditJobComponent = /** @class */ (function () {
                 this.setLocations(this.thirdunloadingFormGroup, '');
             }
             else {
-                this.setLocations(this.thirdunloadingFormGroup, this.unpackingData);
+                this.setLocations(this.thirdunloadingFormGroup, this.unloadingData);
             }
             if (selectedOptionsIds.includes(12)) {
                 this.addDropDowns(moving_id, this.fourthunloadingFormGroup, serv_type, this.unloadingData);
