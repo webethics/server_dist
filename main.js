@@ -5502,7 +5502,7 @@ var CreateJobComponent = /** @class */ (function () {
                 }
                 var moving_id = this.UNPACKING_ID;
                 var serv_type = 'unpacking';
-                this.setLocations(this.secondunpackedFormGroup, '');
+                //this.setLocations(this.secondunpackedFormGroup,'');	
                 if (!this.selectedServices.includes(this.UNPACKING_ID)) {
                     this.setLocations(this.secondunpackedFormGroup, '');
                 }
@@ -5595,7 +5595,7 @@ var CreateJobComponent = /** @class */ (function () {
             console.log(selectedOptionsIds);
             var moving_id = this.LOADING_ID;
             var serv_type = 'loading';
-            if (!this.selectedServices.includes(this.LOADING_ID)) {
+            if (this.selectedServices && !this.selectedServices.includes(this.LOADING_ID)) {
                 this.setLocations(this.secondloadingFormGroup, '');
             }
             else {
@@ -5686,11 +5686,11 @@ var CreateJobComponent = /** @class */ (function () {
             console.log(selectedOptionsIds);
             var moving_id = this.UNLOADING_ID;
             var serv_type = 'unloading';
-            if (!this.selectedServices.includes(this.UNLOADING_ID)) {
-                this.setLocations(this.thirdunloadingFormGroup, '');
+            if (this.selectedServices && !this.selectedServices.includes(this.UNLOADING_ID)) {
+                this.setToLocations(this.thirdunloadingFormGroup, '');
             }
             else {
-                this.setLocations(this.thirdunloadingFormGroup, this.unloadingData);
+                this.setToLocations(this.thirdunloadingFormGroup, this.unloadingData);
             }
             if (selectedOptionsIds.includes(12)) {
                 this.addDropDowns(moving_id, this.fourthunloadingFormGroup, serv_type, this.unloadingData);
