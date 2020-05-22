@@ -2208,6 +2208,31 @@ opacity: 1;
     margin: 0;
 }
 .username_setting[_ngcontent-fcl-c0]{border-radius:60%;}
+
+.job-info[_ngcontent-mri-c1] {
+    padding: 20px 0px !important;
+}
+.desc[_ngcontent-mri-c1] .loc_lable[_ngcontent-mri-c1] , .desc[_ngcontent-uqj-c1] .loc_lable[_ngcontent-uqj-c1] {
+    text-align: left;
+}
+.step1 .col-12 {
+    padding: 0;
+}
+span.username_setting {
+    border-radius: 60% !important;
+}
+.job-info[_ngcontent-uqj-c1] .title[_ngcontent-uqj-c1] {
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+.job-info[_ngcontent-uqj-c1] {
+    margin-bottom: 0;
+}
+.desc {
+    padding-bottom: 10px;
+}
+.job-info[_ngcontent-uga-c1]{-webkit-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);}
 /*------------------ -*/
 
 @media (min-width: 991px) {
