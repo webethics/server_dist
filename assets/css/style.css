@@ -2232,6 +2232,25 @@ span.username_setting {
 .desc p{margin-bottom:0;}
 .job-info{-webkit-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);}
 .probtn[type=button]{-webkit-appearance:none !important;}
+
+
+.esitame-form .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background: #E2E2E2;
+}
+.esitame-form .custom-checkbox .ng-dirty.custom-control-input:checked ~ .custom-control-label::before {
+    background: #1690BE;
+}
+.esitame-form .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+    background: none;
+}
+.esitame-form .custom-checkbox .ng-dirty.custom-control-input:checked ~ .custom-control-label::after {
+    background: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e);
+    background-size: 13px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
 /*------------------ -*/
 
 @media (min-width: 991px) {
