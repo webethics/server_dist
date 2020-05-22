@@ -2179,6 +2179,37 @@ opacity: 1;
     max-width: 100px;
 }
 
+
+/*----------------------22-05-2020---- */
+
+.form-wrapper #pills-tab {
+    border: 0;
+}
+#cdk-step-content-0-0 .esitame-form h3 {
+    margin-top: 10px;
+}
+.mat-horizontal-stepper-content h3.step-title {
+    text-align: left;
+    margin-bottom: 10px;
+}
+.mat-horizontal-stepper-content .container.title-icon-bar {
+    padding: 0;
+}
+.job-info[_ngcontent-gwc-c1] {
+    padding: 20px 0px;
+}
+.desc[_ngcontent-gwc-c1] .loc_lable[_ngcontent-gwc-c1] {
+    text-align: left;padding-bottom:10px;
+}
+.job-info[_ngcontent-gwc-c1] .col-md-6 {
+    padding: 0;
+}
+.job-info .row {
+    margin: 0;
+}
+.username_setting[_ngcontent-fcl-c0]{border-radius:60%;}
+/*------------------ -*/
+
 @media (min-width: 991px) {
 .custom_navbar_1 .navbar-nav .nav-link::before {
     border-left: 1px solid #dcdcdc;
